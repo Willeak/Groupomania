@@ -1,0 +1,54 @@
+.profile {
+      position: relative;
+      width: 288px;
+      height: 300px;
+      margin-left: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 1rem;
+      border-radius: 20px;
+      background-color: rgba(0, 0, 0, 0.4);
+}
+
+.imgProfile {
+      position: absolute;
+      margin-top: 10px;
+      width: 80px;
+      margin-bottom: 10px;
+      clip-path: circle(50% at 50% 50%);
+}
+
+.circle {
+      margin-top: 0px;
+      margin-left: 0px;
+      width: 88px;
+      height: 88px;
+      border: 2px solid red;
+      border-radius: 50%;
+}
+
+.profileName {
+      margin-top: 10px;
+      font-size: 15px;
+}
+
+.profileSetting {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.062);
+      border-radius: 25px;
+      padding: 10px;
+      font-size: 13px;
+      width: 120px;
+      font-weight: bold;
+}
+
+.profileSetting:hover {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.3);
+      color: white;
+      transition: 0.2s;
+      border-radius: 25px;
+      padding: 10px;
+      cursor: pointer;
+}
