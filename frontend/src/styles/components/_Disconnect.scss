@@ -1,19 +1,24 @@
 .DisconnectButton {
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background-color: rgba(255, 255, 255, 0.062);
+      border: 1px solid rgba(255, 255, 255, 0);
+      background-color: rgba(255, 255, 255, 0);
+      color: white;
       border-radius: 25px;
-      padding: 10px;
-      font-size: 13px;
-      width: 120px;
+      padding: 10px 5px 10px 20px;
+      font-size: 17px;
+      width: 160px;
       font-weight: bold;
+      text-align: left;
 }
 
 .DisconnectButton:hover {
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.089);
       color: white;
       transition: 0.2s;
       border-radius: 25px;
-      padding: 10px;
+
       cursor: pointer;
+}
+
+.icon {
+      margin-right: 20px;
 }

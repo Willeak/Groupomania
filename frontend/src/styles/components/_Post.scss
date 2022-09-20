@@ -1,0 +1,30 @@
+.Post {
+      border: 1px solid #ffd7d7;
+      border-radius: 25px;
+      min-width: 411px;
+      padding: 10px 20px 20px 20px;
+      margin-bottom: 20px;
+}
+
+.imgProfilePost {
+      margin-top: 10px;
+      width: 60px;
+      margin-bottom: 10px;
+      clip-path: circle(50% at 50% 50%);
+}
+
+.Name {
+      margin-left: 20px;
+}
+
+.hourly {
+      color: rgb(105, 105, 105);
+      margin-left: 5px;
+      font-size: 16px;
+}
+
+.textPost {
+      padding-left: 80px;
+      width: 80%;
+      margin-bottom: 15px;
+}

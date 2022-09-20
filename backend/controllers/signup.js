@@ -40,7 +40,9 @@ exports.login = (req, res, next) => {
           }
           res.status(200).json({
             userId: user._id,
-            Roles: user.roles,
+            email: user.email,
+            roles: user.roles,
+            img: user.img,
             token: jwt.sign({ userId: user._id }, `${process.env.RND_TKN}`, {
               expiresIn: "24h",
             }),
@@ -53,14 +55,39 @@ exports.login = (req, res, next) => {
 
 // Récuperer un utilisateur
 exports.getOneUser = (req, res, next) => {
+  console.log(req.params.userId);
   User.findOne({ _id: req.params.userId })
-    .then((user) =>
-      res.status(200).json({
-        userId: user._id,
-        Roles: user.roles,
-        img: user.img,
-        user: user.user,
-      })
-    )
+    .then((user) => res.status(200).json(user))
     .catch((error) => res.status(404).json({ error: error }));
+};
+
+exports.getAllUsers = (req, res, next) => {
+  Post.find()
+    .then((posts) => {
+      res.status(200).json(posts);
+    })
+    .catch((error) => {
+      res.status(400).json({ error: error });
+    });
+};
+
+// Supprimer un post
+exports.deleteUser = (req, res, next) => {
+  Post.findOne({ _id: req.params.id })
+    .then((post) => {
+      // verifie si l'user est bien celui du createur du post
+      if (Post.userId !== res.locals.userId)
+        return res.status(403).json({
+          message:
+            "Vous n êtes pas le créateur de ce post, vous ne pouvez pas SUPPRIMER ce post!",
+        });
+
+      const filename = post.imageUrl.split("/images/")[1];
+      fs.unlink(`images/${filename}`, () => {
+        Post.deleteOne({ _id: req.params.id })
+          .then(() => res.status(200).json({ message: "post supprimée !" }))
+          .catch((error) => res.status(400).json({ error: error }));
+      });
+    })
+    .catch((error) => res.status(500).json({ error }));
 };

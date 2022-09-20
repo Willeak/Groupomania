@@ -47,6 +47,9 @@ body {
 .jc__f-start {
       justify-content: flex-start;
 }
+.jc__f-end {
+      justify-content: flex-end;
+}
 .jc__SpaceA {
       justify-content: space-around;
 }
@@ -77,6 +80,10 @@ li {
 
 .displaySwitch {
       display: none;
+}
+
+.size100 {
+      width: 100%;
 }
 
 @media screen and (min-width: 768px) {

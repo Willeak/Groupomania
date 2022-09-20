@@ -54,6 +54,12 @@ body {
           justify-content: flex-start;
 }
 
+.jc__f-end {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
 .jc__SpaceA {
   -ms-flex-pack: distribute;
       justify-content: space-around;
@@ -104,6 +110,10 @@ li {
   display: none;
 }
 
+.size100 {
+  width: 100%;
+}
+
 @media screen and (min-width: 768px) {
   /* VERSION TABLETTE */
 }
@@ -127,24 +137,6 @@ html {
 body {
   min-height: 100vh;
   padding-top: 100px;
-}
-
-.App {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  min-height: 100vh;
-  padding: 1rem 0.5rem;
 }
 
 section {
@@ -184,6 +176,10 @@ section {
   margin-top: 30px;
 }
 
+.buttonAuth {
+  margin: 1rem;
+}
+
 .inputAuth,
 .buttonAuth,
 .textareaAuth {
@@ -207,8 +203,7 @@ label {
   margin-bottom: 3px;
 }
 
-label,
-button {
+label {
   margin-top: 1rem;
 }
 
@@ -352,11 +347,40 @@ h1 {
   color: red;
 }
 
+.BlocPost {
+  margin-top: -65px;
+  width: 30%;
+  min-width: 456px;
+  max-width: 30%;
+  position: relative;
+  height: 1000px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding: 1rem;
+  border-radius: 20px 20px 00px 0px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.center {
+  margin-top: -25px;
+  margin-left: -150px;
+}
+
 .profile {
   position: relative;
   width: 288px;
   height: 300px;
+  margin-top: -15px;
   margin-left: 12px;
+  margin-right: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -396,44 +420,33 @@ h1 {
 }
 
 .profileSetting {
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.062);
+  border: 1px solid rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
   border-radius: 25px;
-  padding: 10px;
-  font-size: 13px;
+  margin: 0.8rem;
+  padding: 10px 5px 10px 25px;
+  font-size: 17px;
   width: 120px;
   font-weight: bold;
+  text-align: left;
 }
 
 .profileSetting:hover {
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.089);
   color: white;
   -webkit-transition: 0.2s;
   transition: 0.2s;
   border-radius: 25px;
-  padding: 10px;
   cursor: pointer;
 }
 
+.icon {
+  margin-right: 20px;
+}
+
 .BlocCreatePost {
-  width: 40%;
-  max-width: 40%;
-  position: relative;
-  height: 150px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  padding: 1rem;
-  border-radius: 20px;
-  background-color: rgba(0, 0, 0, 0.4);
+  margin-bottom: 30px;
 }
 
 .formPost {
@@ -447,49 +460,264 @@ h1 {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
 }
 
-.buttonCreatePost {
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.062);
-  border-radius: 25px;
-  padding: 10px;
-  font-size: 13px;
-  width: 120px;
+.inputPost {
+  border: 1px solid rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0.089);
+  width: 100%;
+  height: auto;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 5px 10px 20px;
+  font-size: 17px;
+  resize: none;
+  overflow: hidden;
 }
 
-.buttonCreatePost:hover {
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.3);
+.buttonCreatePost {
+  border: 2px solid red;
+  background-color: rgba(255, 255, 255, 0);
   color: white;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
   border-radius: 25px;
-  padding: 10px;
+  padding: 10px 5px 10px 5px;
+  font-size: 17px;
+  width: 120px;
+  font-weight: bold;
+  margin-top: 10px;
   cursor: pointer;
 }
 
-.DisconnectButton {
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.062);
-  border-radius: 25px;
-  padding: 10px;
-  font-size: 13px;
-  width: 120px;
-  font-weight: bold;
-}
-
-.DisconnectButton:hover {
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.3);
+.buttonCreatePost:hover {
+  background-color: rgba(255, 255, 255, 0.089);
   color: white;
   -webkit-transition: 0.2s;
   transition: 0.2s;
   border-radius: 25px;
+}
+
+.errmsgPost {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.089);
+  border-radius: 1rem;
+  color: #ff0101;
+  font-weight: bold;
+  margin-top: -10px;
+  padding: 0.5rem;
+  font-size: 15px;
+  margin-right: 50%;
+  margin-bottom: -1rem;
+}
+
+button:disabled,
+button[disabled='true']:hover {
+  border: 1px solid #999999;
+  background-color: #cccccc !important;
+  color: #666666 !important;
+  cursor: default;
+}
+
+#counterBlock {
+  color: rgba(255, 255, 255, 0.863);
+  font-size: 20px;
+  margin-top: 10px;
+  padding: 0px 15px 0px 0px;
+  font-weight: bold;
+}
+
+.controlPost {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.DisconnectButton {
+  border: 1px solid rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  border-radius: 25px;
+  padding: 10px 5px 10px 20px;
+  font-size: 17px;
+  width: 160px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.DisconnectButton:hover {
+  background-color: rgba(255, 255, 255, 0.089);
+  color: white;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.icon {
+  margin-right: 20px;
+}
+
+.Post {
+  border: 1px solid #ffd7d7;
+  border-radius: 25px;
+  min-width: 411px;
+  padding: 10px 20px 20px 20px;
+  margin-bottom: 20px;
+}
+
+.imgProfilePost {
+  margin-top: 10px;
+  width: 60px;
+  margin-bottom: 10px;
+  -webkit-clip-path: circle(50% at 50% 50%);
+          clip-path: circle(50% at 50% 50%);
+}
+
+.Name {
+  margin-left: 20px;
+}
+
+.hourly {
+  color: dimgray;
+  margin-left: 5px;
+  font-size: 16px;
+}
+
+.textPost {
+  padding-left: 80px;
+  width: 80%;
+  margin-bottom: 15px;
+}
+
+.BlocUserList {
+  margin-top: 0px;
+  min-width: 696px;
+  width: 50%;
+  max-width: 50%;
+  position: relative;
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding: 1rem;
+  border-radius: 20px 20px 20px 20px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.accueil {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  width: 100px;
+  max-width: 50%;
+  margin-left: 500px;
+  margin-top: -45px;
+  height: auto;
   padding: 10px;
+  border-radius: 20px 20px 20px 20px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.User {
+  border-top: 1px solid rgba(255, 255, 255, 0.267);
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
+.imgUser {
+  width: 50px;
+  margin-left: 0%;
+  margin-right: 0%;
+  -webkit-clip-path: circle(50% at 50% 50%);
+          clip-path: circle(50% at 50% 50%);
+}
+
+.UserInfo {
+  text-align: center;
+  width: 100%;
+  font-size: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.ulInfo {
+  width: 100%;
+  text-align: center;
+}
+
+.photo {
+  min-width: 50px;
+  width: auto;
+  text-align: center;
+}
+
+.Nom {
+  min-width: 100px;
+  width: auto;
+  text-align: center;
+}
+
+.email {
+  min-width: 179px;
+  width: auto;
+  text-align: center;
+}
+
+.userId {
+  min-width: 150px;
+  width: auto;
+  text-align: center;
+}
+
+.role {
+  min-width: 90px;
+  width: auto;
+  text-align: center;
+}
+
+.suppr {
+  min-width: 83px;
+  width: auto;
+}
+
+.SettingsUser {
+  border: 1px solid rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  border-radius: 25px;
+  padding: 5px;
+  font-size: 17px;
+  width: auto;
+  font-weight: bold;
+  text-align: center;
+}
+
+.SettingsUser:hover {
+  background-color: rgba(255, 255, 255, 0.089);
+  color: white;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-radius: 25px;
   cursor: pointer;
 }
 /*# sourceMappingURL=index.css.map */

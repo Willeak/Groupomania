@@ -2,7 +2,9 @@
       position: relative;
       width: 288px;
       height: 300px;
+      margin-top: -15px;
       margin-left: 12px;
+      margin-right: 20px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -34,21 +36,26 @@
 }
 
 .profileSetting {
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background-color: rgba(255, 255, 255, 0.062);
+      border: 1px solid rgba(255, 255, 255, 0);
+      background-color: rgba(255, 255, 255, 0);
+      color: white;
       border-radius: 25px;
-      padding: 10px;
-      font-size: 13px;
+      margin: 0.8rem;
+      padding: 10px 5px 10px 25px;
+      font-size: 17px;
       width: 120px;
       font-weight: bold;
+      text-align: left;
 }
 
 .profileSetting:hover {
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.089);
       color: white;
       transition: 0.2s;
       border-radius: 25px;
-      padding: 10px;
       cursor: pointer;
+}
+
+.icon {
+      margin-right: 20px;
 }

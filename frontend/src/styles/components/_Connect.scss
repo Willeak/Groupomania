@@ -14,14 +14,14 @@ body {
       padding-top: 100px;
 }
 
-.App {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 1rem 0.5rem;
-}
+// .App {
+//       display: flex;
+//       flex-direction: column;
+//       justify-content: center;
+//       align-items: center;
+//       min-height: 100vh;
+//       padding: 1rem 0.5rem;
+// }
 
 section {
       width: 100%;
@@ -42,6 +42,10 @@ section {
       flex-grow: 1;
       padding-bottom: 1rem;
       margin-top: 30px;
+}
+
+.buttonAuth {
+      margin: 1rem;
 }
 
 .inputAuth,
@@ -66,8 +70,7 @@ label {
       margin-bottom: 3px;
 }
 
-label,
-button {
+label {
       margin-top: 1rem;
 }
 

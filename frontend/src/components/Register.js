@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 import {
       faCheck,
       faTimes,
@@ -8,8 +8,6 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from '../api/axios';
 
-import { BrowserRouter as Route } from 'react-router-dom';
-import AuthenticatedRoute from './AuthenticatedRoute';
 import Home from '../pages/Home';
 
 /* GESTION DU FORMULAIRE */
@@ -100,10 +98,10 @@ const Register = () => {
                   setEmail('');
                   setPwd('');
                   setMatchPwd('');
-            } catch (err) {
-                  if (!err?.response) {
+            } catch (error) {
+                  if (!error?.response) {
                         setErrMsg('Le serveur ne réponds pas');
-                  } else if (err.response?.status === 409) {
+                  } else if (error.response?.status === 409) {
                         setErrMsg("Nom d'utilisateur déjà utilisé");
                   } else {
                         setErrMsg('Enregistrement échouée');
@@ -115,7 +113,7 @@ const Register = () => {
       return (
             <>
                   {success ? (
-                        <p>a</p>
+                        <Navigate to="/" element={<Home />} />
                   ) : (
                         <section>
                               <nav className="flex jc__centre auth">

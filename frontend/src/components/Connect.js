@@ -1,5 +1,11 @@
 import { useRef, useState, useEffect } from 'react';
-import { Navigate, NavLink } from 'react-router-dom';
+import {
+      Navigate,
+      NavLink,
+      Link,
+      useNavigate,
+      useLocation,
+} from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import Home from '../pages/Home';
 import axios from '../api/axios';
@@ -12,6 +18,8 @@ const Connect = () => {
       const userRef = useRef();
       const errRef = useRef();
 
+      const [userId, setUserId] = useState('');
+      const [img, setImg] = useState('');
       const [email, setEmail] = useState('');
       const [pwd, setPwd] = useState('');
       const [errMsg, setErrMsg] = useState('');
@@ -36,13 +44,17 @@ const Connect = () => {
                   .then(function (response) {
                         sessionStorage.setItem('userId', response?.data.userId);
                         sessionStorage.setItem('token', response?.data.token);
-                        sessionStorage.setItem('roles', response?.data.Roles);
+                        sessionStorage.setItem('roles', response?.data.roles);
 
                         // console.log(JSON.stringify(response?.data));
                         console.log(JSON.stringify(response));
                         const token = response?.data?.token;
                         const roles = response?.data?.roles;
-                        setAuth({ email, pwd, roles, token });
+                        const userId = response?.data?.userId;
+                        const email = response?.data?.email;
+                        setAuth({ userId, img, email, roles, token });
+                        setImg('');
+                        setUserId('');
                         setEmail('');
                         setPwd('');
                         setSuccess(true);
