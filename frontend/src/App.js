@@ -14,9 +14,16 @@ import Profile from './pages/Profile';
 import RequireAuth from './components/RequireAuth';
 
 import Layout from './components/Layout';
-import UserList from './pages/UserList';
+import AdminPanel from './pages/AdminPanel';
 
 //mise en place du routeur
+
+const roles = {
+      User: 'User',
+      Editor: 'Editor',
+      Admin: 'Admin',
+};
+
 const App = () => {
       return (
             <Router>
@@ -38,7 +45,7 @@ const App = () => {
                               <Route
                                     exact
                                     path="/Admin"
-                                    element={<UserList />}
+                                    element={<AdminPanel />}
                               />
 
                               {/* path="*" revoie vers l'accueil si tout types de liens non existant est appelé dans la barre de recherche */}

@@ -15,7 +15,7 @@ router.post("/signup", userCtrl.signup);
 router.post("/login", userCtrl.login);
 router.get("/:id", multer, userCtrl.getOneUser); // afficher un user
 
-router.get("/", auth, userCtrl.getAllUsers); // afficher toutes les user
-router.delete("/:id", auth, userCtrl.deleteUser); // supprimer la sauce
+router.get("/", userCtrl.getAllUsers); // afficher toutes les user
+router.delete("/:id", userCtrl.deleteUser); // supprimer la sauce
 
 module.exports = router;

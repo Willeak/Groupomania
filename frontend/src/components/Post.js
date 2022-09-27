@@ -18,7 +18,7 @@ const Post = () => {
                   <div className="textPost">
                         Bonjour à tous, <br />
                         <br />
-                        je m'appel Jean Dupont et je susi développeur Web.
+                        je m'appel Jean Dupont et je suis développeur Web.
                         <br />
                         <br /> Bonne journé a tous !
                   </div>

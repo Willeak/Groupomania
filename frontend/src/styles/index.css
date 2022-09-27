@@ -424,7 +424,8 @@ h1 {
   background-color: rgba(255, 255, 255, 0);
   color: white;
   border-radius: 25px;
-  margin: 0.8rem;
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 10px 5px 10px 25px;
   font-size: 17px;
   width: 120px;
@@ -628,10 +629,25 @@ button[disabled='true']:hover {
   display: -ms-flexbox;
   display: flex;
   position: absolute;
-  width: 100px;
+  width: 150px;
   max-width: 50%;
-  margin-left: 500px;
-  margin-top: -45px;
+  margin-left: -600px;
+  margin-top: -50px;
+  height: 62px;
+  padding: 0px;
+  border-radius: 20px 20px 20px 20px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.recherche {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  width: 250px;
+  max-width: 50%;
+  margin-left: 700px;
+  margin-top: -50px;
   height: auto;
   padding: 10px;
   border-radius: 20px 20px 20px 20px;
@@ -700,6 +716,46 @@ button[disabled='true']:hover {
   width: auto;
 }
 
+.descBar {
+  padding-bottom: 5px;
+}
+
+#inputSearch::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  background-image: url(./../assets/arrows-rotate-solid.svg);
+  -webkit-filter: invert(100%) saturate(2476%) brightness(118%) contrast(119%);
+          filter: invert(100%) saturate(2476%) brightness(118%) contrast(119%);
+}
+
+.homelink {
+  border: 1px solid rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  border-radius: 25px;
+  margin: 0.8rem;
+  padding: 10px;
+  font-size: 17px;
+  width: 120px;
+  font-weight: bold;
+  text-align: left;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+}
+
+.homelink:hover {
+  background-color: rgba(255, 255, 255, 0.089);
+  color: white;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
 .SettingsUser {
   border: 1px solid rgba(255, 255, 255, 0);
   background-color: rgba(255, 255, 255, 0);
@@ -719,5 +775,15 @@ button[disabled='true']:hover {
   transition: 0.2s;
   border-radius: 25px;
   cursor: pointer;
+}
+
+.errmsgUser {
+  background-color: rgba(255, 255, 255, 0.089);
+  border-radius: 1rem;
+  color: #ff0101;
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 0.5rem;
+  font-size: 15px;
 }
 /*# sourceMappingURL=index.css.map */

@@ -13,7 +13,7 @@ import Home from '../pages/Home';
 /* GESTION DU FORMULAIRE */
 
 // #1 #2 Regex pour le contrôle des champs Prénom, Nom
-const regExPrenomNom = /^[A-Z][A-Za-z-]{3,23}.[A-Z][A-Za-z-]{3,23}$/;
+const regExPrenomNom = /^[A-Z]{3,23} [A-Z][a-z-]{3,23}$/;
 
 // #3 Regex pour le contrôle du champ Email
 const regExEmail =
@@ -139,7 +139,7 @@ const Register = () => {
                                     onSubmit={handleSubmit}
                               >
                                     <label htmlFor="username">
-                                          Nom.Prénom
+                                          NOM Prénom
                                           <FontAwesomeIcon
                                                 icon={faCheck}
                                                 className={
@@ -186,7 +186,7 @@ const Register = () => {
                                           <FontAwesomeIcon
                                                 icon={faInfoCircle}
                                           />
-                                          Format valide : Dupont.Jean
+                                          Format valide : DUPONT Jean
                                           <br />
                                           4 à 24 caractères valide.
                                           <br />

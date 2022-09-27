@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import CreatePost from '../components/CreatePost';
 import Logo from '../components/Logo';
 import Post from '../components/Post';

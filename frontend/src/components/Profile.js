@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import axios from '../api/axios';
 import Disconnect from './Disconnect';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,9 +12,14 @@ import { faGear } from '@fortawesome/free-solid-svg-icons';
 
 const Profile = () => {
       const { auth } = useAuth(AuthContext);
-      console.log(auth);
+      console.log(auth.roles);
+
+      const [name, setName] = useState('');
+      const [img, setImg] = useState('');
 
       const userId = auth.userId;
+
+      // const userId = '632749531c2498748c5810ec';
 
       const USER = `/api/register/${userId}`;
 
@@ -23,17 +28,18 @@ const Profile = () => {
                   .get(USER, {
                         headers: {
                               'Content-Type': 'application/json',
-                              Authorization:
-                                    'jwt' + sessionStorage.getItem('token'),
+                              Authorization: sessionStorage.getItem('token'),
                               withCredentials: true,
                         },
                   })
                   .then(function (response) {
                         // console.log(JSON.stringify(response?.data));
                         console.log(JSON.stringify(response));
-                        console.log(userId);
+
+                        setName(response?.data?.user);
+                        setImg(response?.data?.img);
                   })
-                  .catch(function (error) {
+                  .catch((error) => {
                         console.log(JSON.stringify(error));
                   });
       };
@@ -45,12 +51,12 @@ const Profile = () => {
                   <div className="flex jc__centre ai__centre fd__Column">
                         <div className="circle" />
                         <img
-                              src={imgProfile}
+                              src={img}
                               className="imgProfile"
                               alt="logo par defaut"
                         />
                   </div>
-                  <p className="profileName">{auth.userId}</p>
+                  <p className="profileName">{name}</p>
                   <div className="flex fd__Column ">
                         <div>
                               <FontAwesomeIcon icon={faGear} className="icon" />
