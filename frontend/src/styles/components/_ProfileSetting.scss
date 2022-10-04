@@ -1,0 +1,153 @@
+.profileWindow {
+      position: relative;
+      width: 350px;
+      height: auto;
+      margin-top: -15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 1rem;
+      border-radius: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+}
+.circle {
+      margin-top: 0px;
+      margin-left: 0px;
+      width: 88px;
+      height: 88px;
+      border: 2px solid red;
+      border-radius: 50%;
+}
+.imgProfileSetting {
+      width: 80px;
+      clip-path: circle(50% at 50% 50%);
+}
+
+.profileSettingButton {
+      border: 1px solid rgba(255, 255, 255, 0);
+      background-color: rgba(255, 255, 255, 0);
+      color: white;
+      border-radius: 25px;
+      padding: 10px 5px 10px 25px;
+      font-size: 17px;
+      width: 150px;
+      font-weight: bold;
+      text-align: center;
+}
+
+.profileSettingButton:hover {
+      background-color: rgba(255, 255, 255, 0.089);
+      color: white;
+      transition: 0.2s;
+      border-radius: 25px;
+      cursor: pointer;
+}
+
+.iconSave {
+      margin-top: 10px;
+      margin-left: 30px;
+      margin-right: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+.inputSetting {
+      font-size: 17px;
+      padding: 0.25rem;
+      padding-left: 15px;
+      border-radius: 1rem;
+      margin-bottom: 10px;
+      background-color: rgba(255, 255, 255, 0.452);
+      border: rgb(255, 255, 255) solid 2px;
+}
+
+.inputImg {
+      margin-top: 20px;
+      margin-bottom: 20px;
+}
+
+.infoNoImg {
+      font-weight: 400;
+      margin-bottom: 15px;
+      font-size: 14px;
+      font-style: italic;
+}
+
+.infoIfImg {
+      margin-top: 3px;
+      font-weight: 400;
+      font-size: 14px;
+}
+
+.ImgProfileSettingButton {
+      border: 1px solid rgba(255, 255, 255, 0);
+      background-color: rgba(255, 255, 255, 0);
+      color: white;
+      border-radius: 25px;
+      padding: 10px 0px 10px 0px;
+      font-size: 17px;
+      width: 150px;
+      font-weight: bold;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+}
+
+.ImgProfileSettingButton:hover {
+      background-color: rgba(255, 255, 255, 0.089);
+      color: white;
+      transition: 0.2s;
+      border-radius: 25px;
+      cursor: pointer;
+}
+
+.ImgProfileSettingButton:hover[disabled] {
+      cursor: default;
+}
+
+.logoSettings {
+      margin-top: -161px;
+      margin-left: 140px;
+      margin-bottom: -35px;
+      width: 200px;
+      clip-path: inset(35% 0 35% 5% round 20px);
+      border-radius: 20px;
+      opacity: 80%;
+}
+
+.accueilSettings {
+      display: flex;
+      margin-top: 10px;
+      width: 140px;
+      max-width: 50%;
+      height: 62px;
+      margin-left: -210px;
+      margin-bottom: 30px;
+      padding: 0px;
+      border-radius: 20px 20px 20px 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+}
+
+.homelinkProfile {
+      border: 1px solid rgba(255, 255, 255, 0);
+      background-color: rgba(255, 255, 255, 0);
+      color: white;
+      border-radius: 25px;
+      margin: 0.8rem;
+      padding: 10px;
+      font-size: 17px;
+      width: 120px;
+      font-weight: bold;
+      text-align: left;
+      justify-content: center;
+      text-align: center;
+}
+
+.homelinkProfile:hover {
+      background-color: rgba(255, 255, 255, 0.089);
+      color: white;
+      transition: 0.2s;
+      border-radius: 10px;
+      cursor: pointer;
+}

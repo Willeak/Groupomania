@@ -1,0 +1,123 @@
+body {
+      transition: background-color 0.2s ease-in-out, color 0.4s ease-in-out;
+      color: #ffffff;
+}
+
+body[theme='dark'] {
+      background: #4e5166;
+      color: #fff;
+}
+
+#hybrid {
+      visibility: hidden;
+}
+
+#theme-toggle {
+      visibility: hidden;
+}
+
+#theme-toggle + label {
+      content: '';
+      display: inline-block;
+      cursor: pointer;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      transition: all 0.3s ease-in-out;
+}
+
+#theme-toggle:not(:checked) + label {
+      background-color: gold;
+}
+
+#theme-toggle:checked + label {
+      background-color: transparent;
+      width: 20px;
+      height: 20px;
+      box-shadow: inset -4px -4px 1px 1px #fff;
+}
+
+[class*='text-'] {
+      font-size: 1.2em;
+      font-weight: 600;
+      transition: color 5s ease-in;
+}
+
+body[theme='dark'] {
+      .BlocPost {
+            background-color: rgba(0, 0, 0, 0.4);
+      }
+      .profile {
+            background-color: rgba(0, 0, 0, 0.4);
+      }
+      .profileWindow {
+            background-color: rgba(0, 0, 0, 0.4);
+      }
+      .accueilSettings {
+            background-color: rgba(0, 0, 0, 0.4);
+      }
+      .accueil {
+            background-color: rgba(0, 0, 0, 0.4);
+      }
+      .BlocUserList {
+            background-color: rgba(0, 0, 0, 0.4);
+      }
+      .recherche {
+            background-color: rgba(0, 0, 0, 0.4);
+      }
+      section {
+            background-color: rgba(0, 0, 0, 0.4);
+      }
+}
+
+body[theme='light'] {
+      .BlocPost {
+            background-color: rgba(0, 0, 0, 0.7);
+      }
+      .profile {
+            background-color: rgba(0, 0, 0, 0.7);
+      }
+      .profileWindow {
+            background-color: rgba(0, 0, 0, 0.7);
+      }
+      .accueilSettings {
+            background-color: rgba(0, 0, 0, 0.7);
+      }
+      .accueil {
+            background-color: rgba(0, 0, 0, 0.7);
+      }
+      .BlocUserList {
+            background-color: rgba(0, 0, 0, 0.7);
+      }
+      .recherche {
+            background-color: rgba(0, 0, 0, 0.7);
+      }
+      section {
+            background-color: rgba(0, 0, 0, 0.7);
+      }
+}
+
+.darkmod {
+      position: absolute;
+      margin-top: -5px;
+      margin-left: 200px;
+}
+
+@media screen and (max-width: 1100px) {
+      /* VERSION TABLETTE */
+      .darkmod {
+            position: relative;
+            margin-top: -40px;
+            margin-left: -10px;
+            margin-bottom: 10px;
+      }
+}
+@media screen and (max-width: 768px) {
+      /* VERSION PC Responsive */
+      .darkmod {
+            position: relative;
+            margin-top: 0px;
+            margin-left: 0px;
+            margin-bottom: 0px;
+      }
+}

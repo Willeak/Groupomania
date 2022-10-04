@@ -1,97 +1,116 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
-import imgProfile from './../assets/avatar_neutre.png';
-import Logo from '../components/Logo';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserSlash } from '@fortawesome/free-solid-svg-icons';
-import axios from '../api/axios';
+import React from 'react';
+import {
+      BrowserRouter as Router,
+      Routes,
+      Route,
+      Navigate,
+} from 'react-router-dom';
 
-const UserList = () => {
-      const USER = `/api/register/`;
+// import des pages
+import Home from './pages/Home';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import ProfileSetting from './pages/ProfileSetting';
+import RequireAuth from './components/RequireAuth';
+import { AuthProvider } from './contexts/AuthProvider.js';
+import jwt_decode from 'jwt-decode';
 
-      const [users, setUsers] = useState([]);
-      console.log(users);
+import Layout from './components/Layout';
+import AdminPanel from './pages/AdminPanel';
 
-      const userSubmit = async (e) => {
-            await axios
-                  .get(USER, {
-                        headers: {
-                              'Content-Type': 'application/json',
-                              Authorization: sessionStorage.getItem('token'),
-                              withCredentials: true,
-                        },
-                  })
-                  .then((response) => {
-                        // console.log(JSON.stringify(response));
-                        setUsers(response?.data?.users);
-                  })
-                  .catch((error) => {
-                        if (!error?.response) {
-                              console.log(error);
-                        }
-                  });
-      };
+//mise en place du routeur
 
-      useEffect(() => {
-            userSubmit();
-      }, []);
+const isMyTokenValid = () => {
+      if (localStorage.getItem('token')) {
+            const decodedToken = jwt_decode(localStorage.getItem('token'));
+            const dateNow = new Date();
+            if (decodedToken.exp > dateNow / 1000) {
+                  return true;
+            } else {
+                  localStorage.clear();
+                  window.location = '/login';
+            }
+      }
+};
 
-      // ======================================================================
-
+const PrivateRoute = ({ component: children, path }) => {
       return (
-            <div className="flex fd__Column ai__centre">
-                  <Logo />
-                  <div className="accueil jc__centre ai__centre">
-                        <Link to="/">
-                              <button className="SettingsUser">Accueil</button>
-                        </Link>
-                  </div>
-                  <div className="BlocUserList">
-                        <div className="flex jc__centre ai__centre fd__Column">
-                              <div className="flex ai__centre jc__SpaceB size100">
-                                    <ul className="photo">Photo</ul>
-                                    <ul className="Nom">Nom</ul>
-                                    <ul className="email">Email</ul>
-                                    <ul className="userId">UserId</ul>
-                                    <ul className="role">Role</ul>
-                                    <ul className="suppr">Supprimer</ul>
-                              </div>
-
-                              {users.map((register) => {
-                                    return (
-                                          <div
-                                                className="flex ai__centre jc__SpaceB User size100"
-                                                key={register}
-                                          >
-                                                <img
-                                                      src={register.img}
-                                                      className="imgUser"
-                                                      alt="logo par defaut"
-                                                />
-                                                <p className="UserInfo Nom">
-                                                      {register.user}
-                                                </p>
-                                                <p className="UserInfo email">
-                                                      {register.email}
-                                                </p>
-                                                <p className="UserInfo userId">
-                                                      {register._id}
-                                                </p>
-                                                <p className="UserInfo role">
-                                                      {register.roles}
-                                                </p>
-                                                <button className="SettingsUser suppr">
-                                                      <FontAwesomeIcon
-                                                            icon={faUserSlash}
-                                                      />
-                                                </button>
-                                          </div>
-                                    );
-                              })}
-                        </div>
-                  </div>
-            </div>
+            <Route
+                  exact
+                  path={path}
+                  render={() =>
+                        isMyTokenValid() ? (
+                              { children }
+                        ) : (
+                              <Navigate to="/login" />
+                        )
+                  }
+            ></Route>
       );
 };
 
-export default UserList;
+const App = () => {
+      let token = localStorage.getItem('token');
+
+      let routesLink;
+      //
+      if (token) {
+            routesLink = (
+                  <Routes>
+                        <Route exact path="/" element={<Home />} />
+                        <Route
+                              exact
+                              path="/Profile"
+                              element={<ProfileSetting />}
+                        />
+                        <Route path="*" element={<Navigate to="/" replace />} />
+                  </Routes>
+            );
+      } else {
+            routesLink = (
+                  <Routes>
+                        <Route exact path="/Login" element={<Login />} />
+                        <Route exact path="/SignUp" element={<SignUp />} />
+                        <Route
+                              path="*"
+                              element={<Navigate to="/Login" replace />}
+                        />
+                  </Routes>
+            );
+      }
+
+      return (
+            <Router>
+                  <Routes>
+                        <Route path="/" element={<Layout />}>
+                              {/* ++++++++++++++++++  ROUTE FOR USER LOGGOUT ++++++++++++++++++ */}
+                              <Route exact path="/Login" element={<Login />} />
+                              <Route
+                                    exact
+                                    path="/SignUp"
+                                    element={<SignUp />}
+                              />
+
+                              {/* ++++++++++++++++++ PRIVATE ROUTE FOR USER LOGGED ++++++++++++++++++ */}
+
+                              <Route exact path="/" element={<Home />} />
+                              <Route
+                                    exact
+                                    path="/Profile"
+                                    element={<ProfileSetting />}
+                              />
+                              <Route
+                                    exact
+                                    path="/Admin"
+                                    element={<AdminPanel />}
+                              />
+                              {/* path="*" revoie vers l'accueil si tout types de liens 
+                                    non existant est appelé dans la barre de recherche */}
+                              {<Route exact path="*" element={<Home />} />}
+                        </Route>
+                  </Routes>
+            </Router>
+      );
+};
+
+export default App;

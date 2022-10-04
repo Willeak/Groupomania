@@ -1,27 +1,25 @@
 .profile {
       position: relative;
       width: 288px;
-      height: 300px;
-      margin-top: -15px;
+      height: auto;
+      margin-top: 0px;
       margin-left: 12px;
       margin-right: 20px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      padding: 1rem;
+      padding: 20px 10px 20px 10px;
       border-radius: 20px;
-      background-color: rgba(0, 0, 0, 0.4);
+      background-color: rgba(0, 0, 0, 0.7);
 }
 
 .imgProfile {
       position: absolute;
-      margin-top: 10px;
       width: 80px;
-      margin-bottom: 10px;
       clip-path: circle(50% at 50% 50%);
 }
 
-.circle {
+.circleProfile {
       margin-top: 0px;
       margin-left: 0px;
       width: 88px;
@@ -35,13 +33,22 @@
       font-size: 15px;
 }
 
+.profileRole {
+      margin-top: 10px;
+      margin-left: -20px;
+
+      font-size: 15px;
+}
+.iconRole {
+      margin-right: 5px;
+      color: #ffd7d7;
+}
+
 .profileSetting {
       border: 1px solid rgba(255, 255, 255, 0);
       background-color: rgba(255, 255, 255, 0);
       color: white;
       border-radius: 25px;
-      margin-top: 20px;
-      margin-bottom: 20px;
       padding: 10px 5px 10px 25px;
       font-size: 17px;
       width: 120px;
@@ -59,4 +66,150 @@
 
 .icon {
       margin-right: 20px;
+}
+
+.panelUser {
+      margin-top: 20px;
+
+      div {
+            margin-bottom: 12px;
+      }
+}
+
+.iconAdmin {
+      margin-right: 20px;
+}
+
+.AdminButton {
+      border: 1px solid rgba(255, 255, 255, 0);
+      background-color: rgba(255, 255, 255, 0);
+      color: white;
+      border-radius: 25px;
+      padding: 10px 5px 10px 25px;
+      font-size: 17px;
+      width: 180px;
+      font-weight: bold;
+      text-align: left;
+}
+
+.AdminButton:hover {
+      background-color: rgba(255, 255, 255, 0.089);
+      color: white;
+      transition: 0.2s;
+      border-radius: 25px;
+      cursor: pointer;
+}
+
+.IfAdminRole {
+      display: none;
+}
+
+#seeRoles {
+      display: none;
+}
+
+.iconAdminResponsive {
+      display: none;
+}
+
+@media screen and (max-width: 1100px) {
+      /* VERSION TABLETTE */
+      .profile {
+            margin-top: 25px;
+            position: relative;
+            width: 90px;
+            height: 410px;
+            padding-top: 50px;
+            margin-top: 130px;
+            margin-left: 158px;
+            margin-right: 10px;
+      }
+      .circleProfile {
+            margin-top: 0px;
+            margin-left: 0px;
+            width: 60px;
+            height: 60px;
+            border: 2px solid red;
+            border-radius: 50%;
+      }
+      .imgProfile {
+            position: absolute;
+
+            width: 50px;
+
+            clip-path: circle(50% at 50% 50%);
+      }
+      .profileRole {
+            text-align: center;
+            margin-left: 0px;
+      }
+      .profileName {
+            text-align: center;
+      }
+      .d_noneProfile {
+            display: none;
+      }
+      .iconAdmin {
+            display: none;
+      }
+      .AdminButton {
+            display: none;
+      }
+      .profileSetting {
+            display: none;
+      }
+      .icon {
+            display: none;
+      }
+      .buttonResponsive {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+      }
+
+      .buttonResponsive:hover {
+            background-color: rgba(255, 255, 255, 0.089);
+            color: white;
+            transition: 0.2s;
+            border-radius: 10px;
+            cursor: pointer;
+      }
+      .iconAdminResponsive {
+            display: flex;
+      }
+}
+@media screen and (max-width: 768px) {
+      /* VERSION PC Responsive */
+      .profile {
+            flex-direction: row;
+            margin-top: 10px;
+            position: relative;
+            width: 100%;
+            height: 70px;
+            padding-top: 00px;
+            margin-left: 0px;
+            margin-right: 0px;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0px;
+      }
+      .profileRole {
+            text-align: center;
+            margin-top: 0px;
+      }
+      .profileName {
+            margin-top: 0px;
+            text-align: center;
+            display: none;
+      }
+      .panelUser {
+            flex-direction: row;
+
+            div {
+                  margin-bottom: 0px;
+            }
+      }
+      .buttonResponsive {
+            margin-top: -20px;
+      }
 }

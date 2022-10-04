@@ -1,5 +1,5 @@
 import React from 'react';
-import imgProfile from './../assets/avatar_neutre.png';
+// import imgProfile from 'http://localhost:3000/images/profile/avatar_neutre.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Post = () => {
@@ -8,7 +8,7 @@ const Post = () => {
             <div className="Post">
                   <div className="flex ai__centre">
                         <img
-                              src={imgProfile}
+                              // src={imgProfile}
                               alt=""
                               className="imgProfilePost"
                         />

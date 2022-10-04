@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../components/Logo';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserSlash } from '@fortawesome/free-solid-svg-icons';
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
+
 import axios from '../api/axios';
+
 import imgProfile from './../assets/avatar_neutre.png';
 
 const UserList = () => {
@@ -22,7 +25,8 @@ const UserList = () => {
                   .get(USERSList, {
                         headers: {
                               'Content-Type': 'application/json',
-                              Authorization: sessionStorage.getItem('token'),
+                              Authorization:
+                                    'Bearer ' + sessionStorage.getItem('token'),
                               withCredentials: true,
                         },
                   })
@@ -74,7 +78,8 @@ const UserList = () => {
                   .delete(DELETEUser, {
                         headers: {
                               'Content-Type': 'application/json',
-                              Authorization: sessionStorage.getItem('token'),
+                              Authorization:
+                                    'Bearer ' + sessionStorage.getItem('token'),
                               withCredentials: true,
                         },
                   })
@@ -94,31 +99,67 @@ const UserList = () => {
 
       return (
             <div className="flex fd__Column ai__centre">
-                  <Logo />
-                  <div className="accueil jc__centre ai__centre">
-                        <Link to="/">
-                              <button className="homelink">Accueil</button>
-                        </Link>
-                  </div>
-                  <div className="recherche jc__centre ai__centre">
-                        <input
-                              type="search"
-                              value={name}
-                              onChange={filter}
-                              className="inputPost"
-                              id="inputSearch"
-                              placeholder="Entrer un Email..."
+                  <div className="NavBar flex ai__centre jc__SpaceB d_nonePC">
+                        <div className="accueil jc__centre ai__centre">
+                              <Link to="/">
+                                    <button className="homelink">
+                                          Accueil
+                                    </button>
+                              </Link>
+                        </div>
+                        <img
+                              src="/static/media/icon-left-font.e44e3642ed0ba08e9dda.png"
+                              alt="logo Groupomania"
+                              class="logoAdminPanel"
                         />
+                        <div className="recherche jc__centre ai__centre">
+                              <input
+                                    type="search"
+                                    value={name}
+                                    onChange={filter}
+                                    className="inputPost"
+                                    id="inputSearch"
+                                    placeholder="Entrer un Email..."
+                              />
+                        </div>
+                  </div>
+                  <div className="NavBar flex ai__centre jc__SpaceB d_noneMobile">
+                        <img
+                              src="/static/media/icon-left-font.e44e3642ed0ba08e9dda.png"
+                              alt="logo Groupomania"
+                              class="logoAdminPanel"
+                        />
+                        <div className="flex size100">
+                              <div className="accueil jc__centre ai__centre">
+                                    <Link to="/">
+                                          <button className="homelink">
+                                                <FontAwesomeIcon
+                                                      icon={faHouse}
+                                                />
+                                          </button>
+                                    </Link>
+                              </div>
+                              <div className="recherche jc__centre ai__centre">
+                                    <input
+                                          type="search"
+                                          value={name}
+                                          onChange={filter}
+                                          className="inputPost"
+                                          id="inputSearch"
+                                          placeholder="Entrer un Email..."
+                                    />
+                              </div>
+                        </div>
                   </div>
                   <div className="BlocUserList">
                         <div className="flex jc__centre ai__centre fd__Column">
-                              <div className="flex ai__centre jc__SpaceB size100">
-                                    <ul className="photo">Photo</ul>
+                              <div className="flex centerResponsive ai__centre jc__SpaceB size100">
+                                    <ul className="photo d_none">Photo</ul>
                                     <ul className="Nom">Nom</ul>
-                                    <ul className="email">Email</ul>
-                                    <ul className="userId">UserId</ul>
-                                    <ul className="role">Role</ul>
-                                    <ul className="suppr">Supprimer</ul>
+                                    <ul className="email d_none">Email</ul>
+                                    <ul className="userId d_none">UserId</ul>
+                                    <ul className="role d_none">Role</ul>
+                                    <ul className="suppr d_none">Supprimer</ul>
                               </div>
 
                               {users && users.length > 0 ? (
@@ -128,9 +169,17 @@ const UserList = () => {
                                                 key={index}
                                           >
                                                 <img
-                                                      src={register.img}
+                                                      src={
+                                                            'http://localhost:3000' +
+                                                            register.img
+                                                      }
+                                                      id="imgProfileDefault"
                                                       className="imgUser"
                                                       alt="logo par defaut"
+                                                      onError={(e) => {
+                                                            e.target.src =
+                                                                  imgProfile;
+                                                      }}
                                                 />
                                                 <p className="UserInfo Nom">
                                                       {register.user}

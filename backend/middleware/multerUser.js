@@ -11,12 +11,12 @@ const MIME_TYPES = {
 const storage = multer.diskStorage({
   // Création d'un objet de configuration pour Multer
   destination: (req, file, callback) => {
-    callback(null, "images");
+    callback(null, "images/profile/");
   },
   filename: (req, file, callback) => {
     const name = file.originalname.split(".")[0].split(" ").join("_");
     const extension = MIME_TYPES[file.mimetype];
-    callback(null, name + Date.now() + "." + extension); // création du no mde l'image
+    callback(null, req.params.id + "." + extension); // création du nom de l'image
   },
 });
 

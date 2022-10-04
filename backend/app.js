@@ -13,7 +13,7 @@ const app = express();
 //connexion a la base de donnée MongoDB
 mongoose
   .connect(
-    "mongodb+srv://willeak:d5ozjkVY5FZUOrim@cluster0.9uyfwxw.mongodb.net/?retryWrites=true&w=majority",
+    "mongodb+srv://willeak:d5ozjkVY5FZUOrim@cluster0.9uyfwxw.mongodb.net/Groupomania",
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
@@ -41,6 +41,10 @@ app.use(bodyParser.json());
 app.use("/api/posts", postRoutes);
 app.use("/api/comment", commentRoutes);
 app.use("/api/register", signRoutes);
-app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("/images/post", express.static(path.join(__dirname, "images")));
+app.use(
+  "/images/profile/",
+  express.static(path.join(__dirname, "images/profile"))
+);
 
 module.exports = app;

@@ -1,6 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import axios from '../api/axios';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
+
 //adaptation du textaera selon lpassage a la ligne
 const defaultStyle = {
       display: 'block',
@@ -47,6 +50,8 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
             try {
                   const response = await axios.post(POST, JSON.stringify({}), {
                         headers: { 'Content-Type': 'application/json' },
+                        Authorization:
+                              'Bearer ' + sessionStorage.getItem('token'),
                         withCredentials: true,
                   });
                   console.log(JSON.stringify(response));
@@ -101,6 +106,13 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
       return (
             <div className="BlocCreatePost">
                   <form className="formPost" onSubmit={handleSubmit}>
+                        <label className="UploadImgPost">
+                              <FontAwesomeIcon
+                                    icon={faImage}
+                                    className="UploadImg"
+                              />
+                              <input type="file" id="file" name="image" />
+                        </label>
                         <textarea
                               className="inputPost"
                               type="text"

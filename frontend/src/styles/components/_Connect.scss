@@ -11,17 +11,7 @@ html {
 
 body {
       min-height: 100vh;
-      padding-top: 100px;
 }
-
-// .App {
-//       display: flex;
-//       flex-direction: column;
-//       justify-content: center;
-//       align-items: center;
-//       min-height: 100vh;
-//       padding: 1rem 0.5rem;
-// }
 
 section {
       width: 100%;
@@ -32,7 +22,7 @@ section {
       justify-content: flex-start;
       padding: 1rem;
       border-radius: 20px;
-      background-color: rgba(0, 0, 0, 0.4);
+      background-color: rgba(0, 0, 0, 0.7);
 }
 
 .formAuth {
@@ -51,7 +41,7 @@ section {
 .inputAuth,
 .buttonAuth,
 .textareaAuth {
-      font-size: 22px;
+      font-size: 17px;
       padding: 0.25rem;
       padding-left: 15px;
       border-radius: 1rem;
@@ -65,13 +55,10 @@ section {
       transition: 0.5s;
 }
 
-label {
+.labelMarg {
+      margin-top: 10px;
       margin-left: 15px;
       margin-bottom: 3px;
-}
-
-label {
-      margin-top: 1rem;
 }
 
 .buttonAuth {
@@ -199,10 +186,49 @@ a:visited {
 
 .logo {
       position: relative;
-      margin-top: -170px;
+      margin-top: -70px;
       margin-bottom: -70px;
       width: 300px;
       clip-path: inset(35% 0 35% 5% round 20px);
       border-radius: 20px;
       opacity: 80%;
+}
+
+//=========================================
+
+@media screen and (max-width: 992px) {
+      /* VERSION TABLETTE */
+}
+
+@media screen and (max-width: 768px) {
+      /* VERSION PC Responsive */
+      .responsive {
+            width: 350px;
+      }
+
+      .grey::after {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 180px;
+            border-radius: 0 20px 0 0;
+            transform: translateY(-68.4%) translateX(-20px);
+            background-color: rgba(255, 255, 255, 0.2);
+            height: 50px;
+            padding-bottom: 20px;
+      }
+      .grey1::after {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 170px;
+            border-radius: 20px 0 0 0;
+            transform: translateY(-68.5%) translateX(-53px);
+            background-color: rgba(255, 255, 255, 0.2);
+            height: 50px;
+            padding-bottom: 20px;
+      }
+      .buttonAuth {
+            margin-left: 55px;
+      }
 }

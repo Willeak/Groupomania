@@ -11,11 +11,12 @@ const Disconnect = () => {
 
       const DisconnectButton = async (e) => {
             sessionStorage.clear();
+            localStorage.clear();
             setAuth({});
       };
 
       return (
-            <div>
+            <div className="disconnectResponsive">
                   <FontAwesomeIcon icon={faDoorOpen} className="icon" />
                   <Link to="/login" element={<Login />}>
                         <button
@@ -25,6 +26,14 @@ const Disconnect = () => {
                               Déconnecter
                         </button>
                   </Link>
+                  <div className="flex jc__centre ai__centre buttonResponsive">
+                        <Link to="/login" element={<Login />}>
+                              <FontAwesomeIcon
+                                    icon={faDoorOpen}
+                                    className="iconAdminResponsive"
+                              />
+                        </Link>
+                  </div>
             </div>
       );
 };

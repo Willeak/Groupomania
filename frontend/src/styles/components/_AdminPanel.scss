@@ -1,9 +1,7 @@
 .BlocUserList {
-      margin-top: 0px;
-
       min-width: 696px;
-      width: 50%;
-      max-width: 50%;
+      width: 70%;
+      max-width: 70%;
       position: relative;
       height: auto;
       display: flex;
@@ -11,35 +9,34 @@
       justify-content: flex-start;
       padding: 1rem;
       border-radius: 20px 20px 20px 20px;
-      background-color: rgba(0, 0, 0, 0.4);
+      background-color: rgba(0, 0, 0, 0.7);
+}
+
+.NavBar {
+      min-width: 696px;
+      width: 70%;
 }
 
 .accueil {
       display: flex;
-      position: absolute;
       width: 150px;
       max-width: 50%;
-      margin-left: -600px;
-      margin-top: -50px;
       height: 62px;
-
+      margin-top: 0px;
       padding: 0px;
       border-radius: 20px 20px 20px 20px;
-      background-color: rgba(0, 0, 0, 0.4);
+      background-color: rgba(0, 0, 0, 0.7);
 }
 
 .recherche {
       display: flex;
-      position: absolute;
       width: 250px;
-      max-width: 50%;
-      margin-left: 700px;
-      margin-top: -50px;
       height: auto;
-
+      margin-top: 0px;
+      margin-left: 10px;
       padding: 10px;
       border-radius: 20px 20px 20px 20px;
-      background-color: rgba(0, 0, 0, 0.4);
+      background-color: rgba(0, 0, 0, 0.7);
 }
 
 .User {
@@ -82,10 +79,17 @@
       min-width: 179px;
       width: auto;
       text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 190px;
 }
 .userId {
       min-width: 150px;
       width: auto;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 190px;
       text-align: center;
 }
 .role {
@@ -131,7 +135,7 @@
       background-color: rgba(255, 255, 255, 0.089);
       color: white;
       transition: 0.2s;
-      border-radius: 25px;
+      border-radius: 10px;
       cursor: pointer;
 }
 
@@ -165,4 +169,97 @@
       font-size: 15px;
 }
 
+.logoAdminPanel {
+      position: relative;
+      margin-top: -70px;
+      margin-left: 40px;
+      margin-bottom: -70px;
+      width: 300px;
+      clip-path: inset(35% 0 35% 5% round 20px);
+      border-radius: 20px;
+      opacity: 80%;
+}
+
+.d_noneMobile {
+      display: none;
+}
+
 // ===========================================
+
+@media screen and (max-width: 992px) {
+      /* VERSION TABLETTE */
+      .NavBar {
+            // flex-direction: column;
+            min-width: auto;
+            width: 90%;
+      }
+
+      .BlocUserList {
+            min-width: 220px;
+            width: 90%;
+            max-width: 90%;
+      }
+
+      .d_none {
+            display: none;
+      }
+
+      .User {
+            flex-direction: column;
+            .userId {
+                  width: auto;
+            }
+      }
+      .centerResponsive {
+            justify-content: center;
+      }
+      .logoAdminPanel {
+            position: relative;
+            margin-top: -50px;
+            margin-left: 40px;
+            margin-bottom: -50px;
+            width: 200px;
+      }
+}
+
+@media screen and (max-width: 768px) {
+      /* VERSION PC Responsive */
+      .d_nonePC {
+            display: none;
+      }
+      .d_noneMobile {
+            display: flex;
+      }
+      .NavBar {
+            flex-direction: column;
+      }
+      .accueil {
+            display: flex;
+            width: 80px;
+            max-width: 50%;
+            height: 62px;
+            margin-top: -60px;
+            margin-right: 10px;
+            margin-bottom: 0px;
+            padding: 0px;
+            border-radius: 20px 20px 20px 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+      }
+      .recherche {
+            width: 100%;
+            height: 62px;
+            margin-top: -60px;
+            margin-left: 0px;
+            margin-bottom: 10px;
+      }
+      .logoAdminPanel {
+            position: relative;
+            margin-top: -60px;
+            margin-left: 0px;
+            margin-bottom: 0px;
+      }
+
+      .homelink {
+            width: 55px;
+      }
+}

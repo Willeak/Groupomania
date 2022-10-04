@@ -14,7 +14,7 @@ exports.signup = (req, res, next) => {
         user: req.body.user,
         email: req.body.email,
         roles: "User",
-        img: "./../assets/avatar_neutre.png",
+        img: " ",
         pwd: hash,
       });
       user
@@ -42,6 +42,7 @@ exports.login = (req, res, next) => {
           }
           res.status(200).json({
             userId: user._id,
+            user: user.user,
             email: user.email,
             roles: user.roles,
             img: user.img,
@@ -72,43 +73,41 @@ exports.getOneUser = (req, res, next) => {
     .catch((error) => res.status(404).json({ error: error }));
 };
 
-// Modifier une sauce
-exports.modifySauce = (req, res, next) => {
+// Modifier un utilisateur
+exports.modifyUser = (req, res, next) => {
   if (req.file) {
     User.findOne({ _id: req.params.id })
       .then((user) => {
         // verifie si l'user est bien celui du createur de la sauce
         if (res.locals.userId != User.userId)
           return res.status(403).json({
-            message:
-              "Vous n êtes pas le créateur de cette sauce, vous ne pouvez pas MODIFIER cette sauce!",
+            message: "erreur !",
           });
 
         // On supprime l'ancienne image du serveur
-        const filename = user.imageUrl.split("/images/")[1];
-        fs.unlink(`images/${filename}`, () => {
-          const sauceObject = {
-            // On modifie les données et on ajoute la nouvelle image
-            ...JSON.parse(req.body.user),
-            imageUrl: `${req.protocol}://${req.get("host")}/images/${
-              req.file.filename
-            }`,
-          };
-          User.updateOne(
-            { _id: req.params.id },
-            { ...sauceObject, _id: req.params.id }
+        const filename = user.img.split("/images/profile/")[1];
+
+        const userObject = {
+          // On modifie les données et on ajoute la nouvelle image
+          // ...JSON.parse(req.body.user),
+          img: `/images/profile/${req.file.filename}`,
+        };
+        User.updateOne(
+          { _id: req.params.id },
+          { ...userObject, _id: req.params.id }
+        )
+          .then(() =>
+            res.status(200).json({ message: "Photo de profil modifié !" })
           )
-            .then(() => res.status(200).json({ message: "Objet modifié !" }))
-            .catch((error) => res.status(400).json({ error }));
-        });
+          .catch((error) => res.status(400).json({ error }));
       })
-      .catch((error) => res.status(500).json({ error }));
+      .catch((error) => res.status(500).json({ error })); // error actuel
   } else {
-    const sauceObject = { ...req.body };
+    const userObject = { ...req.body };
     // On applique les paramètre de sauceObject
     User.updateOne(
       { _id: req.params.id },
-      { ...sauceObject, _id: req.params.id }
+      { ...userObject, _id: req.params.id }
     )
       .then(() => res.status(200).json({ message: "Objet modifié !" }))
       .catch((error) => res.status(400).json({ error }));

@@ -6,7 +6,7 @@ const router = express.Router();
 // Importation du middleware AUTH pour sécuriser les routes
 const auth = require("../middleware/auth");
 // Importation du middleware MULTER pour la gestion des images
-const multer = require("../middleware/multer");
+const multer = require("../middleware/multerUser");
 
 const postCtrl = require("../controllers/post");
 

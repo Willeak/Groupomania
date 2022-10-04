@@ -1,8 +1,9 @@
 .BlocPost {
-      margin-top: -65px;
-      width: 30%;
-      min-width: 456px;
-      max-width: 30%;
+      margin-top: 40px;
+      margin-right: 20px;
+      width: 616px;
+      min-width: 344px;
+      max-width: 616px;
       position: relative;
       height: 1000px;
       display: flex;
@@ -10,9 +11,73 @@
       justify-content: flex-start;
       padding: 1rem;
       border-radius: 20px 20px 00px 0px;
-      background-color: rgba(0, 0, 0, 0.4);
+      background-color: rgba(0, 0, 0, 0.7);
 }
 .center {
       margin-top: -25px;
       margin-left: -150px;
+}
+
+.logoHome {
+      margin-top: -45px;
+      margin-right: -300px;
+      margin-bottom: -70px;
+      width: 300px;
+      height: 250px;
+      clip-path: inset(35% 0 35% 5% round 20px);
+      border-radius: 20px;
+      opacity: 80%;
+}
+
+@media screen and (max-width: 1100px) {
+      /* VERSION TABLETTE */
+      .logoHome {
+            position: absolute;
+            margin-top: -120px;
+            margin-left: 107px;
+            margin-bottom: -70px;
+            width: 469px;
+            height: 400px;
+            clip-path: inset(40% 70% 40% 11% round 20px);
+            border-radius: 20px;
+            opacity: 80%;
+      }
+}
+@media screen and (max-width: 768px) {
+      /* VERSION PC Responsive */
+      .logoHome {
+            position: absolute;
+            margin-top: -225px;
+            margin-left: 107px;
+            margin-bottom: -70px;
+            width: 469px;
+            height: 400px;
+            clip-path: inset(40% 70% 40% 11% round 20px);
+            border-radius: 20px;
+            opacity: 80%;
+      }
+      .BlocPost {
+            margin-top: 20px;
+            margin-right: 0px;
+            width: 100%;
+            min-width: 344px;
+            max-width: 100%;
+            position: relative;
+            height: 1000px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 1rem;
+            border-radius: 20px 20px 00px 0px;
+            background-color: rgba(0, 0, 0, 0.7);
+      }
+      .center {
+            flex-direction: column;
+            margin-top: 0px;
+            margin-left: 0px;
+            margin-bottom: 0px;
+      }
+      .logoHome {
+            display: none;
+      }
 }

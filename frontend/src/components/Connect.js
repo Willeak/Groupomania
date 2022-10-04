@@ -1,11 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import {
-      Navigate,
-      NavLink,
-      Link,
-      useNavigate,
-      useLocation,
-} from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import Home from '../pages/Home';
 import axios from '../api/axios';
@@ -52,7 +46,18 @@ const Connect = () => {
                         const roles = response?.data?.roles;
                         const userId = response?.data?.userId;
                         const email = response?.data?.email;
-                        setAuth({ userId, img, email, roles, token });
+                        const user = response?.data?.user;
+                        setAuth({ userId, user, img, email, roles, token });
+                        localStorage.setItem(
+                              'authed',
+                              JSON.stringify({
+                                    userId,
+                                    user,
+                                    img,
+                                    email,
+                                    roles,
+                              })
+                        );
                         setImg('');
                         setUserId('');
                         setEmail('');
@@ -83,7 +88,7 @@ const Connect = () => {
                   {success ? (
                         <Navigate to="/" element={<Home />} />
                   ) : (
-                        <section>
+                        <section className="responsive">
                               <nav className="flex jc__centre auth">
                                     <NavLink to="/SignUp" className="grey1">
                                           <li className="stroke">S'inscrire</li>
@@ -108,7 +113,12 @@ const Connect = () => {
                                     className="formAuth"
                                     onSubmit={handleSubmit}
                               >
-                                    <label htmlFor="username">Email :</label>
+                                    <label
+                                          className="labelMarg"
+                                          htmlFor="username"
+                                    >
+                                          Email :
+                                    </label>
                                     <input
                                           className="inputAuth"
                                           type="text"
@@ -122,7 +132,10 @@ const Connect = () => {
                                           required
                                     />
 
-                                    <label htmlFor="password">
+                                    <label
+                                          className="labelMarg"
+                                          htmlFor="password"
+                                    >
                                           Mot de passe :
                                     </label>
                                     <input

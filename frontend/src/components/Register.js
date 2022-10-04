@@ -8,7 +8,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from '../api/axios';
 
-import Home from '../pages/Home';
+import Login from '../pages/Login';
 
 /* GESTION DU FORMULAIRE */
 
@@ -113,9 +113,9 @@ const Register = () => {
       return (
             <>
                   {success ? (
-                        <Navigate to="/" element={<Home />} />
+                        <Navigate to="/login" element={<Login />} />
                   ) : (
-                        <section>
+                        <section className="responsive">
                               <nav className="flex jc__centre auth">
                                     <NavLink to="/SignUp" className="test">
                                           <li className="stroke">S'inscrire</li>
@@ -138,7 +138,10 @@ const Register = () => {
                                     className="formAuth"
                                     onSubmit={handleSubmit}
                               >
-                                    <label htmlFor="username">
+                                    <label
+                                          className="labelMarg"
+                                          htmlFor="username"
+                                    >
                                           NOM Prénom
                                           <FontAwesomeIcon
                                                 icon={faCheck}
@@ -198,7 +201,10 @@ const Register = () => {
                                     </p>
 
                                     {/* EMAIL  */}
-                                    <label htmlFor="email">
+                                    <label
+                                          className="labelMarg"
+                                          htmlFor="email"
+                                    >
                                           Email
                                           <FontAwesomeIcon
                                                 icon={faCheck}
@@ -252,7 +258,10 @@ const Register = () => {
                                           nom.prenom@email.com
                                     </p>
 
-                                    <label htmlFor="password">
+                                    <label
+                                          className="labelMarg"
+                                          htmlFor="password"
+                                    >
                                           Mot de passe
                                           <FontAwesomeIcon
                                                 icon={faCheck}
@@ -318,7 +327,10 @@ const Register = () => {
                                           <span aria-label="percent">%</span>
                                     </p>
 
-                                    <label htmlFor="confirm_pwd">
+                                    <label
+                                          className="labelMarg"
+                                          htmlFor="confirm_pwd"
+                                    >
                                           Confirmez votre mot de passe
                                           <FontAwesomeIcon
                                                 icon={faCheck}

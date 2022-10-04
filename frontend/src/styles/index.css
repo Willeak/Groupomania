@@ -19,7 +19,7 @@ body {
   margin: 0;
   font-size: large;
   font-family: 'Lato', sans-serif;
-  background-color: #4e5166;
+  background-color: #e6e6e6;
 }
 
 :root {
@@ -114,11 +114,11 @@ li {
   width: 100%;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 992px) {
   /* VERSION TABLETTE */
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (max-width: 768px) {
   /* VERSION PC Responsive */
 }
 
@@ -136,7 +136,6 @@ html {
 
 body {
   min-height: 100vh;
-  padding-top: 100px;
 }
 
 section {
@@ -155,7 +154,7 @@ section {
           justify-content: flex-start;
   padding: 1rem;
   border-radius: 20px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .formAuth {
@@ -183,7 +182,7 @@ section {
 .inputAuth,
 .buttonAuth,
 .textareaAuth {
-  font-size: 22px;
+  font-size: 17px;
   padding: 0.25rem;
   padding-left: 15px;
   border-radius: 1rem;
@@ -198,13 +197,10 @@ section {
   transition: 0.5s;
 }
 
-label {
+.labelMarg {
+  margin-top: 10px;
   margin-left: 15px;
   margin-bottom: 3px;
-}
-
-label {
-  margin-top: 1rem;
 }
 
 .buttonAuth {
@@ -334,7 +330,7 @@ a:visited {
 
 .logo {
   position: relative;
-  margin-top: -170px;
+  margin-top: -70px;
   margin-bottom: -70px;
   width: 300px;
   -webkit-clip-path: inset(35% 0 35% 5% round 20px);
@@ -343,15 +339,54 @@ a:visited {
   opacity: 80%;
 }
 
+@media screen and (max-width: 992px) {
+  /* VERSION TABLETTE */
+}
+
+@media screen and (max-width: 768px) {
+  /* VERSION PC Responsive */
+  .responsive {
+    width: 350px;
+  }
+  .grey::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 180px;
+    border-radius: 0 20px 0 0;
+    -webkit-transform: translateY(-68.4%) translateX(-20px);
+            transform: translateY(-68.4%) translateX(-20px);
+    background-color: rgba(255, 255, 255, 0.2);
+    height: 50px;
+    padding-bottom: 20px;
+  }
+  .grey1::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 170px;
+    border-radius: 20px 0 0 0;
+    -webkit-transform: translateY(-68.5%) translateX(-53px);
+            transform: translateY(-68.5%) translateX(-53px);
+    background-color: rgba(255, 255, 255, 0.2);
+    height: 50px;
+    padding-bottom: 20px;
+  }
+  .buttonAuth {
+    margin-left: 55px;
+  }
+}
+
 h1 {
   color: red;
 }
 
 .BlocPost {
-  margin-top: -65px;
-  width: 30%;
-  min-width: 456px;
-  max-width: 30%;
+  margin-top: 40px;
+  margin-right: 20px;
+  width: 616px;
+  min-width: 344px;
+  max-width: 616px;
   position: relative;
   height: 1000px;
   display: -webkit-box;
@@ -366,7 +401,7 @@ h1 {
           justify-content: flex-start;
   padding: 1rem;
   border-radius: 20px 20px 00px 0px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .center {
@@ -374,11 +409,89 @@ h1 {
   margin-left: -150px;
 }
 
+.logoHome {
+  margin-top: -45px;
+  margin-right: -300px;
+  margin-bottom: -70px;
+  width: 300px;
+  height: 250px;
+  -webkit-clip-path: inset(35% 0 35% 5% round 20px);
+          clip-path: inset(35% 0 35% 5% round 20px);
+  border-radius: 20px;
+  opacity: 80%;
+}
+
+@media screen and (max-width: 1100px) {
+  /* VERSION TABLETTE */
+  .logoHome {
+    position: absolute;
+    margin-top: -120px;
+    margin-left: 107px;
+    margin-bottom: -70px;
+    width: 469px;
+    height: 400px;
+    -webkit-clip-path: inset(40% 70% 40% 11% round 20px);
+            clip-path: inset(40% 70% 40% 11% round 20px);
+    border-radius: 20px;
+    opacity: 80%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* VERSION PC Responsive */
+  .logoHome {
+    position: absolute;
+    margin-top: -225px;
+    margin-left: 107px;
+    margin-bottom: -70px;
+    width: 469px;
+    height: 400px;
+    -webkit-clip-path: inset(40% 70% 40% 11% round 20px);
+            clip-path: inset(40% 70% 40% 11% round 20px);
+    border-radius: 20px;
+    opacity: 80%;
+  }
+  .BlocPost {
+    margin-top: 20px;
+    margin-right: 0px;
+    width: 100%;
+    min-width: 344px;
+    max-width: 100%;
+    position: relative;
+    height: 1000px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    padding: 1rem;
+    border-radius: 20px 20px 00px 0px;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  .center {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+  }
+  .logoHome {
+    display: none;
+  }
+}
+
 .profile {
   position: relative;
   width: 288px;
-  height: 300px;
-  margin-top: -15px;
+  height: auto;
+  margin-top: 0px;
   margin-left: 12px;
   margin-right: 20px;
   display: -webkit-box;
@@ -391,21 +504,19 @@ h1 {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  padding: 1rem;
+  padding: 20px 10px 20px 10px;
   border-radius: 20px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .imgProfile {
   position: absolute;
-  margin-top: 10px;
   width: 80px;
-  margin-bottom: 10px;
   -webkit-clip-path: circle(50% at 50% 50%);
           clip-path: circle(50% at 50% 50%);
 }
 
-.circle {
+.circleProfile {
   margin-top: 0px;
   margin-left: 0px;
   width: 88px;
@@ -419,13 +530,22 @@ h1 {
   font-size: 15px;
 }
 
+.profileRole {
+  margin-top: 10px;
+  margin-left: -20px;
+  font-size: 15px;
+}
+
+.iconRole {
+  margin-right: 5px;
+  color: #ffd7d7;
+}
+
 .profileSetting {
   border: 1px solid rgba(255, 255, 255, 0);
   background-color: rgba(255, 255, 255, 0);
   color: white;
   border-radius: 25px;
-  margin-top: 20px;
-  margin-bottom: 20px;
   padding: 10px 5px 10px 25px;
   font-size: 17px;
   width: 120px;
@@ -446,6 +566,164 @@ h1 {
   margin-right: 20px;
 }
 
+.panelUser {
+  margin-top: 20px;
+}
+
+.panelUser div {
+  margin-bottom: 12px;
+}
+
+.iconAdmin {
+  margin-right: 20px;
+}
+
+.AdminButton {
+  border: 1px solid rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  border-radius: 25px;
+  padding: 10px 5px 10px 25px;
+  font-size: 17px;
+  width: 180px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.AdminButton:hover {
+  background-color: rgba(255, 255, 255, 0.089);
+  color: white;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.IfAdminRole {
+  display: none;
+}
+
+#seeRoles {
+  display: none;
+}
+
+.iconAdminResponsive {
+  display: none;
+}
+
+@media screen and (max-width: 1100px) {
+  /* VERSION TABLETTE */
+  .profile {
+    margin-top: 25px;
+    position: relative;
+    width: 90px;
+    height: 410px;
+    padding-top: 50px;
+    margin-top: 130px;
+    margin-left: 158px;
+    margin-right: 10px;
+  }
+  .circleProfile {
+    margin-top: 0px;
+    margin-left: 0px;
+    width: 60px;
+    height: 60px;
+    border: 2px solid red;
+    border-radius: 50%;
+  }
+  .imgProfile {
+    position: absolute;
+    width: 50px;
+    -webkit-clip-path: circle(50% at 50% 50%);
+            clip-path: circle(50% at 50% 50%);
+  }
+  .profileRole {
+    text-align: center;
+    margin-left: 0px;
+  }
+  .profileName {
+    text-align: center;
+  }
+  .d_noneProfile {
+    display: none;
+  }
+  .iconAdmin {
+    display: none;
+  }
+  .AdminButton {
+    display: none;
+  }
+  .profileSetting {
+    display: none;
+  }
+  .icon {
+    display: none;
+  }
+  .buttonResponsive {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+  }
+  .buttonResponsive:hover {
+    background-color: rgba(255, 255, 255, 0.089);
+    color: white;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .iconAdminResponsive {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* VERSION PC Responsive */
+  .profile {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    margin-top: 10px;
+    position: relative;
+    width: 100%;
+    height: 70px;
+    padding-top: 00px;
+    margin-left: 0px;
+    margin-right: 0px;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding-bottom: 0px;
+  }
+  .profileRole {
+    text-align: center;
+    margin-top: 0px;
+  }
+  .profileName {
+    margin-top: 0px;
+    text-align: center;
+    display: none;
+  }
+  .panelUser {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .panelUser div {
+    margin-bottom: 0px;
+  }
+  .buttonResponsive {
+    margin-top: -20px;
+  }
+}
+
 .BlocCreatePost {
   margin-bottom: 30px;
 }
@@ -461,9 +739,9 @@ h1 {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
@@ -472,7 +750,8 @@ h1 {
 .inputPost {
   border: 1px solid rgba(255, 255, 255, 0);
   background-color: rgba(255, 255, 255, 0.089);
-  width: 100%;
+  margin-left: 45px;
+  width: 92%;
   height: auto;
   color: white;
   border-radius: 10px;
@@ -545,6 +824,64 @@ button[disabled='true']:hover {
           align-items: center;
 }
 
+.UploadImgPost {
+  position: absolute;
+  margin-top: -52px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.089);
+  color: #fff;
+  border-radius: 10px;
+}
+
+.UploadImgPost:hover {
+  background-color: rgba(255, 255, 255, 0.195);
+  color: white;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+input[type='file'] {
+  display: none;
+}
+
+.UploadImg {
+  margin-top: 2.5px;
+  margin-left: 2.5px;
+}
+
+@media screen and (max-width: 992px) {
+  /* VERSION TABLETTE */
+}
+
+@media screen and (max-width: 768px) {
+  /* VERSION PC Responsive */
+  .inputPost {
+    border: 1px solid rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0.089);
+    margin-left: 45px;
+    margin-right: 10px;
+    width: 100%;
+    max-width: 92%;
+  }
+}
+
+@media screen and (max-width: 536px) {
+  /* VERSION PC Responsive */
+  .inputPost {
+    border: 1px solid rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0.089);
+    margin-left: 45px;
+    margin-right: 10px;
+    width: 100%;
+    max-width: 88%;
+  }
+}
+
 .DisconnectButton {
   border: 1px solid rgba(255, 255, 255, 0);
   background-color: rgba(255, 255, 255, 0);
@@ -570,12 +907,30 @@ button[disabled='true']:hover {
   margin-right: 20px;
 }
 
+@media screen and (max-width: 1100px) {
+  /* VERSION TABLETTE */
+  .DisconnectButton {
+    display: none;
+  }
+  .disconnectResponsive {
+    margin-top: -10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* VERSION PC Responsive */
+  .disconnectResponsive {
+    margin-top: 0px;
+  }
+}
+
 .Post {
   border: 1px solid #ffd7d7;
   border-radius: 25px;
-  min-width: 411px;
+  min-width: 300px;
   padding: 10px 20px 20px 20px;
   margin-bottom: 20px;
+  font-size: 17px;
 }
 
 .imgProfilePost {
@@ -603,10 +958,9 @@ button[disabled='true']:hover {
 }
 
 .BlocUserList {
-  margin-top: 0px;
   min-width: 696px;
-  width: 50%;
-  max-width: 50%;
+  width: 70%;
+  max-width: 70%;
   position: relative;
   height: auto;
   display: -webkit-box;
@@ -621,37 +975,38 @@ button[disabled='true']:hover {
           justify-content: flex-start;
   padding: 1rem;
   border-radius: 20px 20px 20px 20px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.NavBar {
+  min-width: 696px;
+  width: 70%;
 }
 
 .accueil {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  position: absolute;
   width: 150px;
   max-width: 50%;
-  margin-left: -600px;
-  margin-top: -50px;
   height: 62px;
+  margin-top: 0px;
   padding: 0px;
   border-radius: 20px 20px 20px 20px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .recherche {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  position: absolute;
   width: 250px;
-  max-width: 50%;
-  margin-left: 700px;
-  margin-top: -50px;
   height: auto;
+  margin-top: 0px;
+  margin-left: 10px;
   padding: 10px;
   border-radius: 20px 20px 20px 20px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .User {
@@ -697,11 +1052,18 @@ button[disabled='true']:hover {
   min-width: 179px;
   width: auto;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 190px;
 }
 
 .userId {
   min-width: 150px;
   width: auto;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 190px;
   text-align: center;
 }
 
@@ -752,7 +1114,7 @@ button[disabled='true']:hover {
   color: white;
   -webkit-transition: 0.2s;
   transition: 0.2s;
-  border-radius: 25px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -785,5 +1147,427 @@ button[disabled='true']:hover {
   margin-top: 20px;
   padding: 0.5rem;
   font-size: 15px;
+}
+
+.logoAdminPanel {
+  position: relative;
+  margin-top: -70px;
+  margin-left: 40px;
+  margin-bottom: -70px;
+  width: 300px;
+  -webkit-clip-path: inset(35% 0 35% 5% round 20px);
+          clip-path: inset(35% 0 35% 5% round 20px);
+  border-radius: 20px;
+  opacity: 80%;
+}
+
+.d_noneMobile {
+  display: none;
+}
+
+@media screen and (max-width: 992px) {
+  /* VERSION TABLETTE */
+  .NavBar {
+    min-width: auto;
+    width: 90%;
+  }
+  .BlocUserList {
+    min-width: 220px;
+    width: 90%;
+    max-width: 90%;
+  }
+  .d_none {
+    display: none;
+  }
+  .User {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .User .userId {
+    width: auto;
+  }
+  .centerResponsive {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .logoAdminPanel {
+    position: relative;
+    margin-top: -50px;
+    margin-left: 40px;
+    margin-bottom: -50px;
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* VERSION PC Responsive */
+  .d_nonePC {
+    display: none;
+  }
+  .d_noneMobile {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .NavBar {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .accueil {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 80px;
+    max-width: 50%;
+    height: 62px;
+    margin-top: -60px;
+    margin-right: 10px;
+    margin-bottom: 0px;
+    padding: 0px;
+    border-radius: 20px 20px 20px 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  .recherche {
+    width: 100%;
+    height: 62px;
+    margin-top: -60px;
+    margin-left: 0px;
+    margin-bottom: 10px;
+  }
+  .logoAdminPanel {
+    position: relative;
+    margin-top: -60px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+  }
+  .homelink {
+    width: 55px;
+  }
+}
+
+.profileWindow {
+  position: relative;
+  width: 350px;
+  height: auto;
+  margin-top: -15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding: 1rem;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.circle {
+  margin-top: 0px;
+  margin-left: 0px;
+  width: 88px;
+  height: 88px;
+  border: 2px solid red;
+  border-radius: 50%;
+}
+
+.imgProfileSetting {
+  width: 80px;
+  -webkit-clip-path: circle(50% at 50% 50%);
+          clip-path: circle(50% at 50% 50%);
+}
+
+.profileSettingButton {
+  border: 1px solid rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  border-radius: 25px;
+  padding: 10px 5px 10px 25px;
+  font-size: 17px;
+  width: 150px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.profileSettingButton:hover {
+  background-color: rgba(255, 255, 255, 0.089);
+  color: white;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.iconSave {
+  margin-top: 10px;
+  margin-left: 30px;
+  margin-right: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.inputSetting {
+  font-size: 17px;
+  padding: 0.25rem;
+  padding-left: 15px;
+  border-radius: 1rem;
+  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.452);
+  border: white solid 2px;
+}
+
+.inputImg {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.infoNoImg {
+  font-weight: 400;
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.infoIfImg {
+  margin-top: 3px;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.ImgProfileSettingButton {
+  border: 1px solid rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  border-radius: 25px;
+  padding: 10px 0px 10px 0px;
+  font-size: 17px;
+  width: 150px;
+  font-weight: bold;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.ImgProfileSettingButton:hover {
+  background-color: rgba(255, 255, 255, 0.089);
+  color: white;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.ImgProfileSettingButton:hover[disabled] {
+  cursor: default;
+}
+
+.logoSettings {
+  margin-top: -161px;
+  margin-left: 140px;
+  margin-bottom: -35px;
+  width: 200px;
+  -webkit-clip-path: inset(35% 0 35% 5% round 20px);
+          clip-path: inset(35% 0 35% 5% round 20px);
+  border-radius: 20px;
+  opacity: 80%;
+}
+
+.accueilSettings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 10px;
+  width: 140px;
+  max-width: 50%;
+  height: 62px;
+  margin-left: -210px;
+  margin-bottom: 30px;
+  padding: 0px;
+  border-radius: 20px 20px 20px 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.homelinkProfile {
+  border: 1px solid rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  border-radius: 25px;
+  margin: 0.8rem;
+  padding: 10px;
+  font-size: 17px;
+  width: 120px;
+  font-weight: bold;
+  text-align: left;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+}
+
+.homelinkProfile:hover {
+  background-color: rgba(255, 255, 255, 0.089);
+  color: white;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+body {
+  -webkit-transition: background-color 0.2s ease-in-out, color 0.4s ease-in-out;
+  transition: background-color 0.2s ease-in-out, color 0.4s ease-in-out;
+  color: #ffffff;
+}
+
+body[theme='dark'] {
+  background: #4e5166;
+  color: #fff;
+}
+
+#hybrid {
+  visibility: hidden;
+}
+
+#theme-toggle {
+  visibility: hidden;
+}
+
+#theme-toggle + label {
+  content: '';
+  display: inline-block;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+#theme-toggle:not(:checked) + label {
+  background-color: gold;
+}
+
+#theme-toggle:checked + label {
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+  -webkit-box-shadow: inset -4px -4px 1px 1px #fff;
+          box-shadow: inset -4px -4px 1px 1px #fff;
+}
+
+[class*='text-'] {
+  font-size: 1.2em;
+  font-weight: 600;
+  -webkit-transition: color 5s ease-in;
+  transition: color 5s ease-in;
+}
+
+body[theme='dark'] .BlocPost {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+body[theme='dark'] .profile {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+body[theme='dark'] .profileWindow {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+body[theme='dark'] .accueilSettings {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+body[theme='dark'] .accueil {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+body[theme='dark'] .BlocUserList {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+body[theme='dark'] .recherche {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+body[theme='dark'] section {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+body[theme='light'] .BlocPost {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+body[theme='light'] .profile {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+body[theme='light'] .profileWindow {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+body[theme='light'] .accueilSettings {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+body[theme='light'] .accueil {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+body[theme='light'] .BlocUserList {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+body[theme='light'] .recherche {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+body[theme='light'] section {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.darkmod {
+  position: absolute;
+  margin-top: -5px;
+  margin-left: 200px;
+}
+
+@media screen and (max-width: 1100px) {
+  /* VERSION TABLETTE */
+  .darkmod {
+    position: relative;
+    margin-top: -40px;
+    margin-left: -10px;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* VERSION PC Responsive */
+  .darkmod {
+    position: relative;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+  }
 }
 /*# sourceMappingURL=index.css.map */

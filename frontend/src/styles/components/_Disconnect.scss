@@ -22,3 +22,19 @@
 .icon {
       margin-right: 20px;
 }
+
+@media screen and (max-width: 1100px) {
+      /* VERSION TABLETTE */
+      .DisconnectButton {
+            display: none;
+      }
+      .disconnectResponsive {
+            margin-top: -10px;
+      }
+}
+@media screen and (max-width: 768px) {
+      /* VERSION PC Responsive */
+      .disconnectResponsive {
+            margin-top: 0px;
+      }
+}
