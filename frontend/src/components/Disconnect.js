@@ -26,14 +26,15 @@ const Disconnect = () => {
                               Déconnecter
                         </button>
                   </Link>
-                  <div className="flex jc__centre ai__centre buttonResponsive">
-                        <Link to="/login" element={<Login />}>
+                  <Link to="/login" element={<Login />}>
+                        <div className="flex jc__centre ai__centre buttonResponsive">
                               <FontAwesomeIcon
                                     icon={faDoorOpen}
                                     className="iconAdminResponsive"
+                                    onClick={DisconnectButton}
                               />
-                        </Link>
-                  </div>
+                        </div>
+                  </Link>
             </div>
       );
 };

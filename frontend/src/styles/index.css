@@ -1432,6 +1432,27 @@ input[type='file'] {
   cursor: pointer;
 }
 
+.UploadImgProfile {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.089);
+  color: #fff;
+  border-radius: 10px;
+}
+
+.UploadImgProfile:hover {
+  background-color: rgba(255, 255, 255, 0.195);
+  color: white;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
 body {
   -webkit-transition: background-color 0.2s ease-in-out, color 0.4s ease-in-out;
   transition: background-color 0.2s ease-in-out, color 0.4s ease-in-out;

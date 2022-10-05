@@ -4,6 +4,8 @@ import axios from '../api/axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 
+import FormData from 'form-data';
+
 //adaptation du textaera selon lpassage a la ligne
 const defaultStyle = {
       display: 'block',
@@ -12,11 +14,14 @@ const defaultStyle = {
       width: '100%',
 };
 
-const POST = '/api/';
-
-const regValidPost = /^[A-Za-z-0-9 &_@/;:.,'-éàê^`è&*+() \n \r]{10,280}$/;
+const regValidPost = /^[A-Za-z-0-9 &_@/;:.,'-éàê^`è&*+()!? \n \r]{10,280}$/;
 
 const CreatePost = ({ style = defaultStyle, ...etc }) => {
+      const authed = JSON.parse(localStorage.getItem('authed'));
+      const userId = authed.userId;
+      const name = authed.user;
+      const POST = `/api/posts/createPost/`;
+
       const [post, setPost] = useState('');
       const [validPost, setValidPost] = useState(false);
       const [userFocus, setUserFocus] = useState(false);
@@ -39,6 +44,16 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
             textareaRef.current.style.height = scrollHeight + 'px';
       }, [currentValue]);
 
+      // usestate stockage de l'image pour l'envoie du post
+      const [selectedFile, setSelectedFile] = useState();
+      // console.log('image dans l input : ' + selectedFile);
+      const [isSelected, setIsSelected] = useState(false);
+
+      const PostImg = async (event) => {
+            setSelectedFile(event.target.files[0]);
+            setIsSelected(true);
+      };
+      // envoie du post si clic effectué
       const handleSubmit = async (e) => {
             e.preventDefault();
             const v1 = regValidPost.test(post);
@@ -47,31 +62,53 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                   return;
             }
 
-            try {
-                  const response = await axios.post(POST, JSON.stringify({}), {
-                        headers: { 'Content-Type': 'application/json' },
-                        Authorization:
-                              'Bearer ' + sessionStorage.getItem('token'),
-                        withCredentials: true,
+            const formPost = new FormData();
+            formPost.append('image', selectedFile);
+            // formPost.append('id', userId);
+            // formPost.append('text', post);
+            // formPost.append('date', new Date());
+
+            const date = new Date();
+
+            let CreatePost = {
+                  userId: userId,
+                  name: name,
+                  imageUrl: '',
+                  description: post,
+                  date: date,
+            };
+
+            console.log(CreatePost);
+            console.log(JSON.stringify(CreatePost));
+            await axios
+                  .post(POST, JSON.stringify({ post: CreatePost }), {
+                        headers: {
+                              'Content-Type': 'application/json',
+                              Authorization:
+                                    'Bearer ' + sessionStorage.getItem('token'),
+                              // withCredentials: true,
+                        },
+                  })
+                  .then((response) => {
+                        console.log(JSON.stringify(response));
+                        setSuccess(true);
+                        setPost('');
+                  })
+                  .catch((error) => {
+                        if (!error?.response) {
+                              setErrMsg('Le serveur ne réponds pas');
+                        } else if (error.response?.status === 400) {
+                              setErrMsg('Envoie échoué');
+                        } else {
+                              setErrMsg('Connexion échouée');
+                        }
+
+                        if (error.response?.status !== undefined) {
+                              console.error(error.response?.status); // permet de vois la réponse coté serveur, si connecté message d'erreur en console pour affirmé 0 catch recu
+                        }
+
+                        errRef.current.focus();
                   });
-                  console.log(JSON.stringify(response));
-                  setSuccess(true);
-                  setPost('');
-            } catch (error) {
-                  if (!error?.response) {
-                        setErrMsg('Le serveur ne réponds pas');
-                  } else if (error.response?.status === 400) {
-                        setErrMsg('Envoie échoué');
-                  } else {
-                        setErrMsg('Connexion échouée');
-                  }
-
-                  if (error.response?.status !== undefined) {
-                        console.error(error.response?.status); // permet de vois la réponse coté serveur, si connecté message d'erreur en console pour affirmé 0 catch recu
-                  }
-
-                  errRef.current.focus();
-            }
       };
 
       // on pose un écouteur d'évènement keyup sur le textarea.
@@ -111,7 +148,12 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                                     icon={faImage}
                                     className="UploadImg"
                               />
-                              <input type="file" id="file" name="image" />
+                              <input
+                                    type="file"
+                                    id="file"
+                                    name="image"
+                                    onChange={PostImg}
+                              />
                         </label>
                         <textarea
                               className="inputPost"

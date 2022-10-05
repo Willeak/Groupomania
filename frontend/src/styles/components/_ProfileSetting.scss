@@ -151,3 +151,22 @@
       border-radius: 10px;
       cursor: pointer;
 }
+
+.UploadImgProfile {
+      position: relative;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      width: 40px;
+      height: 40px;
+      padding: 8px;
+      background-color: rgba(255, 255, 255, 0.089);
+      color: #fff;
+      border-radius: 10px;
+}
+.UploadImgProfile:hover {
+      background-color: rgba(255, 255, 255, 0.195);
+      color: white;
+      transition: 0.2s;
+      border-radius: 10px;
+      cursor: pointer;
+}

@@ -14,21 +14,23 @@ exports.getAllPosts = (req, res, next) => {
 
 // Créer un post
 exports.createPost = (req, res, next) => {
-  const postObject = JSON.parse(req.body.post);
-  delete postObject._id;
+  console.log(req.body.post);
+  const postObject = req.body.post;
   const post = new Post({
     ...postObject,
-    imageUrl: `${req.protocol}://${req.get("host")}/images/${
-      req.file.filename
-    }`,
+    // imageUrl: `${req.protocol}://${req.get("host")}/images/post/${
+    //   req.file.filename
+    // }`,
   });
+  console.log(post);
   post
     .save()
     .then(() => {
       res.status(201).json({ message: "Nouveau post créé !" });
     })
     .catch((error) => {
-      res.status(400).json({ error: error });
+      // console.log(req.body);
+      res.status(401).json({ error: error });
     });
 };
 
@@ -51,6 +53,49 @@ exports.deletePost = (req, res, next) => {
       });
     })
     .catch((error) => res.status(500).json({ error }));
+};
+
+// Modifier un post
+exports.modifyPost = (req, res, next) => {
+  if (req.file) {
+    Post.findOne({ _id: req.params.id })
+      .then((post) => {
+        // verifie si l'user est bien celui du createur de ce post
+        if (res.locals.userId != Post.userId)
+          return res.status(403).json({
+            message:
+              "Vous n êtes pas le créateur de ce post, vous ne pouvez pas MODIFIER ce post !",
+          });
+
+        // On supprime l'ancienne image du serveur
+        const filename = post.imageUrl.split("/images/")[1];
+        fs.unlink(`images/${filename}`, () => {
+          const postObject = {
+            // On modifie les données et on ajoute la nouvelle image
+            ...JSON.parse(req.body.post),
+            imageUrl: `${req.protocol}://${req.get("host")}/images/${
+              req.file.filename
+            }`,
+          };
+          Post.updateOne(
+            { _id: req.params.id },
+            { ...postObject, _id: req.params.id }
+          )
+            .then(() => res.status(200).json({ message: "Objet modifié !" }))
+            .catch((error) => res.status(400).json({ error }));
+        });
+      })
+      .catch((error) => res.status(500).json({ error }));
+  } else {
+    const postObject = { ...req.body };
+    // On applique les paramètre de postObject
+    Post.updateOne(
+      { _id: req.params.id },
+      { ...postObject, _id: req.params.id }
+    )
+      .then(() => res.status(200).json({ message: "Objet modifié !" }))
+      .catch((error) => res.status(400).json({ error }));
+  }
 };
 
 //Aimer ou pas une post

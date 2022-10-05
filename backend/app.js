@@ -41,7 +41,7 @@ app.use(bodyParser.json());
 app.use("/api/posts", postRoutes);
 app.use("/api/comment", commentRoutes);
 app.use("/api/register", signRoutes);
-app.use("/images/post", express.static(path.join(__dirname, "images")));
+app.use("/images/post/", express.static(path.join(__dirname, "images/post")));
 app.use(
   "/images/profile/",
   express.static(path.join(__dirname, "images/profile"))

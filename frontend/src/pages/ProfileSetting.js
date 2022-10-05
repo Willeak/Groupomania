@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from '../api/axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
 
 import FormData from 'form-data';
 
@@ -147,12 +148,18 @@ const Profile = () => {
                                           }}
                                     />
                               </div>
-                              <input
-                                    type="file"
-                                    id="file"
-                                    name="image"
-                                    onChange={changeImg}
-                              />
+                              <label className="UploadImgProfile">
+                                    <FontAwesomeIcon
+                                          icon={faImage}
+                                          className="UploadImg"
+                                    />
+                                    <input
+                                          type="file"
+                                          id="file"
+                                          name="image"
+                                          onChange={changeImg}
+                                    />
+                              </label>
                               {isSelected ? (
                                     <div>
                                           <p className="infoIfImg">
