@@ -14,24 +14,38 @@ exports.getAllPosts = (req, res, next) => {
 
 // Créer un post
 exports.createPost = (req, res, next) => {
-  console.log(req.body.post);
+  // console.log(req.body.post.imageUrl);
+  // console.log(req.file);
   const postObject = req.body.post;
-  const post = new Post({
-    ...postObject,
-    // imageUrl: `${req.protocol}://${req.get("host")}/images/post/${
-    //   req.file.filename
-    // }`,
-  });
-  console.log(post);
-  post
-    .save()
-    .then(() => {
-      res.status(201).json({ message: "Nouveau post créé !" });
-    })
-    .catch((error) => {
-      // console.log(req.body);
-      res.status(401).json({ error: error });
+
+  if (req.body.post.imageUrl !== undefined) {
+    const post = new Post({
+      ...postObject,
+      imageUrl: `${req.protocol}://${req.get("host")}/images/post/${req.file}`,
     });
+    post
+      .save()
+      .then(() => {
+        res.status(201).json({ message: "Nouveau post avec image créé !" });
+      })
+      .catch((error) => {
+        // console.log(req.body);
+        res.status(401).json({ error: error });
+      });
+  } else {
+    const post = new Post({
+      ...postObject,
+    });
+    post
+      .save()
+      .then(() => {
+        res.status(201).json({ message: "Nouveau post sans image créé !" });
+      })
+      .catch((error) => {
+        // console.log(req.body);
+        res.status(402).json({ error: error });
+      });
+  }
 };
 
 // Supprimer un post

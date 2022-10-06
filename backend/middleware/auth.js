@@ -13,11 +13,12 @@ module.exports = (req, res, next) => {
     } else {
       // Si tout est valide on passe au prochain middleware
       next();
+      console.log("token valide !");
       // console.log(req.body.post);
     }
   } catch (error) {
     // console.log(req);
-    res.status(401).json({ error });
+    res.status(402).json({ error });
     console.log(token);
   }
 };

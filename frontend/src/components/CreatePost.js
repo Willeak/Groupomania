@@ -20,7 +20,6 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
       const authed = JSON.parse(localStorage.getItem('authed'));
       const userId = authed.userId;
       const name = authed.user;
-      const POST = `/api/posts/createPost/`;
 
       const [post, setPost] = useState('');
       const [validPost, setValidPost] = useState(false);
@@ -52,47 +51,55 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
       const PostImg = async (event) => {
             setSelectedFile(event.target.files[0]);
             setIsSelected(true);
+            console.log('image detecté');
+
+            // console.log('image detecté');
+
+            console.log(event.target.files);
       };
+
       // envoie du post si clic effectué
       const handleSubmit = async (e) => {
             e.preventDefault();
+
+            const sendPOST = `/api/posts/createPost/`;
+
             const v1 = regValidPost.test(post);
             if (!v1) {
                   setErrMsg('Texte invalide');
                   return;
             }
 
-            const formPost = new FormData();
-            formPost.append('image', selectedFile);
-            // formPost.append('id', userId);
-            // formPost.append('text', post);
-            // formPost.append('date', new Date());
-
-            const date = new Date();
-
-            let CreatePost = {
+            let data = {
                   userId: userId,
                   name: name,
-                  imageUrl: '',
                   description: post,
-                  date: date,
+                  date: new Date(),
             };
 
-            console.log(CreatePost);
-            console.log(JSON.stringify(CreatePost));
+            const formPost = new FormData();
+            formPost.append('userId', data.userId);
+            formPost.append('name', data.name);
+            formPost.append('imageUrl', selectedFile);
+            formPost.append('description', data.description);
+            formPost.append('date', data.date);
+
+            const createdPost = { post: Object.fromEntries(formPost) };
+            console.log(createdPost);
+
             await axios
-                  .post(POST, JSON.stringify({ post: CreatePost }), {
+                  .post(sendPOST, createdPost, {
                         headers: {
-                              'Content-Type': 'application/json',
+                              // 'Content-Type': 'multipart/form-data',
                               Authorization:
                                     'Bearer ' + sessionStorage.getItem('token'),
-                              // withCredentials: true,
                         },
                   })
                   .then((response) => {
-                        console.log(JSON.stringify(response));
+                        console.log(JSON.stringify(response?.data?.message));
                         setSuccess(true);
                         setPost('');
+                        setErrMsg('Post envoyé !');
                   })
                   .catch((error) => {
                         if (!error?.response) {
@@ -104,7 +111,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                         }
 
                         if (error.response?.status !== undefined) {
-                              console.error(error.response?.status); // permet de vois la réponse coté serveur, si connecté message d'erreur en console pour affirmé 0 catch recu
+                              console.error(error.response?.status);
                         }
 
                         errRef.current.focus();
@@ -151,8 +158,8 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                               <input
                                     type="file"
                                     id="file"
-                                    name="image"
-                                    onChange={PostImg}
+                                    name="imageUrl"
+                                    onChange={(event) => PostImg(event)}
                               />
                         </label>
                         <textarea
