@@ -3,6 +3,7 @@
       border-radius: 25px;
       min-width: 300px;
       padding: 10px 20px 20px 20px;
+      margin-right: 5px;
       margin-bottom: 20px;
       font-size: 17px;
 }
@@ -16,16 +17,76 @@
 
 .Name {
       margin-left: 20px;
+      height: 20px;
+      white-space: nowrap;
 }
 
 .hourly {
       color: rgb(105, 105, 105);
       margin-left: 5px;
       font-size: 16px;
+      height: 16px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
 }
 
 .textPost {
+      min-width: 130px;
       padding-left: 80px;
-      width: 80%;
+      width: 90%;
       margin-bottom: 15px;
+}
+
+.buttonLike {
+      display: none;
+}
+.buttonLike:checked > .iconLike {
+      color: aqua;
+}
+.likeCont {
+      left: 0;
+}
+.iconLikeBg {
+      display: flex;
+      width: 17px;
+      margin-right: 12px;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+}
+.LikeAnim {
+      text-align: center;
+      position: absolute;
+      border-radius: 50%;
+      width: 0px;
+      height: 0px;
+      z-index: -10;
+      margin-top: -3px;
+}
+
+.iconLikeBg:hover .LikeAnim {
+      transition: 0.2s;
+      position: absolute;
+      border-radius: 50%;
+      background-color: #ffd7d7b2;
+      width: 31px;
+      height: 31px;
+      z-index: -10;
+}
+
+.iconLikeBg:hover .iconLike {
+      transition: 0.3s;
+      color: rgb(255, 0, 85);
+}
+
+@media screen and (max-width: 992px) {
+      /* VERSION TABLETTE */
+}
+
+@media screen and (max-width: 768px) {
+      /* VERSION PC Responsive */
+      .hourly {
+            font-size: 14px;
+      }
 }

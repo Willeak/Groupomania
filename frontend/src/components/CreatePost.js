@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 
 import FormData from 'form-data';
+import moment from 'moment';
+import 'moment/locale/fr';
 
 //adaptation du textaera selon lpassage a la ligne
 const defaultStyle = {
@@ -44,18 +46,18 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
       }, [currentValue]);
 
       // usestate stockage de l'image pour l'envoie du post
-      const [selectedFile, setSelectedFile] = useState();
+      const [selectedFile, setSelectedFile] = useState('');
+
       // console.log('image dans l input : ' + selectedFile);
       const [isSelected, setIsSelected] = useState(false);
 
       const PostImg = async (event) => {
             setSelectedFile(event.target.files[0]);
             setIsSelected(true);
+
             console.log('image detecté');
-
             // console.log('image detecté');
-
-            console.log(event.target.files);
+            console.log(event.target.files[0].name);
       };
 
       // envoie du post si clic effectué
@@ -70,30 +72,40 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                   return;
             }
 
+            // const maDate = new Date().toDateString('fr-FR');
+
+            moment.locale('fr');
+            let myDate;
+            myDate = moment().format('dddd DD MMMM YYYY, à H[h]mm.');
+
             let data = {
                   userId: userId,
                   name: name,
                   description: post,
-                  date: new Date(),
+                  date: myDate,
             };
 
             const formPost = new FormData();
+
             formPost.append('userId', data.userId);
             formPost.append('name', data.name);
-            formPost.append('imageUrl', selectedFile);
+            formPost.append('image', selectedFile);
             formPost.append('description', data.description);
             formPost.append('date', data.date);
 
-            const createdPost = { post: Object.fromEntries(formPost) };
+            const createdPost = {
+                  post: Object.fromEntries(formPost),
+            };
             console.log(createdPost);
 
             await axios
                   .post(sendPOST, createdPost, {
                         headers: {
-                              // 'Content-Type': 'multipart/form-data',
                               Authorization:
                                     'Bearer ' + sessionStorage.getItem('token'),
+                              // 'Content-Type': 'singlepart/form-data',
                         },
+                        withCredentials: true,
                   })
                   .then((response) => {
                         console.log(JSON.stringify(response?.data?.message));
@@ -158,7 +170,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                               <input
                                     type="file"
                                     id="file"
-                                    name="imageUrl"
+                                    name="image"
                                     onChange={(event) => PostImg(event)}
                               />
                         </label>

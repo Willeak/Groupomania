@@ -18,7 +18,9 @@ const Home = () => {
                   </div>
                   <div className="BlocPost">
                         <CreatePost />
-                        <Post />
+                        <div className="scrollBar">
+                              <Post />
+                        </div>
                   </div>
             </div>
       );

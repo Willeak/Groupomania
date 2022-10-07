@@ -14,11 +14,11 @@ exports.getAllPosts = (req, res, next) => {
 
 // Créer un post
 exports.createPost = (req, res, next) => {
-  // console.log(req.body.post.imageUrl);
-  // console.log(req.file);
+  console.log(req.body.post);
+  console.log(req.file);
   const postObject = req.body.post;
 
-  if (req.body.post.imageUrl !== undefined) {
+  if (req.file) {
     const post = new Post({
       ...postObject,
       imageUrl: `${req.protocol}://${req.get("host")}/images/post/${req.file}`,

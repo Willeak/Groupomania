@@ -77,6 +77,7 @@ const Profile = () => {
                   <Darkmod />
                   <div className="flex jc__centre ai__centre fd__Column">
                         <div className="circleProfile flex jc__centre ai__centre">
+                              <div className="reflect" />
                               <img
                                     src={img}
                                     className="imgProfile"
