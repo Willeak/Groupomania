@@ -13,7 +13,6 @@ import SignUp from './pages/SignUp';
 import ProfileSetting from './pages/ProfileSetting';
 import RequireAuth from './components/RequireAuth';
 
-import Layout from './components/Layout';
 import AdminPanel from './pages/AdminPanel';
 
 //mise en place du routeur

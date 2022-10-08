@@ -16,14 +16,12 @@ const Profile = () => {
       const authed = JSON.parse(localStorage.getItem('authed'));
 
       const [user, setUser] = useState('');
-      console.log(user);
 
       const [name, setName] = useState('');
       const [img, setImg] = useState('');
       const [email, setEmail] = useState('');
 
       const userId = authed.userId;
-      console.log('userId : ' + userId);
 
       const USERget = `/api/register/${userId}`;
 
@@ -53,33 +51,6 @@ const Profile = () => {
       };
 
       getInfoUser();
-
-      // requete modification profile
-      // const USERput = `/api/register/`;
-
-      // const ModifyUser = async (event) => {
-      //       event.preventDefault();
-      //       await axios
-      //             .put(USERput, {
-      //                   headers: {
-      //                         'Content-Type': 'application/json',
-      //                         Authorization:
-      //                               'Bearer ' + sessionStorage.getItem('token'),
-      //                         withCredentials: true,
-      //                   },
-      //             })
-      //             .then(function (response) {
-      //                   // console.log(JSON.stringify(response?.data));
-      //                   console.log(JSON.stringify(response));
-
-      //                   setUser(response?.data?.user);
-
-      //                   console.log(response);
-      //             })
-      //             .catch((error) => {
-      //                   console.log(JSON.stringify(error));
-      //             });
-      // };
 
       // ENVOIE DE LA NOUVELLE  IMAGE DE PROFIL
       const [selectedFile, setSelectedFile] = useState();
@@ -217,26 +188,6 @@ const Profile = () => {
                                     className="inputSetting"
                                     disabled="disabled"
                               />
-                              {/* <label htmlFor="pwd">Mot de passe actuel</label>
-
-                              <input type="text" className="inputSetting" />
-                              <label className="labelMarg" htmlFor="newpwd">
-                                    Nouveau mot de passe
-                              </label>
-
-                              <input type="text" className="inputSetting" />
-                              <div className="flex">
-                                    <FontAwesomeIcon
-                                          icon={faSave}
-                                          className="iconSave"
-                                    />
-                                    <button
-                                          className="profileSettingButton flex"
-                                          onClick={ModifyUser}
-                                    >
-                                          Sauvegarder
-                                    </button>
-                              </div> */}
                         </form>
                   </div>
             </div>

@@ -68,6 +68,14 @@ body[theme='dark'] {
       section {
             background-color: rgba(0, 0, 0, 0.4);
       }
+      .fadeGray {
+            background: rgb(47, 49, 61);
+            background: linear-gradient(
+                  180deg,
+                  rgba(47, 49, 61, 1) 30%,
+                  rgba(255, 215, 215, 0) 100%
+            );
+      }
 }
 
 body[theme='light'] {
@@ -100,7 +108,7 @@ body[theme='light'] {
 .darkmod {
       position: absolute;
       margin-top: -5px;
-      margin-left: 200px;
+      margin-left: 223px;
 }
 
 @media screen and (max-width: 1100px) {
@@ -115,9 +123,12 @@ body[theme='light'] {
 @media screen and (max-width: 768px) {
       /* VERSION PC Responsive */
       .darkmod {
-            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-top: 0px;
-            margin-left: 0px;
+            margin-left: -10px;
+            margin-right: 10px;
             margin-bottom: 0px;
       }
 }

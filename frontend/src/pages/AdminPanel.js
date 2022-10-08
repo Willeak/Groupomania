@@ -84,7 +84,7 @@ const UserList = () => {
                         },
                   })
                   .then((response) => {
-                        console.log(JSON.stringify(response));
+                        // console.log(JSON.stringify(response));
                         // si la suppression est validé alors recharger la liste d'utilisateurs
                         userSubmit();
                   })
@@ -93,8 +93,6 @@ const UserList = () => {
                               console.log(error);
                         }
                   });
-
-            console.log(id);
       }
 
       return (
@@ -117,7 +115,7 @@ const UserList = () => {
                                     type="search"
                                     value={name}
                                     onChange={filter}
-                                    className="inputPost"
+                                    className="inputSearch"
                                     id="inputSearch"
                                     placeholder="Entrer un Email..."
                               />
@@ -144,7 +142,7 @@ const UserList = () => {
                                           type="search"
                                           value={name}
                                           onChange={filter}
-                                          className="inputPost"
+                                          className="inputSearch"
                                           id="inputSearch"
                                           placeholder="Entrer un Email..."
                                     />

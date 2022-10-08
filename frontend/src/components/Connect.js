@@ -39,9 +39,7 @@ const Connect = () => {
                         sessionStorage.setItem('userId', response?.data.userId);
                         sessionStorage.setItem('token', response?.data.token);
                         sessionStorage.setItem('roles', response?.data.roles);
-
                         // console.log(JSON.stringify(response?.data));
-                        console.log(JSON.stringify(response));
                         const token = response?.data?.token;
                         const roles = response?.data?.roles;
                         const userId = response?.data?.userId;

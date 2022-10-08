@@ -4,7 +4,6 @@ const Darkmod = () => {
       // darkmod default value = false
 
       const [active, setActive] = useState();
-      console.log(active);
 
       useEffect(() => {
             if (localStorage.getItem('DarkMod')) {
@@ -31,7 +30,6 @@ const Darkmod = () => {
             // const DarkMod = localStorage.getItem('DarkMod');
 
             // document.body.setAttribute('theme', active ? 'light' : 'dark');
-            console.log(active);
       };
 
       return (

@@ -214,6 +214,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                               </button>
                         </div>
                   </form>
+                  <div className="fadeGray" />
             </div>
       );
 };

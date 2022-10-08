@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 // import imgProfile from 'http://localhost:3000/images/profile/avatar_neutre.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -16,11 +16,74 @@ const Post = () => {
       //response original
       console.log(posts);
 
-      // ======================================
+      const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
 
-      const postSubmit = async (e) => {
+      // ======================================
+      useEffect(() => {
+            const postSubmit = async (e) => {
+                  await axios
+                        .get(POSTSList, {
+                              headers: {
+                                    'Content-Type': 'application/json',
+                                    Authorization:
+                                          'Bearer ' +
+                                          sessionStorage.getItem('token'),
+                                    withCredentials: true,
+                              },
+                        })
+                        .then((response) => {
+                              // console.log(JSON.stringify(response));
+                              console.log(response?.data);
+                              setPosts(response?.data);
+                        })
+                        .catch((error) => {
+                              if (!error?.response) {
+                                    console.log(error);
+                              }
+                        });
+            };
+
+            postSubmit();
+      }, [reducerValue]);
+
+      //=======================================================
+
+      const authed = JSON.parse(localStorage.getItem('authed'));
+      const userId = authed.userId;
+
+      const [like, setLike] = useState();
+
+      if (like === undefined) {
+            setLike(1);
+      }
+
+      const LikeSubmit = async (e) => {
+            // setIdPost(e);
+            const IdPost = e._id;
+            console.log(e._id);
+            const LikePosts = `/api/posts/${IdPost}/like`;
+
+            async function myFunction() {
+                  var chkPrint = document.getElementById(IdPost);
+                  chkPrint.value = chkPrint.checked;
+                  // console.log('value', chkPrint.value);
+
+                  if (chkPrint.value === 'true') {
+                        setLike(0);
+                  } else if (chkPrint.value === 'false') {
+                        setLike(1);
+                  }
+                  console.log(like);
+            }
+            myFunction();
+
+            const formLike = {
+                  like: like,
+                  id: userId,
+            };
+
             await axios
-                  .get(POSTSList, {
+                  .post(LikePosts, formLike, {
                         headers: {
                               'Content-Type': 'application/json',
                               Authorization:
@@ -29,53 +92,28 @@ const Post = () => {
                         },
                   })
                   .then((response) => {
-                        // console.log(JSON.stringify(response));
-                        console.log(response?.data);
-                        setPosts(response?.data);
+                        console.log(response?.data?.message);
                   })
                   .catch((error) => {
                         if (!error?.response) {
                               console.log(error);
                         }
                   });
+            forceUpdate();
       };
 
-      useEffect(() => {
-            postSubmit();
-      }, []);
+      console.log();
 
       return (
             <div>
-                  {/* <div className="flex ai__centre">
-                        <img
-                              // src={imgProfile}
-                              alt=""
-                              className="imgProfilePost"
-                        />
-                        <div className="Name">Jean Dupont</div>
-                        <div className="hourly"> · le 24 Septembre à 9h12</div>
-                  </div>
-                  <div className="textPost">
-                        Bonjour à tous, <br />
-                        <br />
-                        je m'appel Jean Dupont et je suis développeur Web.
-                        <br />
-                        <br /> Bonne journé a tous !
-                  </div>
-                  <div className="flex jc__SpaceA">
-                        <div>Commenter</div>
-                        <div>like dislike</div>
-                  </div> */}
                   {posts && posts.length > 0 ? (
                         posts
-                              .map((post, index) => (
-                                    <div className="Post">
-                                          <form className="" key={index}>
+                              .map((post, i) => (
+                                    <div className="Post" key={post._id}>
+                                          <form className="">
                                                 <div className="flex ai__centre">
                                                       <img
-                                                            src={
-                                                                  post.description
-                                                            }
+                                                            src=""
                                                             alt=""
                                                             className="imgProfilePost"
                                                             onError={(e) => {
@@ -111,9 +149,17 @@ const Post = () => {
                                                                   icon={faHeart}
                                                             />
                                                             <input
-                                                                  id=""
+                                                                  id={post._id}
                                                                   type="checkbox"
                                                                   className="flex jc__SpaceA buttonLike"
+                                                                  onClick={(
+                                                                        e
+                                                                  ) =>
+                                                                        LikeSubmit(
+                                                                              (e.target.value =
+                                                                                    post)
+                                                                        )
+                                                                  }
                                                             />
                                                       </label>
                                                       <p>{post.likes}</p>
@@ -123,7 +169,7 @@ const Post = () => {
                               ))
                               .reverse()
                   ) : (
-                        <p className="errmsgUser">Aucun post !</p>
+                        <p className="errmsgUser">Aucun post disponible !</p>
                   )}
             </div>
       );

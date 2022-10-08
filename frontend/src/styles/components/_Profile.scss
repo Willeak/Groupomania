@@ -38,9 +38,9 @@
 .profileRole {
       margin-top: 10px;
       margin-left: -20px;
-
       font-size: 15px;
 }
+
 .iconRole {
       margin-right: 5px;
       color: #ffd7d7;
@@ -262,5 +262,21 @@
       }
       .buttonResponsive {
             margin-top: -20px;
+      }
+
+      .circleProfile {
+            margin-top: 0px;
+            margin-left: 0px;
+            width: 55px;
+            height: 55px;
+            border: 2px solid red;
+            border-radius: 50%;
+      }
+      .imgProfile {
+            position: absolute;
+
+            width: 48px;
+
+            clip-path: circle(50% at 50% 50%);
       }
 }

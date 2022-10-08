@@ -16,8 +16,6 @@ import Darkmod from './Darkmod';
 const Profile = () => {
       const authed = JSON.parse(localStorage.getItem('authed'));
 
-      console.log(authed.roles);
-
       const [name, setName] = useState('');
       const [img, setImg] = useState('');
       const [roles, setRoles] = useState('');
@@ -37,13 +35,9 @@ const Profile = () => {
                         },
                   })
                   .then(function (response) {
-                        // console.log(JSON.stringify(response?.data));
-                        console.log(JSON.stringify(response));
-
                         setName(response?.data?.user);
                         setImg('http://localhost:3000' + response?.data?.img);
                         setRoles(response?.data?.roles);
-                        console.log(response?.data?.roles);
                   })
                   .catch((error) => {
                         console.log(JSON.stringify(error));

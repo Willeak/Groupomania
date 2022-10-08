@@ -28,6 +28,19 @@
       background-color: rgba(0, 0, 0, 0.7);
 }
 
+.inputSearch {
+      border: 1px solid rgba(255, 255, 255, 0);
+      background-color: rgba(255, 255, 255, 0.089);
+      width: 92%;
+      height: auto;
+      color: white;
+      border-radius: 10px;
+      padding: 10px 5px 10px 20px;
+      font-size: 17px;
+      resize: none;
+      overflow: hidden;
+}
+
 .recherche {
       display: flex;
       width: 250px;
