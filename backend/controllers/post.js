@@ -155,22 +155,20 @@ exports.likeOrNot = (req, res, next) => {
     Post.findOne({ _id: req.params.id }).then((post) => {
       // Si le tableau "userLiked" contient deja l'ID de l'utilisateur on refuse le like
       if (post.usersLiked.includes(req.body.id)) {
-        return res
-          .status(400)
-          .json({ message: "Vous avez déja liké ce post !" });
+        return res.send({ message: "Vous avez déja liké ce post !" });
+      } else {
+        // si l'userid n'existe pas, on ajoute 1 like et on l'envoie dans le tableau "usersLiked"
+        Post.updateOne(
+          { _id: req.params.id },
+          {
+            $inc: { likes: req.body.like++ },
+            $push: { usersLiked: req.body.id },
+          }
+        )
+          .then((post) => res.status(200).json({ message: "Like ajouté !" }))
+          .catch((error) => res.status(400).json({ error }));
       }
     });
-
-    // si l'userid n'existe pas, on ajoute 1 like et on l'envoie dans le tableau "usersLiked"
-    Post.updateOne(
-      { _id: req.params.id },
-      {
-        $inc: { likes: req.body.like++ },
-        $push: { usersLiked: req.body.id },
-      }
-    )
-      .then((post) => res.status(200).json({ message: "Like ajouté !" }))
-      .catch((error) => res.status(400).json({ error }));
   } else {
     // Si like === 0 l'utilisateur supprime son vote
     Post.findOne({ _id: req.params.id })

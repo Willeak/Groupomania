@@ -41,9 +41,7 @@
 .buttonLike {
       display: none;
 }
-.buttonLike:checked > .iconLike {
-      color: aqua;
-}
+
 .likeCont {
       left: 0;
 }
@@ -73,6 +71,9 @@
       width: 31px;
       height: 31px;
       z-index: -10;
+}
+.iconLike:checked {
+      color: aqua;
 }
 
 .iconLikeBg:hover .iconLike {

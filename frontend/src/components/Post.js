@@ -16,7 +16,7 @@ const Post = () => {
       //response original
       console.log(posts);
 
-      const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
+      const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0); // ligne 47 et 99
 
       // ======================================
       useEffect(() => {
@@ -44,7 +44,7 @@ const Post = () => {
             };
 
             postSubmit();
-      }, [reducerValue]);
+      }, [reducerValue]); // <--- reducerValue | a ajouter pour refresh auto le components
 
       //=======================================================
 
@@ -63,19 +63,22 @@ const Post = () => {
             console.log(e._id);
             const LikePosts = `/api/posts/${IdPost}/like`;
 
-            async function myFunction() {
-                  var chkPrint = document.getElementById(IdPost);
-                  chkPrint.value = chkPrint.checked;
-                  // console.log('value', chkPrint.value);
+            var chkPrint = document.getElementById(IdPost);
+            chkPrint.value = chkPrint.checked;
+            // console.log('value', chkPrint.value);
 
-                  if (chkPrint.value === 'true') {
-                        setLike(0);
-                  } else if (chkPrint.value === 'false') {
-                        setLike(1);
-                  }
-                  console.log(like);
+            if (e.usersLiked.includes(userId)) {
+                  let el = document.getElementById(IdPost);
+                  el.style.color = 'blue';
+                  document.getElementById(IdPost).value = 'true';
             }
-            myFunction();
+
+            if (chkPrint.value === 'true') {
+                  setLike(0);
+            } else if (chkPrint.value === 'false') {
+                  setLike(1);
+            }
+            console.log(like);
 
             const formLike = {
                   like: like,
