@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 // Création d'un schema de donnée Sauce pour un stockage dans la BD
 const postSchema = mongoose.Schema({
+  userImg: { type: String, required: true },
   userId: { type: String, required: true },
   name: { type: String, required: true },
   imageUrl: { type: String },

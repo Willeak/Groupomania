@@ -34,4 +34,4 @@ module.exports = multer({
   storage, // Ajout de l'objet multer
   limits: { fileSize: 104857600 }, // Définition de la taille de fichier maximale à télécharger à 100 Mo
   fileFilter, // Application du filtre d'extension
-}).single("image"); // assure que l'utilisateur sélectionne une seule image lors de l'envoie
+}).single("imageUrl"); // assure que l'utilisateur sélectionne une seule image lors de l'envoie

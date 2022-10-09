@@ -16,12 +16,7 @@ const Home = () => {
                         />
                         <Profile />
                   </div>
-                  <div className="BlocPost">
-                        <CreatePost />
-                        <div className="scrollBar">
-                              <Post />
-                        </div>
-                  </div>
+                  <CreatePost />
             </div>
       );
 };

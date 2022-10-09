@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from '../api/axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -88,6 +88,18 @@ const Profile = () => {
       };
 
       //========================================================================
+      //Darkmod active si refresh
+      const [active, setActive] = useState();
+
+      useEffect(() => {
+            if (localStorage.getItem('DarkMod')) {
+                  setActive(localStorage.getItem('DarkMod'));
+                  document.body.setAttribute(
+                        'theme',
+                        active ? 'light' : 'dark'
+                  );
+            }
+      }, []);
 
       return (
             <div className="flex jc__centre fd__Column ai__centre">

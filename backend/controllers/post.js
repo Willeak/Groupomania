@@ -59,12 +59,18 @@ exports.deletePost = (req, res, next) => {
             "Vous n êtes pas le créateur de ce post, vous ne pouvez pas SUPPRIMER ce post!",
         });
 
-      const filename = post.imageUrl.split("/images/")[1];
-      fs.unlink(`images/${filename}`, () => {
-        Post.deleteOne({ _id: req.params.id })
-          .then(() => res.status(200).json({ message: "post supprimée !" }))
-          .catch((error) => res.status(400).json({ error: error }));
-      });
+      if (post.imageUrl !== "") {
+        const filename = post.imageUrl.split("/images/post/")[1];
+        fs.unlink(`images/${filename}`, () => {
+          Post.deleteOne({ _id: req.params.id })
+            .then(() => res.status(200).json({ message: "post supprimée !" }))
+            .catch((error) => res.status(400).json({ error: error }));
+        });
+      }
+
+      Post.deleteOne({ _id: req.params.id })
+        .then(() => res.status(200).json({ message: "post supprimée !" }))
+        .catch((error) => res.status(400).json({ error: error }));
     })
     .catch((error) => res.status(500).json({ error }));
 };
@@ -111,41 +117,6 @@ exports.modifyPost = (req, res, next) => {
       .catch((error) => res.status(400).json({ error }));
   }
 };
-
-// //Aimer ou pas une sauce
-// exports.likeOrNot = (req, res, next) => {
-//   // Si l'utilisateur aime la sauce
-//   if (req.body.like === 1) {
-//     // On ajoute 1 like et on l'envoie dans le tableau "usersLiked"
-//     Post.updateOne(
-//       { _id: req.params.id },
-//       {
-//         $inc: { likes: req.body.like++ },
-//         $push: { usersLiked: req.body.id },
-//       }
-//     )
-//       .then((post) => res.status(200).json({ message: "Like ajouté !" }))
-//       .catch((error) => res.status(400).json({ error }));
-//   } else {
-//     // Si like === 0 l'utilisateur supprime son vote
-//     Post.findOne({ _id: req.params.id })
-//       .then((post) => {
-//         // Si le tableau "userLiked" contient l'ID de l'utilisateur
-//         if (post.usersLiked.includes(req.body.id)) {
-//           // On enlève un like du tableau "userLiked"
-//           Post.updateOne(
-//             { _id: req.params.id },
-//             { $pull: { usersLiked: req.body.id }, $inc: { likes: -1 } }
-//           )
-//             .then((post) => {
-//               res.status(200).json({ message: "Like supprimé !" });
-//             })
-//             .catch((error) => res.status(400).json({ error }));
-//         }
-//       })
-//       .catch((error) => res.status(400).json({ error }));
-//   }
-// };
 
 //Aimer ou pas une sauce
 exports.likeOrNot = (req, res, next) => {

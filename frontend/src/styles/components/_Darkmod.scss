@@ -76,32 +76,11 @@ body[theme='dark'] {
                   rgba(255, 215, 215, 0) 100%
             );
       }
-}
-
-body[theme='light'] {
-      .BlocPost {
-            background-color: rgba(0, 0, 0, 0.7);
+      .hourly {
+            color: rgb(105, 105, 105);
       }
-      .profile {
-            background-color: rgba(0, 0, 0, 0.7);
-      }
-      .profileWindow {
-            background-color: rgba(0, 0, 0, 0.7);
-      }
-      .accueilSettings {
-            background-color: rgba(0, 0, 0, 0.7);
-      }
-      .accueil {
-            background-color: rgba(0, 0, 0, 0.7);
-      }
-      .BlocUserList {
-            background-color: rgba(0, 0, 0, 0.7);
-      }
-      .recherche {
-            background-color: rgba(0, 0, 0, 0.7);
-      }
-      section {
-            background-color: rgba(0, 0, 0, 0.7);
+      .windowPostSettings {
+            background-color: rgb(40, 42, 53);
       }
 }
 

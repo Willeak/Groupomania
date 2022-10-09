@@ -95,6 +95,19 @@ const UserList = () => {
                   });
       }
 
+      //Darkmod active si refresh
+      const [active, setActive] = useState();
+
+      useEffect(() => {
+            if (localStorage.getItem('DarkMod')) {
+                  setActive(localStorage.getItem('DarkMod'));
+                  document.body.setAttribute(
+                        'theme',
+                        active ? 'light' : 'dark'
+                  );
+            }
+      }, []);
+
       return (
             <div className="flex fd__Column ai__centre">
                   <div className="NavBar flex ai__centre jc__SpaceB d_nonePC">

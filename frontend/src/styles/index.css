@@ -155,7 +155,7 @@ section {
           justify-content: flex-start;
   padding: 1rem;
   border-radius: 20px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #4e5166;
 }
 
 .formAuth {
@@ -178,6 +178,10 @@ section {
 
 .buttonAuth {
   margin: 1rem;
+}
+
+.buttonAuth {
+  font-weight: bold;
 }
 
 .inputAuth,
@@ -378,10 +382,6 @@ a:visited {
   }
 }
 
-h1 {
-  color: red;
-}
-
 .BlocPost {
   margin-top: 40px;
   margin-right: -270px;
@@ -401,9 +401,9 @@ h1 {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  padding: 1rem;
+  padding: 15px 10px 0px 15px;
   border-radius: 20px 20px 00px 0px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #4e5166;
 }
 
 .scrollBar {
@@ -496,8 +496,8 @@ h1 {
     width: 100%;
     min-width: 100%;
     max-width: 100%;
-    margin-top: 110px;
-    height: 90%;
+    margin-top: 120px;
+    height: 88%;
   }
   .center {
     -webkit-box-orient: vertical;
@@ -510,6 +510,17 @@ h1 {
   }
   .logoHome {
     display: none;
+  }
+}
+
+@media screen and (max-height: 667px) {
+  /* VERSION PC Responsive */
+  .BlocPost {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    margin-top: 110px;
+    height: 86%;
   }
 }
 
@@ -531,7 +542,7 @@ h1 {
           justify-content: flex-start;
   padding: 20px 10px 20px 10px;
   border-radius: 20px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #4e5166;
   z-index: 100;
 }
 
@@ -851,8 +862,8 @@ h1 {
 .inputPost {
   border: 1px solid rgba(255, 255, 255, 0);
   background-color: rgba(255, 255, 255, 0.089);
-  margin-left: 45px;
-  width: 92%;
+  margin-left: 55px;
+  width: 90%;
   height: auto;
   color: white;
   border-radius: 10px;
@@ -928,7 +939,7 @@ button[disabled='true']:hover {
 .UploadImgPost {
   position: absolute;
   margin-top: -52px;
-  left: 20px;
+  left: 12px;
   width: 40px;
   height: 40px;
   padding: 8px;
@@ -957,11 +968,11 @@ input[type='file'] {
 
 .fadeGray {
   pointer-events: none;
-  margin-left: -22px;
+  margin-left: -15px;
   position: absolute;
-  background: #444444;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #444444), to(rgba(255, 215, 215, 0)));
-  background: linear-gradient(180deg, #444444 30%, rgba(255, 215, 215, 0) 100%);
+  background: #4e5166;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #4e5166), to(rgba(255, 215, 215, 0)));
+  background: linear-gradient(180deg, #4e5166 30%, rgba(255, 215, 215, 0) 100%);
   width: 100%;
   height: 60px;
   z-index: 50;
@@ -976,9 +987,9 @@ input[type='file'] {
   .inputPost {
     border: 1px solid rgba(255, 255, 255, 0);
     background-color: rgba(255, 255, 255, 0.089);
-    margin-left: 45px;
+    margin-left: 60px;
     margin-right: 10px;
-    width: 100%;
+    width: 88%;
     max-width: 92%;
   }
 }
@@ -988,9 +999,9 @@ input[type='file'] {
   .inputPost {
     border: 1px solid rgba(255, 255, 255, 0);
     background-color: rgba(255, 255, 255, 0.089);
-    margin-left: 45px;
+    margin-left: 60px;
     margin-right: 10px;
-    width: 100%;
+    width: 80%;
     max-width: 88%;
   }
 }
@@ -1062,7 +1073,7 @@ input[type='file'] {
 }
 
 .hourly {
-  color: dimgray;
+  color: #afafaf;
   margin-left: 5px;
   font-size: 16px;
   height: 16px;
@@ -1075,6 +1086,7 @@ input[type='file'] {
   min-width: 130px;
   padding-left: 80px;
   width: 90%;
+  margin-top: -35px;
   margin-bottom: 15px;
 }
 
@@ -1122,14 +1134,81 @@ input[type='file'] {
   z-index: -10;
 }
 
-.iconLike:checked {
-  color: aqua;
+.counterLike {
+  color: #ffd7d7;
 }
 
 .iconLikeBg:hover .iconLike {
   -webkit-transition: 0.3s;
   transition: 0.3s;
   color: #ff0055;
+}
+
+.DivPostSettings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  margin-top: -50px;
+  margin-right: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  right: 0;
+}
+
+.DivPostSettings:hover {
+  background-color: rgba(255, 255, 255, 0.089);
+  color: white;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.PostSettings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 20px;
+  height: 20px;
+  right: 0;
+}
+
+.windowPostSettings {
+  display: none;
+  position: absolute;
+  border: 1px solid #fd2d01;
+  border-radius: 10px;
+  background-color: #4e5166;
+  width: 130px;
+  height: 100px;
+  padding-top: 5px;
+  right: 0;
+  margin-top: 60px;
+  margin-right: 45px;
+}
+
+.buttonSettingPost {
+  margin-bottom: 10px;
+  width: 80%;
+  border: 1px solid rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  border-radius: 25px;
+  padding: 5px 5px 5px 5px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.buttonSettingPost:hover {
+  background-color: rgba(255, 255, 255, 0.089);
+  color: white;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-radius: 25px;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 992px) {
@@ -1161,7 +1240,7 @@ input[type='file'] {
           justify-content: flex-start;
   padding: 1rem;
   border-radius: 20px 20px 20px 20px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #4e5166;
 }
 
 .NavBar {
@@ -1179,7 +1258,7 @@ input[type='file'] {
   margin-top: 0px;
   padding: 0px;
   border-radius: 20px 20px 20px 20px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #4e5166;
 }
 
 .inputSearch {
@@ -1205,7 +1284,7 @@ input[type='file'] {
   margin-left: 10px;
   padding: 10px;
   border-radius: 20px 20px 20px 20px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #4e5166;
 }
 
 .User {
@@ -1465,7 +1544,7 @@ input[type='file'] {
           justify-content: flex-start;
   padding: 1rem;
   border-radius: 20px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #4e5166;
 }
 
 .circle {
@@ -1601,7 +1680,7 @@ input[type='file'] {
   margin-bottom: 30px;
   padding: 0px;
   border-radius: 20px 20px 20px 20px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #4e5166;
 }
 
 .homelinkProfile {
@@ -1738,36 +1817,12 @@ body[theme='dark'] .fadeGray {
   background: linear-gradient(180deg, #2f313d 30%, rgba(255, 215, 215, 0) 100%);
 }
 
-body[theme='light'] .BlocPost {
-  background-color: rgba(0, 0, 0, 0.7);
+body[theme='dark'] .hourly {
+  color: dimgray;
 }
 
-body[theme='light'] .profile {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-body[theme='light'] .profileWindow {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-body[theme='light'] .accueilSettings {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-body[theme='light'] .accueil {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-body[theme='light'] .BlocUserList {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-body[theme='light'] .recherche {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-body[theme='light'] section {
-  background-color: rgba(0, 0, 0, 0.7);
+body[theme='dark'] .windowPostSettings {
+  background-color: #282a35;
 }
 
 .darkmod {

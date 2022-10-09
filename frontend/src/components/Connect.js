@@ -45,6 +45,7 @@ const Connect = () => {
                         const userId = response?.data?.userId;
                         const email = response?.data?.email;
                         const user = response?.data?.user;
+                        const img = response?.data?.img;
                         setAuth({ userId, user, img, email, roles, token });
                         localStorage.setItem(
                               'authed',

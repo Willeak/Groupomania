@@ -22,7 +22,7 @@ section {
       justify-content: flex-start;
       padding: 1rem;
       border-radius: 20px;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: #4e5166;
 }
 
 .formAuth {
@@ -37,11 +37,15 @@ section {
 .buttonAuth {
       margin: 1rem;
 }
+.buttonAuth {
+      font-weight: bold;
+}
 
 .inputAuth,
 .buttonAuth,
 .textareaAuth {
       font-size: 17px;
+
       padding: 0.25rem;
       padding-left: 15px;
       border-radius: 1rem;

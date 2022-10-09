@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Connect from '../components/Connect';
 import Background from '../components/Background';
 import Logo from '../components/Logo';

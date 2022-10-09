@@ -2,6 +2,7 @@ import React, { useEffect, useReducer, useState } from 'react';
 // import imgProfile from 'http://localhost:3000/images/profile/avatar_neutre.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faSliders } from '@fortawesome/free-solid-svg-icons';
 
 import axios from '../api/axios';
 import imgProfile from './../assets/avatar_neutre.png';
@@ -44,7 +45,7 @@ const Post = () => {
             };
 
             postSubmit();
-      }, [reducerValue]); // <--- reducerValue | a ajouter pour refresh auto le components
+      }, [reducerValue]); // <--- reducerValue | a ajouter pour refresh auto le component
 
       //=======================================================
 
@@ -54,7 +55,7 @@ const Post = () => {
       const [like, setLike] = useState();
 
       if (like === undefined) {
-            setLike(1);
+            setLike(0);
       }
 
       const LikeSubmit = async (e) => {
@@ -67,16 +68,10 @@ const Post = () => {
             chkPrint.value = chkPrint.checked;
             // console.log('value', chkPrint.value);
 
-            if (e.usersLiked.includes(userId)) {
-                  let el = document.getElementById(IdPost);
-                  el.style.color = 'blue';
-                  document.getElementById(IdPost).value = 'true';
-            }
-
             if (chkPrint.value === 'true') {
-                  setLike(0);
-            } else if (chkPrint.value === 'false') {
                   setLike(1);
+            } else if (chkPrint.value === 'false') {
+                  setLike(0);
             }
             console.log(like);
 
@@ -88,10 +83,9 @@ const Post = () => {
             await axios
                   .post(LikePosts, formLike, {
                         headers: {
-                              'Content-Type': 'application/json',
+                              // 'Content-Type': 'multipart/form-data',
                               Authorization:
                                     'Bearer ' + sessionStorage.getItem('token'),
-                              withCredentials: true,
                         },
                   })
                   .then((response) => {
@@ -107,17 +101,90 @@ const Post = () => {
 
       console.log();
 
+      async function setInputValue(e) {
+            if (e.usersLiked.includes(userId)) {
+                  console.log(e._id + '= tu a voté');
+                  let el = document.getElementById(e._id);
+                  el.checked = 'true';
+                  el.value = 'true';
+                  el.initialValues = 'false';
+                  let heart = document.getElementById(e._id + 1);
+                  heart.style.color = 'red';
+            }
+
+            console.log(e.usersLiked);
+
+            if (e.userId === userId) {
+                  let element = document.getElementById(e._id + 2);
+                  element.style.display = 'flex';
+            } else if (e.userId !== userId) {
+                  let element = document.getElementById(e._id + 2);
+                  element.style.display = 'none';
+            }
+
+            document.getElementById(e._id + 2).onclick = function () {
+                  if (
+                        document.getElementById(e._id + 3).style.display ===
+                        'flex'
+                  ) {
+                        let window = document.getElementById(e._id + 3);
+                        return (window.style.display = 'none');
+                  }
+                  let window = document.getElementById(e._id + 3);
+                  window.style.display = 'flex';
+            };
+
+            document.getElementById(e._id + 'Delete').onclick = function () {
+                  const DELETEPost = `/api/posts/${e._id}`;
+
+                  async function DeleteMyPost() {
+                        await axios
+                              .delete(DELETEPost, {
+                                    headers: {
+                                          'Content-Type': 'application/json',
+                                          Authorization:
+                                                'Bearer ' +
+                                                sessionStorage.getItem('token'),
+                                          withCredentials: true,
+                                    },
+                              })
+                              .then((response) => {
+                                    console.log(
+                                          JSON.stringify(
+                                                response?.data?.message
+                                          )
+                                    );
+                              })
+                              .catch((error) => {
+                                    if (!error?.response) {
+                                          console.log(error);
+                                    }
+                              });
+                        forceUpdate();
+                  }
+                  DeleteMyPost();
+            };
+      }
+
       return (
             <div>
                   {posts && posts.length > 0 ? (
                         posts
                               .map((post, i) => (
                                     <div className="Post" key={post._id}>
-                                          <form className="">
+                                          <form
+                                                className=""
+                                                onLoad={(e) =>
+                                                      setInputValue((e = post))
+                                                }
+                                          >
                                                 <div className="flex ai__centre">
                                                       <img
-                                                            src=""
-                                                            alt=""
+                                                            src={post.userImg}
+                                                            alt={
+                                                                  'photo de profil de' +
+                                                                  post.name
+                                                            }
                                                             className="imgProfilePost"
                                                             onError={(e) => {
                                                                   e.target.src =
@@ -130,6 +197,41 @@ const Post = () => {
                                                       <div className="hourly">
                                                             {' '}
                                                             ● le {post.date}
+                                                      </div>
+                                                      <div className="flex jc__centre ai__centre DivPostSettings">
+                                                            <FontAwesomeIcon
+                                                                  icon={
+                                                                        faSliders
+                                                                  }
+                                                                  id={
+                                                                        post._id +
+                                                                        2
+                                                                  }
+                                                                  className="PostSettings"
+                                                            />
+                                                      </div>
+                                                      <div
+                                                            id={post._id + 3}
+                                                            className="flex jc__centre ai__centre fd__Column windowPostSettings"
+                                                      >
+                                                            <button
+                                                                  id={
+                                                                        post._id +
+                                                                        'Modify'
+                                                                  }
+                                                                  className="buttonSettingPost"
+                                                            >
+                                                                  modifier
+                                                            </button>
+                                                            <p
+                                                                  id={
+                                                                        post._id +
+                                                                        'Delete'
+                                                                  }
+                                                                  className="buttonSettingPost"
+                                                            >
+                                                                  supprimer
+                                                            </p>
                                                       </div>
                                                 </div>
                                                 <img
@@ -148,7 +250,13 @@ const Post = () => {
                                                       <label className="iconLikeBg">
                                                             <div className="LikeAnim" />
                                                             <FontAwesomeIcon
-                                                                  className="iconLike"
+                                                                  id={
+                                                                        post._id +
+                                                                        1
+                                                                  }
+                                                                  className={
+                                                                        ' iconLike '
+                                                                  }
                                                                   icon={faHeart}
                                                             />
                                                             <input
@@ -165,7 +273,9 @@ const Post = () => {
                                                                   }
                                                             />
                                                       </label>
-                                                      <p>{post.likes}</p>
+                                                      <p className="counterLike">
+                                                            {post.likes}
+                                                      </p>
                                                 </div>
                                           </form>
                                     </div>

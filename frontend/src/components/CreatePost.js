@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useReducer } from 'react';
 import axios from '../api/axios';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +7,7 @@ import { faImage } from '@fortawesome/free-solid-svg-icons';
 import FormData from 'form-data';
 import moment from 'moment';
 import 'moment/locale/fr';
+import Post from './Post';
 
 //adaptation du textaera selon lpassage a la ligne
 const defaultStyle = {
@@ -21,6 +22,7 @@ const regValidPost = /^[A-Za-z-0-9 &_@/;:.,'-éàê^`è&*+()!? \n \r]{10,280}$/;
 const CreatePost = ({ style = defaultStyle, ...etc }) => {
       const authed = JSON.parse(localStorage.getItem('authed'));
       const userId = authed.userId;
+      const userImg = 'http://localhost:3000' + authed.img;
       const name = authed.user;
 
       const [post, setPost] = useState('');
@@ -79,6 +81,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
             myDate = moment().format('dddd DD MMMM YYYY, à H[h]mm.');
 
             let data = {
+                  userImg: userImg,
                   userId: userId,
                   name: name,
                   description: post,
@@ -86,10 +89,10 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
             };
 
             const formPost = new FormData();
-
+            formPost.append('userImg', data.userImg);
             formPost.append('userId', data.userId);
             formPost.append('name', data.name);
-            formPost.append('image', selectedFile);
+            formPost.append('imageUrl', selectedFile);
             formPost.append('description', data.description);
             formPost.append('date', data.date);
 
@@ -105,6 +108,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                                     'Bearer ' + sessionStorage.getItem('token'),
                               // 'Content-Type': 'singlepart/form-data',
                         },
+
                         withCredentials: true,
                   })
                   .then((response) => {
@@ -159,62 +163,72 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
             count();
       });
 
+      const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0); // ligne 47 et 99
+
       return (
-            <div className="BlocCreatePost">
-                  <form className="formPost" onSubmit={handleSubmit}>
-                        <label className="UploadImgPost">
-                              <FontAwesomeIcon
-                                    icon={faImage}
-                                    className="UploadImg"
-                              />
-                              <input
-                                    type="file"
-                                    id="file"
-                                    name="image"
-                                    onChange={(event) => PostImg(event)}
-                              />
-                        </label>
-                        <textarea
-                              className="inputPost"
-                              type="text"
-                              id="CreatePost"
-                              name="CreatePost"
-                              placeholder="Exprimez vous..."
-                              ref={textareaRef}
-                              // maxLength="8"
-                              autoComplete="off"
-                              onChange={(e) => {
-                                    setCurrentValue(e.target.value);
-                                    setPost(e.target.value);
-                                    //to do something with value, maybe callback?
-                              }}
-                              value={post}
-                              required
-                              aria-invalid={validPost ? 'false' : 'true'}
-                              onFocus={() => setUserFocus(true)}
-                              onBlur={() => setUserFocus(false)}
-                        ></textarea>
-                        <div className="controlPost">
-                              <p
-                                    ref={errRef}
-                                    className={
-                                          errMsg ? 'errmsgPost' : 'offscreen'
-                                    }
-                                    aria-live="assertive"
-                              >
-                                    {errMsg}
-                              </p>
-                              <p id="counterBlock"></p>
-                              <button
-                                    className="buttonCreatePost"
-                                    id="buttonCreatePost"
-                                    disabled={!validPost ? true : false}
-                              >
-                                    Envoyer
-                              </button>
-                        </div>
-                  </form>
-                  <div className="fadeGray" />
+            <div className="BlocPost">
+                  <div className="BlocCreatePost">
+                        <form className="formPost" onSubmit={handleSubmit}>
+                              <label className="UploadImgPost">
+                                    <FontAwesomeIcon
+                                          icon={faImage}
+                                          className="UploadImg"
+                                    />
+                                    <input
+                                          type="file"
+                                          id="file"
+                                          name="imageUrl"
+                                          onChange={(event) => PostImg(event)}
+                                    />
+                              </label>
+                              <textarea
+                                    className="inputPost"
+                                    type="text"
+                                    id="CreatePost"
+                                    name="CreatePost"
+                                    placeholder="Exprimez vous..."
+                                    ref={textareaRef}
+                                    // maxLength="8"
+                                    autoComplete="off"
+                                    onChange={(e) => {
+                                          setCurrentValue(e.target.value);
+                                          setPost(e.target.value);
+                                          //to do something with value, maybe callback?
+                                    }}
+                                    value={post}
+                                    required
+                                    aria-invalid={validPost ? 'false' : 'true'}
+                                    onFocus={() => setUserFocus(true)}
+                                    onBlur={() => setUserFocus(false)}
+                              ></textarea>
+                              <div className="controlPost">
+                                    <p
+                                          ref={errRef}
+                                          className={
+                                                errMsg
+                                                      ? 'errmsgPost'
+                                                      : 'offscreen'
+                                          }
+                                          aria-live="assertive"
+                                    >
+                                          {errMsg}
+                                    </p>
+                                    <p id="counterBlock"></p>
+                                    <button
+                                          className="buttonCreatePost"
+                                          id="buttonCreatePost"
+                                          disabled={!validPost ? true : false}
+                                          onClick={forceUpdate}
+                                    >
+                                          Envoyer
+                                    </button>
+                              </div>
+                        </form>
+                        <div className="fadeGray" />
+                  </div>
+                  <div className="scrollBar">
+                        <Post key={reducerValue} />
+                  </div>
             </div>
       );
 };
