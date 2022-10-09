@@ -6,7 +6,6 @@ const path = require("path");
 const cors = require("cors");
 
 const postRoutes = require("./routes/post");
-const commentRoutes = require("./routes/comment");
 const signRoutes = require("./routes/user");
 
 const app = express();
@@ -39,7 +38,6 @@ app.use(cors({ origin: "http://localhost:4200", credentials: true }));
 app.use(bodyParser.json());
 
 app.use("/api/posts", postRoutes);
-app.use("/api/comment", commentRoutes);
 app.use("/api/register", signRoutes);
 app.use("/images/post/", express.static(path.join(__dirname, "images/post")));
 app.use(

@@ -6,6 +6,8 @@ import { faSliders } from '@fortawesome/free-solid-svg-icons';
 
 import axios from '../api/axios';
 import imgProfile from './../assets/avatar_neutre.png';
+import imgPost from './../assets/Error_Image.png';
+
 import moment from 'moment';
 import 'moment/locale/fr';
 
@@ -134,6 +136,27 @@ const Post = () => {
                   window.style.display = 'flex';
             };
 
+            if (
+                  !document
+                        .getElementById(e._id + 'Image')
+                        .getAttribute('src', '')
+            ) {
+                  let image = document.getElementById(e._id + 'Image');
+                  image.style.display = 'none';
+            }
+
+            document.getElementById(e._id + 'Image').onclick = function () {
+                  if (
+                        document.getElementById(e._id + 3).style.display ===
+                        'flex'
+                  ) {
+                        let window = document.getElementById(e._id + 3);
+                        return (window.style.display = 'none');
+                  }
+                  let window = document.getElementById(e._id + 3);
+                  window.style.display = 'flex';
+            };
+
             document.getElementById(e._id + 'Delete').onclick = function () {
                   const DELETEPost = `/api/posts/${e._id}`;
 
@@ -235,13 +258,13 @@ const Post = () => {
                                                       </div>
                                                 </div>
                                                 <img
-                                                      // src=
-                                                      alt=""
-                                                      className="imgProfilePost"
-                                                      onError={(e) => {
-                                                            e.target.src =
-                                                                  imgProfile;
-                                                      }}
+                                                      src={post.imageUrl}
+                                                      alt={
+                                                            'photo du commentaire de' +
+                                                            post.name
+                                                      }
+                                                      id={post._id + 'Image'}
+                                                      className="imgPost"
                                                 />
                                                 <div className="textPost">
                                                       {post.description}

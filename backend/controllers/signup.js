@@ -56,6 +56,7 @@ exports.login = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
+//get all users
 exports.getAllUsers = (req, res, next) => {
   User.find()
     .then((users) => {
@@ -75,17 +76,15 @@ exports.getOneUser = (req, res, next) => {
 
 // Modifier un utilisateur
 exports.modifyUser = (req, res, next) => {
+  //si la requete comporte une image
   if (req.file) {
     User.findOne({ _id: req.params.id })
       .then((user) => {
-        // verifie si l'user est bien celui du createur de la sauce
+        // verifie si l'user est bien celui du createur du compte
         if (res.locals.userId != User.userId)
           return res.status(403).json({
             message: "erreur !",
           });
-
-        // On supprime l'ancienne image du serveur
-        const filename = user.img.split("/images/profile/")[1];
 
         const userObject = {
           // On modifie les données et on ajoute la nouvelle image

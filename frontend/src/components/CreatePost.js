@@ -92,48 +92,92 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
             formPost.append('userImg', data.userImg);
             formPost.append('userId', data.userId);
             formPost.append('name', data.name);
-            formPost.append('imageUrl', selectedFile);
             formPost.append('description', data.description);
             formPost.append('date', data.date);
 
-            const createdPost = {
-                  post: Object.fromEntries(formPost),
-            };
-            console.log(createdPost);
+            if (isSelected === false) {
+                  const createdPost = {
+                        post: Object.fromEntries(formPost),
+                  };
+                  console.log(formPost);
+                  await axios
+                        .post(sendPOST, createdPost, {
+                              headers: {
+                                    // 'Content-Type': 'multipart/form-data',
+                                    Authorization:
+                                          'Bearer ' +
+                                          sessionStorage.getItem('token'),
+                              },
 
-            await axios
-                  .post(sendPOST, createdPost, {
-                        headers: {
-                              Authorization:
-                                    'Bearer ' + sessionStorage.getItem('token'),
-                              // 'Content-Type': 'singlepart/form-data',
-                        },
+                              withCredentials: true,
+                        })
+                        .then((response) => {
+                              console.log(
+                                    JSON.stringify(response?.data?.message)
+                              );
+                              setSuccess(true);
+                              setPost('');
+                              setErrMsg('Post envoyé !');
+                        })
+                        .catch((error) => {
+                              if (!error?.response) {
+                                    setErrMsg('Le serveur ne réponds pas');
+                              } else if (error.response?.status === 400) {
+                                    setErrMsg('Envoie échoué');
+                              } else {
+                                    setErrMsg('Connexion échouée');
+                              }
 
-                        withCredentials: true,
-                  })
-                  .then((response) => {
-                        console.log(JSON.stringify(response?.data?.message));
-                        setSuccess(true);
-                        setPost('');
-                        setErrMsg('Post envoyé !');
-                  })
-                  .catch((error) => {
-                        if (!error?.response) {
-                              setErrMsg('Le serveur ne réponds pas');
-                        } else if (error.response?.status === 400) {
-                              setErrMsg('Envoie échoué');
-                        } else {
-                              setErrMsg('Connexion échouée');
-                        }
+                              if (error.response?.status !== undefined) {
+                                    console.error(error.response?.status);
+                              }
 
-                        if (error.response?.status !== undefined) {
-                              console.error(error.response?.status);
-                        }
+                              errRef.current.focus();
+                        });
+            } else if (isSelected === true) {
+                  const createdPost = {
+                        imageUrl: selectedFile,
+                        post: JSON.stringify(data), //probleme d'envoie
+                  };
 
-                        errRef.current.focus();
-                  });
+                  await axios
+                        .post(sendPOST, createdPost, {
+                              headers: {
+                                    'Content-Type': 'multipart/form-data',
+                                    Authorization:
+                                          'Bearer ' +
+                                          sessionStorage.getItem('token'),
+                              },
+
+                              withCredentials: true,
+                        })
+                        .then((response) => {
+                              console.log(
+                                    JSON.stringify(response?.data?.message)
+                              );
+                              setSuccess(true);
+                              setPost('');
+                              setErrMsg('Post envoyé !');
+                        })
+                        .catch((error) => {
+                              if (!error?.response) {
+                                    setErrMsg('Le serveur ne réponds pas');
+                              } else if (error.response?.status === 400) {
+                                    setErrMsg('Envoie échoué');
+                              } else {
+                                    setErrMsg('Connexion échouée');
+                              }
+
+                              if (error.response?.status !== undefined) {
+                                    console.error(error.response?.status);
+                              }
+
+                              errRef.current.focus();
+                        });
+                  setIsSelected(false);
+            }
       };
-
+      console.log(selectedFile);
       // on pose un écouteur d'évènement keyup sur le textarea.
       // On déclenche la fonction count quand l'évènement se produit et au chargement de la page
 
@@ -165,6 +209,10 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
 
       const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0); // ligne 47 et 99
 
+      function todo() {
+            forceUpdate();
+      }
+
       return (
             <div className="BlocPost">
                   <div className="BlocCreatePost">
@@ -176,7 +224,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                                     />
                                     <input
                                           type="file"
-                                          id="file"
+                                          id="Inputfile"
                                           name="imageUrl"
                                           onChange={(event) => PostImg(event)}
                                     />
@@ -218,7 +266,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                                           className="buttonCreatePost"
                                           id="buttonCreatePost"
                                           disabled={!validPost ? true : false}
-                                          onClick={forceUpdate}
+                                          onClick={todo}
                                     >
                                           Envoyer
                                     </button>

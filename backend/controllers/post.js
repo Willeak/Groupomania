@@ -14,25 +14,27 @@ exports.getAllPosts = (req, res, next) => {
 
 // Créer un post
 exports.createPost = (req, res, next) => {
-  console.log(req.body.post);
-  console.log(req.file);
-  const postObject = req.body.post;
-
+  console.log("a", req.body.post);
+  console.log("b", req.file);
   if (req.file) {
+    const postObject = JSON.parse(req.body.post);
     const post = new Post({
       ...postObject,
-      imageUrl: `${req.protocol}://${req.get("host")}/images/post/${req.file}`,
+      imageUrl: `${req.protocol}://${req.get("host")}/images/post/${
+        req.file.filename
+      }`,
     });
     post
       .save()
       .then(() => {
-        res.status(201).json({ message: "Nouveau post avec image créé !" });
+        res.status(201).json({ message: "Nouveau post sans image créé !" });
       })
       .catch((error) => {
         // console.log(req.body);
-        res.status(401).json({ error: error });
+        res.status(402).json({ error: error });
       });
   } else {
+    const postObject = req.body.post;
     const post = new Post({
       ...postObject,
     });
@@ -61,16 +63,16 @@ exports.deletePost = (req, res, next) => {
 
       if (post.imageUrl !== "") {
         const filename = post.imageUrl.split("/images/post/")[1];
-        fs.unlink(`images/${filename}`, () => {
+        fs.unlink(`images/post/${filename}`, () => {
           Post.deleteOne({ _id: req.params.id })
             .then(() => res.status(200).json({ message: "post supprimée !" }))
             .catch((error) => res.status(400).json({ error: error }));
         });
+      } else {
+        Post.deleteOne({ _id: req.params.id })
+          .then(() => res.status(200).json({ message: "post supprimée !" }))
+          .catch((error) => res.status(400).json({ error: error }));
       }
-
-      Post.deleteOne({ _id: req.params.id })
-        .then(() => res.status(200).json({ message: "post supprimée !" }))
-        .catch((error) => res.status(400).json({ error: error }));
     })
     .catch((error) => res.status(500).json({ error }));
 };
