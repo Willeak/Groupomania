@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useReducer } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 //appel du parametre axios
 import axios from '../api/axios';
 //appel de font awesomes pour  les icons
@@ -113,6 +113,10 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                               setSuccess(true);
                               setPost('');
                               setErrMsg('Post envoyé !');
+                              let modify =
+                                    document.getElementById('ModifyPost');
+                              modify.style.display = 'none';
+                              window.location.reload();
                         })
                         .catch((error) => {
                               if (!error?.response) {
@@ -155,6 +159,10 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                               setSuccess(true);
                               setPost('');
                               setErrMsg('Post envoyé !');
+                              let modify =
+                                    document.getElementById('ModifyPost');
+                              modify.style.display = 'none';
+                              window.location.reload();
                         })
                         .catch((error) => {
                               if (!error?.response) {
@@ -253,6 +261,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                                           {errMsg}
                                     </p>
                                     <p id="counterBlock"></p>
+
                                     <button
                                           className="buttonCreatePost"
                                           id="buttonCreatePost"

@@ -197,123 +197,115 @@ const Post = () => {
       return (
             <div>
                   {posts && posts.length > 0 ? (
-                        posts
-                              .map((post, i) => (
-                                    <div className="Post" key={post._id}>
-                                          <form
-                                                className=""
-                                                onLoad={(e) =>
-                                                      setInputValue((e = post))
-                                                }
-                                          >
-                                                <div className="flex ai__centre">
-                                                      <img
-                                                            src={post.userImg}
-                                                            alt={
-                                                                  'photo de profil de' +
-                                                                  post.name
-                                                            }
-                                                            className="imgProfilePost"
-                                                            onError={(e) => {
-                                                                  e.target.src =
-                                                                        imgProfile;
-                                                            }}
+                        posts.map((post, i) => (
+                              <div className="Post" key={post._id}>
+                                    <form
+                                          className=""
+                                          onLoad={(e) =>
+                                                setInputValue((e = post))
+                                          }
+                                    >
+                                          <div className="flex ai__centre">
+                                                <img
+                                                      src={post.userImg}
+                                                      alt={
+                                                            'photo de profil de' +
+                                                            post.name
+                                                      }
+                                                      className="imgProfilePost"
+                                                      onError={(e) => {
+                                                            e.target.src =
+                                                                  imgProfile;
+                                                      }}
+                                                />
+                                                <div className="Name">
+                                                      {post.name}
+                                                </div>
+                                                <div className="hourly">
+                                                      {' '}
+                                                      ● le {post.date}
+                                                </div>
+                                                <div
+                                                      id={post._id + 2}
+                                                      className="flex jc__centre ai__centre DivPostSettings"
+                                                >
+                                                      <FontAwesomeIcon
+                                                            icon={faSliders}
+                                                            className="PostSettings"
                                                       />
-                                                      <div className="Name">
-                                                            {post.name}
-                                                      </div>
-                                                      <div className="hourly">
-                                                            {' '}
-                                                            ● le {post.date}
-                                                      </div>
-                                                      <div
-                                                            id={post._id + 2}
-                                                            className="flex jc__centre ai__centre DivPostSettings"
+                                                </div>
+                                                <div
+                                                      id={post._id + 3}
+                                                      className="flex jc__centre ai__centre fd__Column windowPostSettings"
+                                                >
+                                                      <Link
+                                                            className="buttonSettingPost"
+                                                            to={`/ModifyIdPost?=${post._id}`}
                                                       >
-                                                            <FontAwesomeIcon
-                                                                  icon={
-                                                                        faSliders
-                                                                  }
-                                                                  className="PostSettings"
-                                                            />
-                                                      </div>
-                                                      <div
-                                                            id={post._id + 3}
-                                                            className="flex jc__centre ai__centre fd__Column windowPostSettings"
-                                                      >
-                                                            <Link
-                                                                  className="buttonSettingPost"
-                                                                  to={`/ModifyIdPost?=${post._id}`}
-                                                            >
-                                                                  <p
-                                                                        id={
-                                                                              post._id +
-                                                                              'Modify'
-                                                                        }
-                                                                  >
-                                                                        modifier
-                                                                  </p>
-                                                            </Link>
-
                                                             <p
                                                                   id={
                                                                         post._id +
-                                                                        'Delete'
+                                                                        'Modify'
                                                                   }
-                                                                  className="buttonSettingPost"
                                                             >
-                                                                  supprimer
+                                                                  modifier
                                                             </p>
-                                                      </div>
-                                                </div>
-                                                <img
-                                                      src={post.imageUrl}
-                                                      alt={
-                                                            'photo du commentaire de' +
-                                                            post.name
-                                                      }
-                                                      id={post._id + 'Image'}
-                                                      className="imgPost"
-                                                />
-                                                <div className="textPost">
-                                                      {post.description}
-                                                </div>
-                                                <div className="flex jc__centre likeCont">
-                                                      <label className="iconLikeBg">
-                                                            <div className="LikeAnim" />
-                                                            <FontAwesomeIcon
-                                                                  id={
-                                                                        post._id +
-                                                                        1
-                                                                  }
-                                                                  className={
-                                                                        ' iconLike '
-                                                                  }
-                                                                  icon={faHeart}
-                                                            />
-                                                            <input
-                                                                  id={post._id}
-                                                                  type="checkbox"
-                                                                  className="flex jc__SpaceA buttonLike"
-                                                                  onClick={(
-                                                                        e
-                                                                  ) =>
-                                                                        LikeSubmit(
-                                                                              (e.target.value =
-                                                                                    post)
-                                                                        )
-                                                                  }
-                                                            />
-                                                      </label>
-                                                      <p className="counterLike">
-                                                            {post.likes}
+                                                      </Link>
+
+                                                      <p
+                                                            id={
+                                                                  post._id +
+                                                                  'Delete'
+                                                            }
+                                                            className="buttonSettingPost"
+                                                      >
+                                                            supprimer
                                                       </p>
                                                 </div>
-                                          </form>
-                                    </div>
-                              ))
-                              .reverse()
+                                          </div>
+                                          <img
+                                                src={post.imageUrl}
+                                                alt={
+                                                      'photo du commentaire de' +
+                                                      post.name
+                                                }
+                                                id={post._id + 'Image'}
+                                                className="imgPost"
+                                          />
+                                          <div className="textPost">
+                                                {post.description}
+                                          </div>
+                                          <div className="flex jc__centre likeCont">
+                                                <label className="iconLikeBg">
+                                                      <div className="LikeAnim" />
+                                                      <FontAwesomeIcon
+                                                            id={post._id + 1}
+                                                            className={
+                                                                  ' iconLike '
+                                                            }
+                                                            icon={faHeart}
+                                                      />
+                                                      <input
+                                                            id={post._id}
+                                                            type="checkbox"
+                                                            className="flex jc__SpaceA buttonLike"
+                                                            onClick={(e) =>
+                                                                  LikeSubmit(
+                                                                        (e.target.value =
+                                                                              post)
+                                                                  )
+                                                            }
+                                                      />
+                                                </label>
+                                                <p className="counterLike">
+                                                      {post.likes}
+                                                </p>
+                                          </div>
+                                    </form>
+                              </div>
+                        ))
                   ) : (
+                        // .reverse()
                         <p className="errmsgUser">Aucun post disponible !</p>
                   )}
             </div>

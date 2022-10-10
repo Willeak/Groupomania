@@ -6,6 +6,8 @@ const fs = require("fs"); // pour la fonction des boutons
 //afficher tout les posts
 exports.getAllPosts = (req, res, next) => {
   Post.find()
+    .sort({ date: -1 })
+    .limit(10)
     .then((posts) => {
       res.status(200).json(posts);
     })
@@ -111,22 +113,59 @@ exports.modifyPost = (req, res, next) => {
   Post.findOne({ _id: req.params.id })
     .then((post) => {
       if (req.file) {
-        // verifie si l'user est bien celui du createur de ce post
-        if (post.userId !== userId)
-          return res.status(403).json({
-            message:
-              "Vous n êtes pas le créateur de ce post, vous ne pouvez pas MODIFIER ce post !",
+        if ("63347f831f9cf84f32dd4f07" === userId) {
+          // On supprime l'ancienne image du serveur
+          const filename = post.imageUrl.split("/images/post/")[1];
+          fs.unlink(`images/post/${filename}`, () => {
+            const postObject = {
+              // On modifie les données et on ajoute la nouvelle image
+              ...JSON.parse(req.body.post),
+              imageUrl: `${req.protocol}://${req.get("host")}/images/post/${
+                req.file.filename
+              }`,
+            };
+            Post.updateOne(
+              { _id: req.params.id },
+              { ...postObject, _id: req.params.id }
+            )
+              .then(() =>
+                res.status(200).json({ message: "Objet modifié 1 !" })
+              )
+              .catch((error) => res.status(400).json({ error }));
           });
-
-        // On supprime l'ancienne image du serveur
-        const filename = post.imageUrl.split("/images/post/")[1];
-        fs.unlink(`images/post/${filename}`, () => {
+        } else {
+          // verifie si l'user est bien celui du createur de ce post
+          if (post.userId !== userId) {
+            return res.status(403).json({
+              message:
+                "Vous n êtes pas le créateur de ce post, vous ne pouvez pas MODIFIER ce post !",
+            });
+          }
+          // On supprime l'ancienne image du serveur
+          const filename = post.imageUrl.split("/images/post/")[1];
+          fs.unlink(`images/post/${filename}`, () => {
+            const postObject = {
+              // On modifie les données et on ajoute la nouvelle image
+              ...JSON.parse(req.body.post),
+              imageUrl: `${req.protocol}://${req.get("host")}/images/post/${
+                req.file.filename
+              }`,
+            };
+            Post.updateOne(
+              { _id: req.params.id },
+              { ...postObject, _id: req.params.id }
+            )
+              .then(() =>
+                res.status(200).json({ message: "Objet modifié 1 !" })
+              )
+              .catch((error) => res.status(400).json({ error }));
+          });
+        }
+      } else {
+        if ("63347f831f9cf84f32dd4f07" === userId) {
           const postObject = {
             // On modifie les données et on ajoute la nouvelle image
-            ...JSON.parse(req.body.post),
-            imageUrl: `${req.protocol}://${req.get("host")}/images/post/${
-              req.file.filename
-            }`,
+            ...req.body.post,
           };
           Post.updateOne(
             { _id: req.params.id },
@@ -134,27 +173,27 @@ exports.modifyPost = (req, res, next) => {
           )
             .then(() => res.status(200).json({ message: "Objet modifié 1 !" }))
             .catch((error) => res.status(400).json({ error }));
-        });
-      } else {
-        console.log("body:", req.body.post);
-        // console.log(post);
-        // verifie si l'user est bien celui du createur de ce post
-        if (post.userId !== userId)
-          return res.status(403).json({
-            message:
-              "Vous n êtes pas le créateur de ce post, vous ne pouvez pas MODIFIER ce post !",
-          });
+        } else {
+          console.log("body:", req.body.post);
+          // console.log(post);
+          // verifie si l'user est bien celui du createur de ce post
+          if (post.userId !== userId)
+            return res.status(403).json({
+              message:
+                "Vous n êtes pas le créateur de ce post, vous ne pouvez pas MODIFIER ce post !",
+            });
 
-        const postObject = {
-          // On modifie les données et on ajoute la nouvelle image
-          ...req.body.post,
-        };
-        Post.updateOne(
-          { _id: req.params.id },
-          { ...postObject, _id: req.params.id }
-        )
-          .then(() => res.status(200).json({ message: "Objet modifié 1 !" }))
-          .catch((error) => res.status(400).json({ error }));
+          const postObject = {
+            // On modifie les données et on ajoute la nouvelle image
+            ...req.body.post,
+          };
+          Post.updateOne(
+            { _id: req.params.id },
+            { ...postObject, _id: req.params.id }
+          )
+            .then(() => res.status(200).json({ message: "Objet modifié 1 !" }))
+            .catch((error) => res.status(400).json({ error }));
+        }
       }
     })
     .catch((error) => res.status(500).json({ error }));
