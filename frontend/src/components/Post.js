@@ -7,6 +7,7 @@ import { faSliders } from '@fortawesome/free-solid-svg-icons';
 import axios from '../api/axios';
 //appel de l'image de profil basic
 import imgProfile from './../assets/avatar_neutre.png';
+import { Link } from 'react-router-dom';
 
 const Post = () => {
       //appel de  l'api des pots pour l'utilisation du .map
@@ -119,7 +120,7 @@ const Post = () => {
             }
             // au click du bouton setting post afficher uen fenetre flottante
             document.getElementById(e._id + 2).onclick = function () {
-                  //si elle est deja en display flex alor  retourner la valeurdisplay none
+                  //si elle est deja en display flex alors retourner la valeur display none
                   if (
                         document.getElementById(e._id + 3).style.display ===
                         'flex'
@@ -140,6 +141,25 @@ const Post = () => {
                   let image = document.getElementById(e._id + 'Image');
                   image.style.display = 'none';
             }
+
+            // au clic du bouton MODIFY envoyer la requete avec l'id du post pour la modification
+            document.getElementById(e._id + 'Modify').onclick = function () {
+                  //si elle est deja en display flex alors retourner la valeur display none
+                  if (
+                        document.getElementById('ModifyPost').style.display ===
+                        'flex'
+                  ) {
+                        let modify = document.getElementById(e._id + 3);
+                        return (modify.style.display = 'none');
+                  }
+                  //fenetre flottante
+                  let modify = document.getElementById('ModifyPost');
+                  modify.style.display = 'flex';
+                  console.log('modify');
+                  let window = document.getElementById(e._id + 3);
+                  window.style.display = 'none';
+            };
+
             // au clic du bouton DELETE envoyer la requete avec l'id du post pour la suppression
             document.getElementById(e._id + 'Delete').onclick = function () {
                   //appel de l'api
@@ -221,15 +241,20 @@ const Post = () => {
                                                             id={post._id + 3}
                                                             className="flex jc__centre ai__centre fd__Column windowPostSettings"
                                                       >
-                                                            <button
-                                                                  id={
-                                                                        post._id +
-                                                                        'Modify'
-                                                                  }
+                                                            <Link
                                                                   className="buttonSettingPost"
+                                                                  to={`/ModifyIdPost?=${post._id}`}
                                                             >
-                                                                  modifier
-                                                            </button>
+                                                                  <p
+                                                                        id={
+                                                                              post._id +
+                                                                              'Modify'
+                                                                        }
+                                                                  >
+                                                                        modifier
+                                                                  </p>
+                                                            </Link>
+
                                                             <p
                                                                   id={
                                                                         post._id +

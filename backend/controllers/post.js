@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const Post = require("../models/Post");
 const fs = require("fs"); // pour la fonction des boutons
 
+//afficher tout les posts
 exports.getAllPosts = (req, res, next) => {
   Post.find()
     .then((posts) => {
@@ -102,23 +103,28 @@ exports.deletePost = (req, res, next) => {
 
 // Modifier un post
 exports.modifyPost = (req, res, next) => {
-  if (req.file) {
-    Post.findOne({ _id: req.params.id })
-      .then((post) => {
+  //recuparation de l'id dans le token fe facon sécurisé !
+  const token = req.headers.authorization.split(" ")[1];
+  const decodedToken = jwt.verify(token, `${process.env.RND_TKN}`);
+  const userId = decodedToken.userId;
+  console.log(req.params.id);
+  Post.findOne({ _id: req.params.id })
+    .then((post) => {
+      if (req.file) {
         // verifie si l'user est bien celui du createur de ce post
-        if (res.locals.userId != Post.userId)
+        if (post.userId !== userId)
           return res.status(403).json({
             message:
               "Vous n êtes pas le créateur de ce post, vous ne pouvez pas MODIFIER ce post !",
           });
 
         // On supprime l'ancienne image du serveur
-        const filename = post.imageUrl.split("/images/")[1];
-        fs.unlink(`images/${filename}`, () => {
+        const filename = post.imageUrl.split("/images/post/")[1];
+        fs.unlink(`images/post/${filename}`, () => {
           const postObject = {
             // On modifie les données et on ajoute la nouvelle image
             ...JSON.parse(req.body.post),
-            imageUrl: `${req.protocol}://${req.get("host")}/images/${
+            imageUrl: `${req.protocol}://${req.get("host")}/images/post/${
               req.file.filename
             }`,
           };
@@ -126,21 +132,32 @@ exports.modifyPost = (req, res, next) => {
             { _id: req.params.id },
             { ...postObject, _id: req.params.id }
           )
-            .then(() => res.status(200).json({ message: "Objet modifié !" }))
+            .then(() => res.status(200).json({ message: "Objet modifié 1 !" }))
             .catch((error) => res.status(400).json({ error }));
         });
-      })
-      .catch((error) => res.status(500).json({ error }));
-  } else {
-    const postObject = { ...req.body };
-    // On applique les paramètre de postObject
-    Post.updateOne(
-      { _id: req.params.id },
-      { ...postObject, _id: req.params.id }
-    )
-      .then(() => res.status(200).json({ message: "Objet modifié !" }))
-      .catch((error) => res.status(400).json({ error }));
-  }
+      } else {
+        console.log("body:", req.body.post);
+        // console.log(post);
+        // verifie si l'user est bien celui du createur de ce post
+        if (post.userId !== userId)
+          return res.status(403).json({
+            message:
+              "Vous n êtes pas le créateur de ce post, vous ne pouvez pas MODIFIER ce post !",
+          });
+
+        const postObject = {
+          // On modifie les données et on ajoute la nouvelle image
+          ...req.body.post,
+        };
+        Post.updateOne(
+          { _id: req.params.id },
+          { ...postObject, _id: req.params.id }
+        )
+          .then(() => res.status(200).json({ message: "Objet modifié 1 !" }))
+          .catch((error) => res.status(400).json({ error }));
+      }
+    })
+    .catch((error) => res.status(500).json({ error }));
 };
 
 //Aimer ou pas une sauce

@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
     } else {
       // Si tout est valide on passe au prochain middleware
       next();
-      console.log("auth body:", req.body);
+      // console.log("auth body:", req.body);
     }
   } catch (error) {
     res.status(402).json({ error });
