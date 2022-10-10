@@ -3,12 +3,13 @@
 ## Groupomania
 
 Le projet a été réalisé avec React Js en frontend (avec comme prépocesseur SASS), Node.js et Express.js pour le backend, la base de données a été réalisée avec MongoDB.
+Le paramètrage de lancement du frontend(4200) et backend(3000) sont déjà définies.
 
 ## Backend
 
 Le backend a été crée avec Node.js, Express.js et MongoDB pour la base de donnée.
 
-Installation :
+Installation : /!\ LE BACKEND DOIT DEMARRER SUR LE http://localhost:3000 /!\
 
     Dans le terminal de VSCODE, entrez :
             cd backend
@@ -22,7 +23,7 @@ Installation :
 
 Le frontend a été crée avec React JS.
 
-Installation :
+Installation : /!\ LE FRONTEND DOIT DEMARRER SUR LE http://localhost:4200 /!\
 
     Dans le terminal de VSCODE, entrez :
             cd frontend

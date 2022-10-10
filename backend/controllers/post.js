@@ -1,4 +1,5 @@
 //appel des middlewares
+const jwt = require("jsonwebtoken");
 const Post = require("../models/Post");
 const fs = require("fs"); // pour la fonction des boutons
 
@@ -14,8 +15,6 @@ exports.getAllPosts = (req, res, next) => {
 
 // Créer un post
 exports.createPost = (req, res, next) => {
-  console.log("a", req.body.post);
-  console.log("b", req.file);
   if (req.file) {
     const postObject = JSON.parse(req.body.post);
     const post = new Post({
@@ -52,26 +51,50 @@ exports.createPost = (req, res, next) => {
 
 // Supprimer un post
 exports.deletePost = (req, res, next) => {
+  //recuparation de l'id dans le token fe facon sécurisé !
+  const token = req.headers.authorization.split(" ")[1];
+  const decodedToken = jwt.verify(token, `${process.env.RND_TKN}`);
+  const userId = decodedToken.userId;
+  //recheche du post concerné
   Post.findOne({ _id: req.params.id })
     .then((post) => {
-      // verifie si l'user est bien celui du createur du post
-      if (Post.userId !== res.locals.userId)
-        return res.status(403).json({
-          message:
-            "Vous n êtes pas le créateur de ce post, vous ne pouvez pas SUPPRIMER ce post!",
-        });
-
-      if (post.imageUrl !== "") {
-        const filename = post.imageUrl.split("/images/post/")[1];
-        fs.unlink(`images/post/${filename}`, () => {
+      console.log("res ", post);
+      //droit d'admistrateur sur la suppression de n'importe quel post
+      if ("63347f831f9cf84f32dd4f07" === userId) {
+        if (post.imageUrl !== "") {
+          const filename = post.imageUrl.split("/images/post/")[1];
+          fs.unlink(`images/post/${filename}`, () => {
+            Post.deleteOne({ _id: req.params.id })
+              .then(() => res.status(200).json({ message: "post supprimée !" }))
+              .catch((error) => res.status(400).json({ error: error }));
+          });
+        } else {
           Post.deleteOne({ _id: req.params.id })
             .then(() => res.status(200).json({ message: "post supprimée !" }))
             .catch((error) => res.status(400).json({ error: error }));
-        });
+        }
       } else {
-        Post.deleteOne({ _id: req.params.id })
-          .then(() => res.status(200).json({ message: "post supprimée !" }))
-          .catch((error) => res.status(400).json({ error: error }));
+        console.log("test1", post.userId);
+        console.log("test2", req.headers.userid);
+        if (post.userId !== userId)
+          // verifie si l'user est bien celui du createur du post
+          return res.status(403).json({
+            message:
+              "Vous n êtes pas le créateur de ce post, vous ne pouvez pas SUPPRIMER ce post!",
+          });
+
+        if (post.imageUrl !== "") {
+          const filename = post.imageUrl.split("/images/post/")[1];
+          fs.unlink(`images/post/${filename}`, () => {
+            Post.deleteOne({ _id: req.params.id })
+              .then(() => res.status(200).json({ message: "post supprimée !" }))
+              .catch((error) => res.status(400).json({ error: error }));
+          });
+        } else {
+          Post.deleteOne({ _id: req.params.id })
+            .then(() => res.status(200).json({ message: "post supprimée !" }))
+            .catch((error) => res.status(400).json({ error: error }));
+        }
       }
     })
     .catch((error) => res.status(500).json({ error }));

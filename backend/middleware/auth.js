@@ -13,12 +13,9 @@ module.exports = (req, res, next) => {
     } else {
       // Si tout est valide on passe au prochain middleware
       next();
-      // console.log("token valide !");
-      // console.log("auth file:", req.file);
-      console.log("auth body:", req.body.post);
+      console.log("auth body:", req.body);
     }
   } catch (error) {
-    // console.log(req);
     res.status(402).json({ error });
     console.log(token);
   }

@@ -14,7 +14,7 @@ const Post = () => {
       // user list permetant la filtration via la search bar
       const [posts, setPosts] = useState([]);
       //response original
-      console.log(posts);
+
       // permet  de forcer l'update d'un component
       const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0); // ligne 47 et 99
       // requete des posts
@@ -65,9 +65,9 @@ const Post = () => {
             chkPrint.value = chkPrint.checked;
             // si l'input est false ou true convertir en nombre
             if (chkPrint.value === 'true') {
-                  setLike(1);
-            } else if (chkPrint.value === 'false') {
                   setLike(0);
+            } else if (chkPrint.value === 'false') {
+                  setLike(1);
             }
             // format a l'envoi du la requete
             const formLike = {
@@ -106,7 +106,10 @@ const Post = () => {
                   heart.style.color = 'red';
             }
             //si l'userId enregistré sur un post correspond a l'userId de l'utilisateur afficher en display flex le bouton settingpost
-            if (e.userId === userId) {
+            if (
+                  e.userId === userId ||
+                  authed.userId === '63347f831f9cf84f32dd4f07' // id Administrateur
+            ) {
                   let element = document.getElementById(e._id + 2);
                   element.style.display = 'flex';
                   //si l'userId enregistré sur un post ne correspond pas afficher en display none
@@ -203,14 +206,13 @@ const Post = () => {
                                                             {' '}
                                                             ● le {post.date}
                                                       </div>
-                                                      <div className="flex jc__centre ai__centre DivPostSettings">
+                                                      <div
+                                                            id={post._id + 2}
+                                                            className="flex jc__centre ai__centre DivPostSettings"
+                                                      >
                                                             <FontAwesomeIcon
                                                                   icon={
                                                                         faSliders
-                                                                  }
-                                                                  id={
-                                                                        post._id +
-                                                                        2
                                                                   }
                                                                   className="PostSettings"
                                                             />
