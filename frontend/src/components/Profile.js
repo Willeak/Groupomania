@@ -1,29 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+//appel du parametre axios
 import axios from '../api/axios';
+//appel du component disconnect
 import Disconnect from './Disconnect';
+//appel de font awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 import { faCrown } from '@fortawesome/free-solid-svg-icons';
 import { faHammer } from '@fortawesome/free-solid-svg-icons';
-
+// appel de l'image de profil basic
 import imgProfile from './../assets/avatar_neutre.png';
+// appel du component darkmod
 import Darkmod from './Darkmod';
 
 // const userId = sessionStorage.getItem('userId');
 
 const Profile = () => {
+      //get value of localstorage
       const authed = JSON.parse(localStorage.getItem('authed'));
-
+      const userId = authed.userId;
+      //set value les données sur l'interface utilisateur
       const [name, setName] = useState('');
       const [img, setImg] = useState('');
       const [roles, setRoles] = useState('');
-
-      const userId = authed.userId;
-
+      // appel de l'api
       const USER = `/api/register/${userId}`;
-
+      // recuperation des données de l'utilisateur
       const userSubmit = async (e) => {
             await axios
                   .get(USER, {
@@ -43,11 +46,11 @@ const Profile = () => {
                         console.log(JSON.stringify(error));
                   });
       };
-
       userSubmit();
 
-      // admin button active si role = admin
+      // Admin button active si role = admin
       const AdminSubmit = async (e) => {
+            //afficher le bouton du panel Admin et le role définie
             if (roles === 'Admin') {
                   console.log('Tu es bien administrateur');
                   let element = document.getElementById('IfAdminRole');
@@ -55,6 +58,7 @@ const Profile = () => {
 
                   let admin = document.getElementById('seeRoles');
                   admin.style.display = 'flex';
+                  //bloque l'affichage du bouton du panel Admin et le role définie
             } else if (roles === 'User') {
                   let element = document.getElementById('IfAdminRole');
                   element.style.display = 'none';
@@ -63,7 +67,6 @@ const Profile = () => {
                   admin.style.display = 'none';
             }
       };
-
       AdminSubmit();
 
       return (

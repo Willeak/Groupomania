@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Navigate, NavLink } from 'react-router-dom';
+// appel de  font awesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
       faCheck,
       faTimes,
       faInfoCircle,
 } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// appel du parametre axios
 import axios from '../api/axios';
-
+// appel de la page login
 import Login from '../pages/Login';
-
-/* GESTION DU FORMULAIRE */
 
 // #1 #2 Regex pour le contrôle des champs Prénom, Nom
 const regExPrenomNom = /^[A-Z]{3,23} [A-Z][a-z-]{3,23}$/;
@@ -51,7 +51,7 @@ const Register = () => {
       useEffect(() => {
             userRef.current.focus();
       }, []);
-
+      //regex appliqué au different formulaire d'inscription
       useEffect(() => {
             setValidName(regExPrenomNom.test(user));
       }, [user]);
@@ -68,7 +68,7 @@ const Register = () => {
       useEffect(() => {
             setErrMsg('');
       }, [user, pwd, matchPwd]);
-
+      //soumission de la connection
       const handleSubmit = async (e) => {
             e.preventDefault();
             // if button enabled with JS hack

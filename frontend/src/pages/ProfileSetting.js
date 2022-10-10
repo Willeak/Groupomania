@@ -1,30 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+//appel de axios
 import axios from '../api/axios';
+//appel de font awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
-
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
+// appel de formdata
 import FormData from 'form-data';
-
+// appel de l'image de profil basic
 import imgProfile from './../assets/avatar_neutre.png';
+// appel du logo
 import Logo1 from './../assets/icon-left-font.png';
 
-// import { faSave } from '@fortawesome/free-solid-svg-icons';
-import { faUpload } from '@fortawesome/free-solid-svg-icons';
-
 const Profile = () => {
+      //recuperation du localstorage
       const authed = JSON.parse(localStorage.getItem('authed'));
-
+      const userId = authed.userId;
+      //recuperatino de la requete pour les afficher sur l'interface
       const [user, setUser] = useState('');
-
       const [name, setName] = useState('');
       const [img, setImg] = useState('');
       const [email, setEmail] = useState('');
-
-      const userId = authed.userId;
-
+      //appel del'api
       const USERget = `/api/register/${userId}`;
-
+      //requete pour recevoir tout les  utilisateurs
       const getInfoUser = async (e) => {
             await axios
                   .get(USERget, {
@@ -49,26 +49,25 @@ const Profile = () => {
                         console.log(JSON.stringify(error));
                   });
       };
-
       getInfoUser();
 
-      // ENVOIE DE LA NOUVELLE  IMAGE DE PROFIL
+      // useState qui est definie si une photo de profil est envoyé dans l'input
       const [selectedFile, setSelectedFile] = useState();
-      console.log('image dans l input : ' + selectedFile);
+      // definie sur true si une image est envoyé a l'input et affiche un tableau de données concernant l'image
       const [isSelected, setIsSelected] = useState(false);
-
+      // au click de l'input file definit le useState
       const changeImg = async (event) => {
             setSelectedFile(event.target.files[0]);
             setIsSelected(true);
       };
-
+      // appe lde l'api
       const USERputImg = `/api/register/${userId}`;
-
+      // au click envoie la requete pour modifier  la photo de profil
       const ModifyUserImg = async (e) => {
             e.preventDefault();
             const formData = new FormData();
             formData.append('image', selectedFile, selectedFile.name);
-
+            // execution de la requete
             await axios
                   .put(USERputImg, formData, {
                         headers: {
@@ -86,11 +85,8 @@ const Profile = () => {
                   });
             window.location.reload();
       };
-
-      //========================================================================
-      //Darkmod active si refresh
+      //Darkmod active si refresh ou item present dans le localstorage
       const [active, setActive] = useState();
-
       useEffect(() => {
             if (localStorage.getItem('DarkMod')) {
                   setActive(localStorage.getItem('DarkMod'));

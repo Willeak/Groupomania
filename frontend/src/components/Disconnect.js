@@ -1,14 +1,17 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+//appe lde font  awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
-import { Link, Navigate } from 'react-router-dom';
+// appel du compoenent  Login
 import Login from './../pages/Login';
+//appel de authContext
 import AuthContext from '../contexts/AuthProvider';
 
 const Disconnect = () => {
+      //appel du useAuth
       const { setAuth } = useContext(AuthContext);
-
+      //fontion pour clear   sessionStorage,  localStorage et useAuth
       const DisconnectButton = async (e) => {
             sessionStorage.clear();
             localStorage.clear();

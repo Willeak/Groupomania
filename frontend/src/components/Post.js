@@ -1,27 +1,23 @@
 import React, { useEffect, useReducer, useState } from 'react';
-// import imgProfile from 'http://localhost:3000/images/profile/avatar_neutre.png';
+//appel de font  awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faSliders } from '@fortawesome/free-solid-svg-icons';
-
+// appel du parametre axios
 import axios from '../api/axios';
+//appel de l'image de profil basic
 import imgProfile from './../assets/avatar_neutre.png';
-import imgPost from './../assets/Error_Image.png';
-
-import moment from 'moment';
-import 'moment/locale/fr';
 
 const Post = () => {
-      //utilisation .map
+      //appel de  l'api des pots pour l'utilisation du .map
       const POSTSList = `/api/posts/`;
       // user list permetant la filtration via la search bar
       const [posts, setPosts] = useState([]);
       //response original
       console.log(posts);
-
+      // permet  de forcer l'update d'un component
       const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0); // ligne 47 et 99
-
-      // ======================================
+      // requete des posts
       useEffect(() => {
             const postSubmit = async (e) => {
                   await axios
@@ -49,39 +45,36 @@ const Post = () => {
             postSubmit();
       }, [reducerValue]); // <--- reducerValue | a ajouter pour refresh auto le component
 
-      //=======================================================
-
+      // get value du localStorage
       const authed = JSON.parse(localStorage.getItem('authed'));
       const userId = authed.userId;
-
+      // definir la valeur du like par 0 ou 1 selon si le post est like ou non
       const [like, setLike] = useState();
-
+      //si undefined lui donner 0
       if (like === undefined) {
             setLike(0);
       }
-
+      // fonction au click du bouton Like
       const LikeSubmit = async (e) => {
-            // setIdPost(e);
+            //recuperer les valeur dynamique de la .map
             const IdPost = e._id;
-            console.log(e._id);
+            //appel de l'api
             const LikePosts = `/api/posts/${IdPost}/like`;
-
+            //recuperation de l'id dynamique de l'input Heart
             var chkPrint = document.getElementById(IdPost);
             chkPrint.value = chkPrint.checked;
-            // console.log('value', chkPrint.value);
-
+            // si l'input est false ou true convertir en nombre
             if (chkPrint.value === 'true') {
                   setLike(1);
             } else if (chkPrint.value === 'false') {
                   setLike(0);
             }
-            console.log(like);
-
+            // format a l'envoi du la requete
             const formLike = {
                   like: like,
                   id: userId,
             };
-
+            //axios post du like avec l'userId
             await axios
                   .post(LikePosts, formLike, {
                         headers: {
@@ -98,12 +91,11 @@ const Post = () => {
                               console.log(error);
                         }
                   });
-            forceUpdate();
+            forceUpdate(); // <--- apres le click de l'input  HEART, forceUpdate le compteur de like
       };
-
-      console.log();
-
+      //récuperation des valeurs au chargement
       async function setInputValue(e) {
+            //si un post contient l'userId dans les usersLiked définir l'input HEART sur true
             if (e.usersLiked.includes(userId)) {
                   console.log(e._id + '= tu a voté');
                   let el = document.getElementById(e._id);
@@ -113,18 +105,18 @@ const Post = () => {
                   let heart = document.getElementById(e._id + 1);
                   heart.style.color = 'red';
             }
-
-            console.log(e.usersLiked);
-
+            //si l'userId enregistré sur un post correspond a l'userId de l'utilisateur afficher en display flex le bouton settingpost
             if (e.userId === userId) {
                   let element = document.getElementById(e._id + 2);
                   element.style.display = 'flex';
+                  //si l'userId enregistré sur un post ne correspond pas afficher en display none
             } else if (e.userId !== userId) {
                   let element = document.getElementById(e._id + 2);
                   element.style.display = 'none';
             }
-
+            // au click du bouton setting post afficher uen fenetre flottante
             document.getElementById(e._id + 2).onclick = function () {
+                  //si elle est deja en display flex alor  retourner la valeurdisplay none
                   if (
                         document.getElementById(e._id + 3).style.display ===
                         'flex'
@@ -132,10 +124,11 @@ const Post = () => {
                         let window = document.getElementById(e._id + 3);
                         return (window.style.display = 'none');
                   }
+                  //fenetre flottante
                   let window = document.getElementById(e._id + 3);
                   window.style.display = 'flex';
             };
-
+            //si l'img src est égale a "" mettre display  none sur l'img
             if (
                   !document
                         .getElementById(e._id + 'Image')
@@ -144,22 +137,11 @@ const Post = () => {
                   let image = document.getElementById(e._id + 'Image');
                   image.style.display = 'none';
             }
-
-            document.getElementById(e._id + 'Image').onclick = function () {
-                  if (
-                        document.getElementById(e._id + 3).style.display ===
-                        'flex'
-                  ) {
-                        let window = document.getElementById(e._id + 3);
-                        return (window.style.display = 'none');
-                  }
-                  let window = document.getElementById(e._id + 3);
-                  window.style.display = 'flex';
-            };
-
+            // au clic du bouton DELETE envoyer la requete avec l'id du post pour la suppression
             document.getElementById(e._id + 'Delete').onclick = function () {
+                  //appel de l'api
                   const DELETEPost = `/api/posts/${e._id}`;
-
+                  //requete delete du post
                   async function DeleteMyPost() {
                         await axios
                               .delete(DELETEPost, {

@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import {
-      BrowserRouter as Router,
-      Routes,
-      Route,
-      Navigate,
-} from 'react-router-dom';
-
-// import des pages
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// restrictino de connection
+import RequireAuth from './components/RequireAuth';
+// imports des pages
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import ProfileSetting from './pages/ProfileSetting';
-import RequireAuth from './components/RequireAuth';
 
 import AdminPanel from './pages/AdminPanel';
 

@@ -1,24 +1,24 @@
 import { useRef, useState, useEffect } from 'react';
 import { Navigate, NavLink } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
+//appel de la pagee Home
 import Home from '../pages/Home';
+//appel du parametre axios
 import axios from '../api/axios';
 
+//appel de  l'api
 const LOGIN_URL = '/api/register/login';
 
 const Connect = () => {
-      const { setAuth } = useAuth();
-
       const userRef = useRef();
       const errRef = useRef();
-
+      //set  value dans le local storage
       const [userId, setUserId] = useState('');
       const [img, setImg] = useState('');
       const [email, setEmail] = useState('');
       const [pwd, setPwd] = useState('');
       const [errMsg, setErrMsg] = useState('');
       const [success, setSuccess] = useState(false);
-
+      // sert a afficher une message  d'erreur si retour catch
       useEffect(() => {
             userRef.current.focus();
       }, []);
@@ -26,10 +26,10 @@ const Connect = () => {
       useEffect(() => {
             setErrMsg();
       }, [email, pwd]);
-
+      //soumission du  formulaire
       const handleSubmit = async (e) => {
             e.preventDefault();
-
+            //requete axios pour se connecter
             await axios
                   .post(LOGIN_URL, JSON.stringify({ email, pwd }), {
                         headers: { 'Content-Type': 'application/json' },
@@ -46,11 +46,12 @@ const Connect = () => {
                         const email = response?.data?.email;
                         const user = response?.data?.user;
                         const img = response?.data?.img;
-                        setAuth({ userId, user, img, email, roles, token });
+
                         localStorage.setItem(
                               'authed',
                               JSON.stringify({
                                     userId,
+                                    token,
                                     user,
                                     img,
                                     email,

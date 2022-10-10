@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
+//appel de font awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserSlash } from '@fortawesome/free-solid-svg-icons';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
-
+//appel du parametre axios
 import axios from '../api/axios';
-
+// appel de l'image de profil basic
 import imgProfile from './../assets/avatar_neutre.png';
 
 const UserList = () => {
+      //appel de l'api
       const USERSList = `/api/register/`;
-
       // user list permetant la filtration via la search bar
       const [users, setUsers] = useState([]);
       //response original
       const [OriginListUser, setOriginListUser] = useState([]);
       console.log(users);
-
-      // ======================================
-
+      //a l'arrivé appel des users
       const userSubmit = async (e) => {
             await axios
                   .get(USERSList, {
@@ -42,18 +40,17 @@ const UserList = () => {
                         }
                   });
       };
-
+      //appel de la fonction
       useEffect(() => {
             userSubmit();
       }, []);
-
-      // ======================================================================
-
+      // useState pour la search bar
       const [name, setName] = useState('');
-
+      // fonction qui recupere la valeur de la searchbar a  chaque tappage
       async function filter(e) {
+            //definir la valeur de la search bar
             const keyword = e.target.value;
-
+            //si la search bar n'est pas vide
             if (keyword !== '') {
                   // permet la filtration de la requete via l'email unique de chaque utilisateur sur la search bar
                   const results = OriginListUser.filter((user) => {
@@ -61,19 +58,19 @@ const UserList = () => {
                               .toLowerCase()
                               .startsWith(keyword.toLowerCase());
                   });
+                  // envoie du nouveau table sous la restrictino du filtre dans l'interface
                   setUsers(results);
             } else {
-                  // si la recherche est vide, alors afficher la requete complete
+                  // si la recherche est vide, alors afficher la recherche sans filtre complete
                   setUsers(userSubmit);
             }
-
             setName(keyword);
       }
-
       // supprimer un utilisateur via le bouton
       async function deleteUser(id) {
+            //appel  de l'api
             const DELETEUser = `/api/register/${id}`;
-
+            //envoie de la requetepour  supprimer un compte
             await axios
                   .delete(DELETEUser, {
                         headers: {
@@ -94,10 +91,8 @@ const UserList = () => {
                         }
                   });
       }
-
-      //Darkmod active si refresh
+      //Darkmod s'active si refresh et si le local comporte un darmod true
       const [active, setActive] = useState();
-
       useEffect(() => {
             if (localStorage.getItem('DarkMod')) {
                   setActive(localStorage.getItem('DarkMod'));
