@@ -7,8 +7,10 @@ const fs = require("fs"); // pour la fonction des boutons
 //afficher tout les posts
 exports.getAllPosts = (req, res, next) => {
   Post.find()
-    .sort({ dateDefault: -1 })
-    .limit(10)
+    //recuperation par ordre descendant
+    .sort({ $natural: 1 })
+    //avec une limite de 15 posts
+    .limit(15)
     .then((posts) => {
       res.status(200).json(posts);
     })

@@ -6,7 +6,12 @@ const Logo = () => {
       //appel du logo
       return (
             <div>
-                  <img src={Logo1} alt="logo Groupomania" className="logo" />
+                  <img
+                        src={Logo1}
+                        alt="logo Groupomania"
+                        className="logo"
+                        aria-label="logo de l'entreprise Groupomania"
+                  />
             </div>
       );
 };

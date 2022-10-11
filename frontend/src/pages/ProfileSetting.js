@@ -101,7 +101,10 @@ const Profile = () => {
             <div className="flex jc__centre fd__Column ai__centre">
                   <div className="accueilSettings jc__centre ai__centre">
                         <Link to="/">
-                              <button className="homelinkProfile">
+                              <button
+                                    className="homelinkProfile"
+                                    aria-label="bouton accueil"
+                              >
                                     Accueil
                               </button>
                         </Link>
@@ -112,7 +115,10 @@ const Profile = () => {
                         className="logoSettings"
                   />
                   <div className="profileWindow flex jc__centre ai__centre">
-                        <form className="flex fd__Column jc__centre ai__centre">
+                        <form
+                              className="flex fd__Column jc__centre ai__centre"
+                              aria-label="formulaire de modification de post"
+                        >
                               <label className="labelMarg" htmlFor="photo">
                                     Photo de profil
                               </label>
@@ -127,7 +133,10 @@ const Profile = () => {
                                           }}
                                     />
                               </div>
-                              <label className="UploadImgProfile">
+                              <label
+                                    className="UploadImgProfile"
+                                    aria-label="inserer une image de profil"
+                              >
                                     <FontAwesomeIcon
                                           icon={faImage}
                                           className="UploadImg"
@@ -141,13 +150,31 @@ const Profile = () => {
                               </label>
                               {isSelected ? (
                                     <div>
-                                          <p className="infoIfImg">
+                                          <p
+                                                className="infoIfImg"
+                                                aria-label={
+                                                      'nom du fichier selectionné' +
+                                                      selectedFile.name
+                                                }
+                                          >
                                                 Nom: {selectedFile.name}
                                           </p>
-                                          <p className="infoIfImg">
+                                          <p
+                                                className="infoIfImg"
+                                                aria-label={
+                                                      'type du fichier selectionné' +
+                                                      selectedFile.type
+                                                }
+                                          >
                                                 Type: {selectedFile.type}
                                           </p>
-                                          <p className="infoIfImg">
+                                          <p
+                                                className="infoIfImg"
+                                                aria-label={
+                                                      'taille du fichier selectionné' +
+                                                      selectedFile.size
+                                                }
+                                          >
                                                 Taille: {selectedFile.size}{' '}
                                                 octets
                                           </p>
@@ -167,6 +194,7 @@ const Profile = () => {
                                           className="iconSave"
                                     />
                                     <button
+                                          aria-label="bouton envoyer votre nouvelle photo de profil"
                                           id="SendFile"
                                           className="ImgProfileSettingButton flex"
                                           onClick={ModifyUserImg}

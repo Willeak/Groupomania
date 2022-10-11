@@ -103,12 +103,23 @@ const UserList = () => {
             }
       }, []);
 
+      if (document.getElementById('Admin')) {
+            let admin = document.getElementById('Admin');
+            admin.style.backgroundColor = '#373949';
+            admin.style.marginBottom = '0px';
+            admin.style.paddingBottom = '10px';
+            admin.style.fontWeight = 'bold';
+      }
+
       return (
             <div className="flex fd__Column ai__centre">
                   <div className="NavBar flex ai__centre jc__SpaceB d_nonePC">
                         <div className="accueil jc__centre ai__centre">
                               <Link to="/">
-                                    <button className="homelink">
+                                    <button
+                                          className="homelink"
+                                          aria-label="bouton accueil"
+                                    >
                                           Accueil
                                     </button>
                               </Link>
@@ -120,6 +131,7 @@ const UserList = () => {
                         />
                         <div className="recherche jc__centre ai__centre">
                               <input
+                                    aria-label="barre de recherche par email d'utilisateur"
                                     type="search"
                                     value={name}
                                     onChange={filter}
@@ -138,7 +150,10 @@ const UserList = () => {
                         <div className="flex size100">
                               <div className="accueil jc__centre ai__centre">
                                     <Link to="/">
-                                          <button className="homelink">
+                                          <button
+                                                className="homelink"
+                                                aria-label="bouton accueil"
+                                          >
                                                 <FontAwesomeIcon
                                                       icon={faHouse}
                                                 />
@@ -147,6 +162,7 @@ const UserList = () => {
                               </div>
                               <div className="recherche jc__centre ai__centre">
                                     <input
+                                          aria-label="barre de recherche par email d'utilisateur"
                                           type="search"
                                           value={name}
                                           onChange={filter}
@@ -171,6 +187,7 @@ const UserList = () => {
                               {users && users.length > 0 ? (
                                     users.map((register, index) => (
                                           <form
+                                                id={register.roles}
                                                 className="flex ai__centre jc__SpaceB User size100"
                                                 key={index}
                                           >
@@ -196,10 +213,19 @@ const UserList = () => {
                                                 <p className="UserInfo userId">
                                                       {register._id}
                                                 </p>
-                                                <p className="UserInfo role">
+                                                <p
+                                                      id="role"
+                                                      className="UserInfo role"
+                                                >
                                                       {register.roles}
                                                 </p>
                                                 <button
+                                                      aria-label={
+                                                            "bouton de suppression de l'utilisateur " +
+                                                            register.user +
+                                                            ' possédant le role de ' +
+                                                            register.roles
+                                                      }
                                                       type="button"
                                                       className="SettingsUser suppr"
                                                       onClick={() =>

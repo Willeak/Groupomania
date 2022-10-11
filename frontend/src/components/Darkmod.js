@@ -31,7 +31,7 @@ const Darkmod = () => {
       };
 
       return (
-            <div theme="light" className="darkmod">
+            <div theme="light" className="darkmod" aria-label="bouton darkMod">
                   <input
                         type="checkbox"
                         id="theme-toggle"

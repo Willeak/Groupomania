@@ -70,12 +70,17 @@ const Profile = () => {
       AdminSubmit();
 
       return (
-            <div className="profile flex jc__centre ai__centre">
+            <nav
+                  aria-label="Navigation"
+                  role="navigation"
+                  className="profile flex jc__centre ai__centre"
+            >
                   <Darkmod />
                   <div className="flex jc__centre ai__centre fd__Column">
                         <div className="circleProfile flex jc__centre ai__centre">
                               <div className="reflect" />
                               <img
+                                    aria-label="photo de profil"
                                     src={img}
                                     className="imgProfile"
                                     alt="logo par defaut"
@@ -85,22 +90,34 @@ const Profile = () => {
                               />
                         </div>
                   </div>
-                  <p id="seeRoles" className="profileRole">
+                  <p
+                        id="seeRoles"
+                        className="profileRole"
+                        aria-label="mon role"
+                  >
                         <FontAwesomeIcon icon={faCrown} className="iconRole" />{' '}
                         {roles}
                   </p>
-                  <p className="profileName">{name}</p>
+                  <p className="profileName" aria-label="mon nom">
+                        {name}
+                  </p>
                   <div className="flex fd__Column panelUser">
                         <div>
                               <FontAwesomeIcon icon={faGear} className="icon" />
                               <Link to="/Profile" element={<Profile />}>
-                                    <button className="profileSetting">
+                                    <button
+                                          className="profileSetting"
+                                          aria-label="Modifier mon profil"
+                                    >
                                           Profil
                                     </button>
                               </Link>
                         </div>
                         <Link to="/Profile" element={<Profile />}>
-                              <div className="flex jc__centre ai__centre buttonResponsive">
+                              <div
+                                    className="flex jc__centre ai__centre buttonResponsive"
+                                    aria-label="Modifier mon profil"
+                              >
                                     <FontAwesomeIcon
                                           icon={faGear}
                                           className="iconAdminResponsive"
@@ -114,13 +131,19 @@ const Profile = () => {
                                     className="iconAdmin"
                               />
                               <Link to="/Admin">
-                                    <button className="AdminButton">
+                                    <button
+                                          className="AdminButton"
+                                          aria-label="panneaux d'administration"
+                                    >
                                           Panneau d'administration
                                     </button>
                               </Link>
 
                               <Link to="/Admin">
-                                    <div className="flex jc__centre ai__centre buttonResponsive">
+                                    <div
+                                          className="flex jc__centre ai__centre buttonResponsive"
+                                          aria-label="panneaux d'administration"
+                                    >
                                           <FontAwesomeIcon
                                                 icon={faHammer}
                                                 className="iconAdminResponsive"
@@ -130,7 +153,7 @@ const Profile = () => {
                         </div>
                         <Disconnect />
                   </div>
-            </div>
+            </nav>
       );
 };
 

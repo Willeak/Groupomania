@@ -23,6 +23,7 @@ const Disconnect = () => {
                   <FontAwesomeIcon icon={faDoorOpen} className="icon" />
                   <Link to="/login" element={<Login />}>
                         <button
+                              aria-label="bouton me deconnecter"
                               onClick={DisconnectButton}
                               className="DisconnectButton"
                         >
@@ -30,7 +31,10 @@ const Disconnect = () => {
                         </button>
                   </Link>
                   <Link to="/login" element={<Login />}>
-                        <div className="flex jc__centre ai__centre buttonResponsive">
+                        <div
+                              aria-label="bouton me deconnecter"
+                              className="flex jc__centre ai__centre buttonResponsive"
+                        >
                               <FontAwesomeIcon
                                     icon={faDoorOpen}
                                     className="iconAdminResponsive"

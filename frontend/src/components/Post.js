@@ -49,12 +49,6 @@ const Post = () => {
       // get value du localStorage
       const authed = JSON.parse(localStorage.getItem('authed'));
       const userId = authed.userId;
-      // definir la valeur du like par 0 ou 1 selon si le post est like ou non
-      // const [like, setLike] = useState();
-      //si undefined lui donner 0
-      // if (like === undefined) {
-      //       setLike(0);
-      // }
       // fonction au click du bouton Like
       const LikeSubmit = async (e) => {
             //recuperer les valeur dynamique de la .map
@@ -65,18 +59,24 @@ const Post = () => {
             var chkPrint = document.getElementById(IdPost);
             chkPrint.value = chkPrint.checked;
             // si l'input est false ou true convertir en nombre
-
             let formLike;
+            //définit les boutons sur les valeurs a renvoyer dans la requete
             if (chkPrint.value === 'true') {
                   formLike = {
                         like: 1,
                         id: userId,
                   };
+                  //si liké changer la couleur du coeur en rouge
+                  let heart = document.getElementById(e._id + 1);
+                  heart.style.color = 'red';
             } else if (chkPrint.value === 'false') {
                   formLike = {
                         like: 0,
                         id: userId,
                   };
+                  //si non liké changer la couleur du coeur en blanc
+                  let heart = document.getElementById(e._id + 1);
+                  heart.style.color = 'white';
             }
             console.log(formLike.like);
             // format a l'envoi du la requete
@@ -108,7 +108,6 @@ const Post = () => {
                   let el = document.getElementById(e._id);
                   el.checked = 'true';
                   el.value = 'true';
-
                   let heart = document.getElementById(e._id + 1);
                   heart.style.color = 'red';
             } else if (e.usersLiked.includes(userId)) {
@@ -211,6 +210,9 @@ const Post = () => {
                               .map((post, i) => (
                                     <div className="Post" key={post._id}>
                                           <form
+                                                aria-label={
+                                                      'post de ' + post.name
+                                                }
                                                 className=""
                                                 onLoad={(e) =>
                                                       setInputValue((e = post))
@@ -237,6 +239,7 @@ const Post = () => {
                                                             ● le {post.date}
                                                       </div>
                                                       <div
+                                                            aria-label="Modifier votre post"
                                                             id={post._id + 2}
                                                             className="flex jc__centre ai__centre DivPostSettings"
                                                       >
@@ -256,6 +259,7 @@ const Post = () => {
                                                                   to={`/ModifyIdPost?=${post._id}`}
                                                             >
                                                                   <p
+                                                                        aria-label="bouton  modifier votre post"
                                                                         id={
                                                                               post._id +
                                                                               'Modify'
@@ -266,6 +270,7 @@ const Post = () => {
                                                             </Link>
 
                                                             <p
+                                                                  aria-label="supprimer votre post"
                                                                   id={
                                                                         post._id +
                                                                         'Delete'
@@ -279,17 +284,31 @@ const Post = () => {
                                                 <img
                                                       src={post.imageUrl}
                                                       alt={
-                                                            'photo du commentaire de' +
+                                                            'photo du post de' +
                                                             post.name
                                                       }
                                                       id={post._id + 'Image'}
                                                       className="imgPost"
                                                 />
-                                                <div className="textPost">
+                                                <div
+                                                      className="textPost"
+                                                      aria-label={
+                                                            'description de post de ' +
+                                                            post.name +
+                                                            ':' +
+                                                            post.description
+                                                      }
+                                                >
                                                       {post.description}
                                                 </div>
                                                 <div className="flex jc__centre likeCont">
-                                                      <label className="iconLikeBg">
+                                                      <label
+                                                            className="iconLikeBg"
+                                                            aria-label={
+                                                                  'bouton liker le post de' +
+                                                                  post.name
+                                                            }
+                                                      >
                                                             <div className="LikeAnim" />
                                                             <FontAwesomeIcon
                                                                   id={

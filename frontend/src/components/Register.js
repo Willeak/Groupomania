@@ -113,19 +113,26 @@ const Register = () => {
                   {success ? (
                         <Navigate to="/login" element={<Login />} />
                   ) : (
-                        <section className="responsive">
+                        <section
+                              className="responsive"
+                              aria-label="formulaire de connexion"
+                        >
                               <nav className="flex jc__centre auth">
                                     <NavLink to="/SignUp" className="test">
                                           <li className="stroke">S'inscrire</li>
                                     </NavLink>
 
                                     <NavLink to="/Login" className="grey">
-                                          <li className="stroke">
+                                          <li
+                                                className="stroke"
+                                                aria-label="lien vers se connecter"
+                                          >
                                                 Se connecter
                                           </li>
                                     </NavLink>
                               </nav>
                               <p
+                                    aria-label="message d'erreur"
                                     ref={errRef}
                                     className={errMsg ? 'errmsg' : 'offscreen'}
                                     aria-live="assertive"
@@ -137,6 +144,7 @@ const Register = () => {
                                     onSubmit={handleSubmit}
                               >
                                     <label
+                                          aria-label="label NOM Prénom"
                                           className="labelMarg"
                                           htmlFor="username"
                                     >
@@ -159,6 +167,7 @@ const Register = () => {
                                           />
                                     </label>
                                     <input
+                                          aria-label="input NOM Prénom"
                                           className="inputAuth"
                                           type="text"
                                           id="username"
@@ -200,6 +209,7 @@ const Register = () => {
 
                                     {/* EMAIL  */}
                                     <label
+                                          aria-label="label email"
                                           className="labelMarg"
                                           htmlFor="email"
                                     >
@@ -222,6 +232,7 @@ const Register = () => {
                                           />
                                     </label>
                                     <input
+                                          aria-label="input email"
                                           className="inputAuth"
                                           type="text"
                                           id="email"
@@ -257,6 +268,7 @@ const Register = () => {
                                     </p>
 
                                     <label
+                                          aria-label="label mot de passe"
                                           className="labelMarg"
                                           htmlFor="password"
                                     >
@@ -279,6 +291,7 @@ const Register = () => {
                                           />
                                     </label>
                                     <input
+                                          aria-label="input mot de passe"
                                           className="inputAuth"
                                           type="password"
                                           id="password"
@@ -326,6 +339,7 @@ const Register = () => {
                                     </p>
 
                                     <label
+                                          aria-label="confirmer votre mot de passe "
                                           className="labelMarg"
                                           htmlFor="confirm_pwd"
                                     >
@@ -348,6 +362,7 @@ const Register = () => {
                                           />
                                     </label>
                                     <input
+                                          aria-label="input confirmer votre  mot de passe"
                                           className="inputAuth"
                                           type="password"
                                           id="confirm_pwd"
@@ -379,6 +394,7 @@ const Register = () => {
                                     </p>
 
                                     <button
+                                          aria-label="confirmer votre inscription"
                                           className="buttonAuth"
                                           disabled={
                                                 !validName ||
@@ -395,7 +411,10 @@ const Register = () => {
                                     <span className="flex fd__row-r">
                                           {/*put router link here*/}
                                           <NavLink to="/Login">
-                                                <li className="italic">
+                                                <li
+                                                      className="italic"
+                                                      aria-label="lien vers se connecter"
+                                                >
                                                       Déjà inscrit ?
                                                 </li>
                                           </NavLink>

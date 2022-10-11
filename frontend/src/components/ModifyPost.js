@@ -213,10 +213,16 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
       const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0); // ligne 47 et 99
 
       return (
-            <div className="BlocModifyPost">
+            <div
+                  className="BlocModifyPost"
+                  aria-label="fenetre de modification de votre post"
+            >
                   <div className="BlocCreatePost">
                         <form className="formPost" onSubmit={handleSubmit}>
-                              <label className="UploadImgPost">
+                              <label
+                                    className="UploadImgPost"
+                                    aria-label="inserer une image"
+                              >
                                     <FontAwesomeIcon
                                           icon={faImage}
                                           className="UploadImg"
@@ -229,6 +235,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                                     />
                               </label>
                               <textarea
+                                    aria-label="entre votre texte pour modifier votre post"
                                     className="inputModifyPost"
                                     type="text"
                                     id="CreatePost"
@@ -250,6 +257,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                               ></textarea>
                               <div className="controlPost">
                                     <p
+                                          aria-label="message de notification"
                                           ref={errRef}
                                           className={
                                                 errMsg
@@ -260,9 +268,13 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                                     >
                                           {errMsg}
                                     </p>
-                                    <p id="counterBlock"></p>
+                                    <p
+                                          aria-label="compteur de caractère bloqué a 280"
+                                          id="counterBlock"
+                                    ></p>
 
                                     <button
+                                          aria-label="valider votre modification de post"
                                           className="buttonCreatePost"
                                           id="buttonCreatePost"
                                           disabled={!validPost ? true : false}

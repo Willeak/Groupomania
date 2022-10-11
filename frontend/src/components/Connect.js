@@ -88,10 +88,18 @@ const Connect = () => {
                   {success ? (
                         <Navigate to="/" element={<Home />} />
                   ) : (
-                        <section className="responsive">
+                        <section
+                              className="responsive"
+                              aria-label="formulaire de connexion"
+                        >
                               <nav className="flex jc__centre auth">
                                     <NavLink to="/SignUp" className="grey1">
-                                          <li className="stroke">S'inscrire</li>
+                                          <li
+                                                className="stroke"
+                                                aria-label="lien vers s'incrire"
+                                          >
+                                                S'inscrire
+                                          </li>
                                     </NavLink>
 
                                     <NavLink to="/Login">
@@ -102,6 +110,7 @@ const Connect = () => {
                               </nav>
 
                               <p
+                                    aria-label="message d'erreur"
                                     ref={errRef}
                                     className={errMsg ? 'errmsg' : 'offscreen'}
                                     aria-live="assertive"
@@ -114,12 +123,14 @@ const Connect = () => {
                                     onSubmit={handleSubmit}
                               >
                                     <label
+                                          aria-label="label email"
                                           className="labelMarg"
                                           htmlFor="username"
                                     >
                                           Email :
                                     </label>
                                     <input
+                                          aria-label="input email"
                                           className="inputAuth"
                                           type="text"
                                           id="email"
@@ -133,12 +144,14 @@ const Connect = () => {
                                     />
 
                                     <label
+                                          aria-label="label mot de passe"
                                           className="labelMarg"
                                           htmlFor="password"
                                     >
                                           Mot de passe :
                                     </label>
                                     <input
+                                          aria-label="input mot de passe"
                                           className="inputAuth"
                                           type="password"
                                           id="password"
@@ -148,7 +161,10 @@ const Connect = () => {
                                           value={pwd}
                                           required
                                     />
-                                    <button className="buttonAuth">
+                                    <button
+                                          className="buttonAuth"
+                                          aria-label="bouton me connecter"
+                                    >
                                           Me connecter
                                     </button>
                               </form>
@@ -159,7 +175,10 @@ const Connect = () => {
                                                 to="/SignUp"
                                                 className="test"
                                           >
-                                                <li className="italic">
+                                                <li
+                                                      aria-label="lien vers creer un compte"
+                                                      className="italic"
+                                                >
                                                       Créer un compte ?
                                                 </li>
                                           </NavLink>

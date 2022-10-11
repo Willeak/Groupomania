@@ -60,7 +60,7 @@
 
 .imgUser {
       width: 50px;
-      margin-left: 0%;
+      margin-left: 10px;
       margin-right: 0%;
       clip-path: circle(50% at 50% 50%);
 }
@@ -79,6 +79,7 @@
 }
 
 .photo {
+      margin-left: 10px;
       min-width: 50px;
       width: auto;
       text-align: center;
@@ -232,6 +233,9 @@
             margin-bottom: -50px;
             width: 200px;
       }
+      .imgUser {
+            margin-left: 0px;
+      }
 }
 
 @media screen and (max-width: 768px) {
@@ -255,7 +259,7 @@
             margin-bottom: 0px;
             padding: 0px;
             border-radius: 20px 20px 20px 20px;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: #4e5166;
       }
       .recherche {
             width: 100%;

@@ -63,6 +63,8 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
       // envoie du post si clic effectué
       const handleSubmit = async (e) => {
             e.preventDefault();
+            //generation de la notification
+            document.getElementById('Message').style.display = 'flex';
             //appel de l'api
             const sendPOST = `/api/posts/createPost/`;
             // si le regex ne  corresponds pas refus de l'envoie + en CSS desactivation du bouton pour plus de sécurité
@@ -177,6 +179,11 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                   //une fois la requete envoyer avec limage definir la valeur du use state sur  false pour ne pas renvoyer l'image au second post
                   setIsSelected(false);
             }
+            //generation de la notification pendant 4 secondes
+            async function masquernotification() {
+                  document.getElementById('Message').style.display = 'none';
+            }
+            window.setTimeout(masquernotification, 4000);
       };
       //creatino d'un compteur de caracteres
       useEffect(() => {
@@ -208,10 +215,13 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
       const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0); // ligne 47 et 99
 
       return (
-            <div className="BlocPost">
-                  <div className="BlocCreatePost">
+            <div className="BlocPost" aria-label="page home">
+                  <div className="BlocCreatePost" aria-label="créer un post">
                         <form className="formPost" onSubmit={handleSubmit}>
-                              <label className="UploadImgPost">
+                              <label
+                                    className="UploadImgPost"
+                                    aria-label="inserer une image"
+                              >
                                     <FontAwesomeIcon
                                           icon={faImage}
                                           className="UploadImg"
@@ -224,6 +234,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                                     />
                               </label>
                               <textarea
+                                    aria-label="entre votre texte pour creer un post"
                                     className="inputPost"
                                     type="text"
                                     id="CreatePost"
@@ -245,6 +256,8 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                               ></textarea>
                               <div className="controlPost">
                                     <p
+                                          aria-label="message de notification"
+                                          id="Message"
                                           ref={errRef}
                                           className={
                                                 errMsg
@@ -255,8 +268,12 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                                     >
                                           {errMsg}
                                     </p>
-                                    <p id="counterBlock"></p>
+                                    <p
+                                          aria-label="compteur de caractère bloqué a 280"
+                                          id="counterBlock"
+                                    ></p>
                                     <button
+                                          aria-label="valider votre post"
                                           className="buttonCreatePost"
                                           id="buttonCreatePost"
                                           disabled={!validPost ? true : false}
@@ -268,7 +285,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                         </form>
                         <div className="fadeGray" />
                   </div>
-                  <div className="scrollBar">
+                  <div aria-label="scroll bar" className="scrollBar">
                         <Post key={reducerValue} />
                   </div>
             </div>

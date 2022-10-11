@@ -16,12 +16,16 @@ const Home = () => {
 
       //appel des componenets pour la page home
       return (
-            <div className="flex  jc__centre center">
+            <div
+                  className="flex  jc__centre center"
+                  aria-label="page d'accueil"
+            >
                   <div id="ModifyPost">
                         <ModifyPost />
                         <div>
                               <Link to={'/'} onClick={close}>
                                     <button
+                                          aria-label="annuler la modification de votre post"
                                           className="buttonCreatePost"
                                           id="CancelModify"
                                     >

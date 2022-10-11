@@ -1,7 +1,7 @@
 //appel des middlewares
 const mongoose = require("mongoose");
 var moment = require("moment");
-var momentDate = moment().format("YYYYMMDDHHMMssSSSSSS");
+var momentDate = moment().format("YYYYMMDDHHMMssSSS");
 // Création d'un schema de donnée Sauce pour un stockage dans la BD
 const postSchema = mongoose.Schema({
   userImg: { type: String, required: true },
