@@ -50,11 +50,11 @@ const Post = () => {
       const authed = JSON.parse(localStorage.getItem('authed'));
       const userId = authed.userId;
       // definir la valeur du like par 0 ou 1 selon si le post est like ou non
-      const [like, setLike] = useState();
+      // const [like, setLike] = useState();
       //si undefined lui donner 0
-      if (like === undefined) {
-            setLike(0);
-      }
+      // if (like === undefined) {
+      //       setLike(0);
+      // }
       // fonction au click du bouton Like
       const LikeSubmit = async (e) => {
             //recuperer les valeur dynamique de la .map
@@ -65,16 +65,22 @@ const Post = () => {
             var chkPrint = document.getElementById(IdPost);
             chkPrint.value = chkPrint.checked;
             // si l'input est false ou true convertir en nombre
+
+            let formLike;
             if (chkPrint.value === 'true') {
-                  setLike(0);
+                  formLike = {
+                        like: 1,
+                        id: userId,
+                  };
             } else if (chkPrint.value === 'false') {
-                  setLike(1);
+                  formLike = {
+                        like: 0,
+                        id: userId,
+                  };
             }
+            console.log(formLike.like);
             // format a l'envoi du la requete
-            const formLike = {
-                  like: like,
-                  id: userId,
-            };
+            console.log('test');
             //axios post du like avec l'userId
             await axios
                   .post(LikePosts, formLike, {
@@ -96,25 +102,19 @@ const Post = () => {
       };
       //récuperation des valeurs au chargement
       async function setInputValue(e) {
-            const IdPost = e._id;
-            var chkPrint = document.getElementById(IdPost);
-            chkPrint.value = chkPrint.checked;
-            // si l'input est false ou true convertir en nombre
-            if (chkPrint.value === 'true') {
-                  setLike(0);
-            } else if (chkPrint.value === 'false') {
-                  setLike(1);
-            }
-
             //si un post contient l'userId dans les usersLiked définir l'input HEART sur true
             if (e.usersLiked.includes(userId)) {
                   console.log(e._id + '= tu a voté');
                   let el = document.getElementById(e._id);
                   el.checked = 'true';
                   el.value = 'true';
-                  // el.initialValues = 'false';
+
                   let heart = document.getElementById(e._id + 1);
                   heart.style.color = 'red';
+            } else if (e.usersLiked.includes(userId)) {
+                  let el = document.getElementById(e._id);
+                  el.checked = 'false';
+                  el.value = 'false';
             }
             //si l'userId enregistré sur un post correspond a l'userId de l'utilisateur afficher en display flex le bouton settingpost
             if (
