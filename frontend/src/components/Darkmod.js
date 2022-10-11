@@ -39,6 +39,7 @@ const Darkmod = () => {
                         defaultChecked={active}
                         onClick={(e) => DarkMod(e)}
                   />
+
                   <label htmlFor="theme-toggle"></label>
             </div>
       );

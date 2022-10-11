@@ -96,13 +96,23 @@ const Post = () => {
       };
       //récuperation des valeurs au chargement
       async function setInputValue(e) {
+            const IdPost = e._id;
+            var chkPrint = document.getElementById(IdPost);
+            chkPrint.value = chkPrint.checked;
+            // si l'input est false ou true convertir en nombre
+            if (chkPrint.value === 'true') {
+                  setLike(0);
+            } else if (chkPrint.value === 'false') {
+                  setLike(1);
+            }
+
             //si un post contient l'userId dans les usersLiked définir l'input HEART sur true
             if (e.usersLiked.includes(userId)) {
                   console.log(e._id + '= tu a voté');
                   let el = document.getElementById(e._id);
                   el.checked = 'true';
                   el.value = 'true';
-                  el.initialValues = 'false';
+                  // el.initialValues = 'false';
                   let heart = document.getElementById(e._id + 1);
                   heart.style.color = 'red';
             }

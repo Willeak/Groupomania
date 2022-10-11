@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect, useReducer } from 'react';
-import { Link, useParams } from 'react-router-dom';
 //appel du parametre axios
 import axios from '../api/axios';
 //appel de font awesomes pour  les icons
@@ -10,7 +9,7 @@ import FormData from 'form-data';
 //appel de moment et definit  sur  FR
 import moment from 'moment';
 import 'moment/locale/fr';
-// appel du component post
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 //adaptation du textaera selon le passage a la ligne
 const defaultStyle = {
@@ -116,6 +115,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                               let modify =
                                     document.getElementById('ModifyPost');
                               modify.style.display = 'none';
+
                               window.location.reload();
                         })
                         .catch((error) => {

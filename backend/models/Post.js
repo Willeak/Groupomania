@@ -9,6 +9,7 @@ const postSchema = mongoose.Schema({
   imageUrl: { type: String, default: "" },
   description: { type: String, required: true },
   date: { type: String, required: true },
+  dateDefault: { type: String, default: Date.now() },
   likes: { type: Number, default: 0 },
   usersLiked: { type: [String], default: [] },
 });
