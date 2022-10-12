@@ -58,13 +58,25 @@ exports.login = (req, res, next) => {
 
 //get all users
 exports.getAllUsers = (req, res, next) => {
-  User.find()
-    .then((users) => {
-      res.status(200).json({ users });
-    })
-    .catch((error) => {
-      res.status(400).json({ error: error });
-    });
+  //recuparation de l'id dans le token fe facon sécurisé !
+  const token = req.headers.authorization.split(" ")[1];
+  const decodedToken = jwt.verify(token, `${process.env.RND_TKN}`);
+  const userId = decodedToken.userId;
+  //rechercher l'utilisateur pour connaitre son role
+  User.findOne({ _id: userId }).then((user) => {
+    //vérifie si la demande est faite par un administateur ou non
+    if (user.roles !== "Admin")
+      return res.status(403).json({
+        message: "Vous n êtes pas administrateur !",
+      });
+    User.find()
+      .then((users) => {
+        res.status(200).json({ users });
+      })
+      .catch((error) => {
+        res.status(400).json({ error: error });
+      });
+  });
 };
 
 // Récuperer un utilisateur

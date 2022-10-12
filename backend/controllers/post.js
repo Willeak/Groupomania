@@ -179,42 +179,25 @@ exports.modifyPost = (req, res, next) => {
             });
           }
         } else {
-          if ("63347f831f9cf84f32dd4f07" === userId) {
-            const postObject = {
-              // On modifie les données et on ajoute la nouvelle image
-              ...req.body.post,
-            };
-            Post.updateOne(
-              { _id: req.params.id },
-              { ...postObject, _id: req.params.id }
-            )
-              .then(() =>
-                res.status(200).json({ message: "Objet modifié 1 !" })
-              )
-              .catch((error) => res.status(400).json({ error }));
-          } else {
-            console.log("body:", req.body.post);
-            // console.log(post);
-            // verifie si l'user est bien celui du createur de ce post
-            if (post.userId !== userId)
-              return res.status(403).json({
-                message:
-                  "Vous n êtes pas le créateur de ce post, vous ne pouvez pas MODIFIER ce post !",
-              });
+          console.log("body:", req.body.post);
+          // console.log(post);
+          // verifie si l'user est bien celui du createur de ce post
+          if (post.userId !== userId)
+            return res.status(403).json({
+              message:
+                "Vous n êtes pas le créateur de ce post, vous ne pouvez pas MODIFIER ce post !",
+            });
 
-            const postObject = {
-              // On modifie les données et on ajoute la nouvelle image
-              ...req.body.post,
-            };
-            Post.updateOne(
-              { _id: req.params.id },
-              { ...postObject, _id: req.params.id }
-            )
-              .then(() =>
-                res.status(200).json({ message: "Objet modifié 1 !" })
-              )
-              .catch((error) => res.status(400).json({ error }));
-          }
+          const postObject = {
+            // On modifie les données et on ajoute la nouvelle image
+            ...req.body.post,
+          };
+          Post.updateOne(
+            { _id: req.params.id },
+            { ...postObject, _id: req.params.id }
+          )
+            .then(() => res.status(200).json({ message: "Objet modifié 1 !" }))
+            .catch((error) => res.status(400).json({ error }));
         }
       });
     })
