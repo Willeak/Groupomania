@@ -19,6 +19,14 @@ exports.getAllPosts = (req, res, next) => {
     });
 };
 
+// Récuperer un utilisateur
+exports.getOnePost = (req, res, next) => {
+  console.log(req.params);
+  Post.findOne({ _id: req.params.id })
+    .then((post) => res.status(200).json(post))
+    .catch((error) => res.status(404).json({ error: error }));
+};
+
 // Créer un post
 exports.createPost = (req, res, next) => {
   if (req.file) {
@@ -134,13 +142,25 @@ exports.modifyPost = (req, res, next) => {
             // On supprime l'ancienne image du serveur
             const filename = post.imageUrl.split("/images/post/")[1];
             fs.unlink(`images/post/${filename}`, () => {
-              const postObject = {
-                // On modifie les données et on ajoute la nouvelle image
-                ...JSON.parse(req.body.post),
-                imageUrl: `${req.protocol}://${req.get("host")}/images/post/${
-                  req.file.filename
-                }`,
-              };
+              let postObject;
+              if (req.body.post === undefined) {
+                postObject = {
+                  // On modifie les données et on ajoute la nouvelle image
+
+                  imageUrl: `${req.protocol}://${req.get("host")}/images/post/${
+                    req.file.filename
+                  }`,
+                };
+              } else {
+                postObject = {
+                  // On modifie les données et on ajoute la nouvelle image
+                  ...JSON.parse(req.body.post),
+                  imageUrl: `${req.protocol}://${req.get("host")}/images/post/${
+                    req.file.filename
+                  }`,
+                };
+              }
+
               Post.updateOne(
                 { _id: req.params.id },
                 { ...postObject, _id: req.params.id }

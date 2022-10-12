@@ -12,6 +12,9 @@ const postCtrl = require("../controllers/post");
 
 router.get("/", auth, postCtrl.getAllPosts); // afficher toutes les posts
 router.post("/createPost", auth, multerPost, postCtrl.createPost); // creer un posts
+
+router.get("/:id", multerPost, auth, postCtrl.getOnePost); // afficher un user
+
 router.delete("/:id", auth, postCtrl.deletePost); // supprimer le posts
 router.put("/:id", auth, multerPost, postCtrl.modifyPost); // modifier un posts
 router.post("/:id/like", auth, postCtrl.likeOrNot); // like ou dislikes des posts

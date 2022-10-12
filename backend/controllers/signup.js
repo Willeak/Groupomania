@@ -47,7 +47,10 @@ exports.login = (req, res, next) => {
             roles: user.roles,
             img: user.img,
             token: jwt.sign({ userId: user._id }, `${process.env.RND_TKN}`, {
-              expiresIn: "24h",
+              expiresIn: "12h",
+              //expiresIn: "20d" // it will be expired after 20 days
+              //expiresIn: 120 // it will be expired after 120ms
+              //expiresIn: "120s" // it will be expired after 120s
             }),
           });
         })

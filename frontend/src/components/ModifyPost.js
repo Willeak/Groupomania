@@ -33,6 +33,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
       const name = authed.user;
 
       const [post, setPost] = useState('');
+      console.log(post);
 
       const [validPost, setValidPost] = useState(false);
       const [userFocus, setUserFocus] = useState(false);
@@ -70,9 +71,11 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
             const sendModifyPOST = `/api/posts/${ipModifyPost}`;
             // si le regex ne  corresponds pas refus de l'envoie + en CSS desactivation du bouton pour plus de sécurité
             const v1 = regValidPost.test(post);
-            if (!v1) {
-                  setErrMsg('Texte invalide');
-                  return;
+            if (post !== '') {
+                  if (!v1) {
+                        setErrMsg('Texte invalide');
+                        return;
+                  }
             }
             // definir la langue de Moement
             moment.locale('fr');
@@ -88,7 +91,53 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
             formPost.append('description', data.description);
 
             // si la selection de l'input image est sur false alors envoie de la requete specific
-            if (isSelected === false) {
+            if (post === '') {
+                  //recuparation du formdata et Object pour l'envoi
+                  const createdPost = {
+                        imageUrl: selectedFile,
+                  };
+                  //envoie de la  rzquete pour poster un post
+                  await axios
+                        .put(sendModifyPOST, createdPost, {
+                              headers: {
+                                    'Content-Type': 'multipart/form-data',
+                                    Authorization:
+                                          'Bearer ' +
+                                          sessionStorage.getItem('token'),
+                              },
+
+                              withCredentials: true,
+                        })
+                        .then((response) => {
+                              console.log(
+                                    JSON.stringify(response?.data?.message)
+                              );
+                              setSuccess(true);
+                              setPost('');
+                              setErrMsg('Post envoyé !');
+                              let modify =
+                                    document.getElementById('ModifyPost');
+                              modify.style.display = 'none';
+
+                              window.location.reload();
+                        })
+                        .catch((error) => {
+                              if (!error?.response) {
+                                    setErrMsg('Le serveur ne réponds pas');
+                              } else if (error.response?.status === 400) {
+                                    setErrMsg('Envoie échoué');
+                              } else {
+                                    setErrMsg('Connexion échouée');
+                              }
+
+                              if (error.response?.status !== undefined) {
+                                    console.error(error.response?.status);
+                              }
+
+                              errRef.current.focus();
+                        });
+                  // si la selection de l'input image est sur true alors envoie de la requete specific
+            } else if (isSelected === false) {
                   //recuparation du formdata et Object pour l'envoi
                   const createdPost = {
                         post: Object.fromEntries(formPost),
@@ -250,7 +299,6 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                                           //to do something with value, maybe callback?
                                     }}
                                     value={post}
-                                    required
                                     aria-invalid={validPost ? 'false' : 'true'}
                                     onFocus={() => setUserFocus(true)}
                                     onBlur={() => setUserFocus(false)}
@@ -277,7 +325,6 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                                           aria-label="valider votre modification de post"
                                           className="buttonCreatePost"
                                           id="buttonCreatePost"
-                                          disabled={!validPost ? true : false}
                                           onClick={forceUpdate}
                                     >
                                           Envoyer

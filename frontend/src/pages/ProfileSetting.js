@@ -24,7 +24,7 @@ const Profile = () => {
       const [email, setEmail] = useState('');
       //appel del'api
       const USERget = `/api/register/${userId}`;
-      //requete pour recevoir tout les  utilisateurs
+      //requete pour recevoir les info personnels de l'utilisateur
       const getInfoUser = async (e) => {
             await axios
                   .get(USERget, {
