@@ -9,7 +9,6 @@ import FormData from 'form-data';
 //appel de moment et definit  sur  FR
 import moment from 'moment';
 import 'moment/locale/fr';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 //adaptation du textaera selon le passage a la ligne
 const defaultStyle = {
@@ -28,9 +27,6 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
 
       //appel du localstorage
       const authed = JSON.parse(localStorage.getItem('authed'));
-      const userId = authed.userId;
-      const userImg = 'http://localhost:3000' + authed.img;
-      const name = authed.user;
 
       const [post, setPost] = useState('');
       console.log(post);
@@ -78,8 +74,8 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                   }
             }
             // definir la langue de Moement
-            moment.locale('fr');
-            let myDate;
+            // moment.locale('fr');
+            // let myDate;
             //definir le format a l'envoi
             //myDate = moment().format('dddd DD MMMM YYYY, à H[h]mm.');
             // creation d'un tableau de valeur

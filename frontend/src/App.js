@@ -9,6 +9,7 @@ import SignUp from './pages/SignUp';
 import ProfileSetting from './pages/ProfileSetting';
 
 import AdminPanel from './pages/AdminPanel';
+import LogoutAuth from './components/LogoutAuth';
 
 //mise en place du routeur
 
@@ -16,10 +17,15 @@ function App() {
       return (
             <Router>
                   <Routes>
-                        <Route exact path="/Login" element={<Login />} />
+                        <Route element={<LogoutAuth />}>
+                              <Route exact path="/Login" element={<Login />} />
 
-                        <Route exact path="/SignUp" element={<SignUp />} />
-
+                              <Route
+                                    exact
+                                    path="/SignUp"
+                                    element={<SignUp />}
+                              />
+                        </Route>
                         <Route element={<RequireAuth />}>
                               <Route exact path="/" element={<Home />} />
                               <Route
