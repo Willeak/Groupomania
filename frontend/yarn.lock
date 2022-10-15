@@ -3281,6 +3281,15 @@
     "strip-ansi" "^6.0.0"
     "wrap-ansi" "^7.0.0"
 
+"cliui@^8.0.1":
+  "integrity" "sha512-BSeNnyus75C4//NQ9gQt1/csTXyo/8Sb+afLAkzAptFuMsod9HFokGNudZpi/oQV73hnVK+sR+5PVRMd+Dr7YQ=="
+  "resolved" "https://registry.npmjs.org/cliui/-/cliui-8.0.1.tgz"
+  "version" "8.0.1"
+  dependencies:
+    "string-width" "^4.2.0"
+    "strip-ansi" "^6.0.1"
+    "wrap-ansi" "^7.0.0"
+
 "co@^4.6.0":
   "integrity" "sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ=="
   "resolved" "https://registry.npmjs.org/co/-/co-4.6.0.tgz"
@@ -6227,7 +6236,7 @@
     "import-local" "^3.0.2"
     "jest-cli" "^27.5.1"
 
-"js-base64@^2.4.3":
+"js-base64@^2.4.9":
   "integrity" "sha512-pZe//GGmwJndub7ZghVHz7vjb2LgC1m8B07Au3eYqeqv9emhESByMXxaEgkUkEqJe87oBbSniGYoQNIBklc7IQ=="
   "resolved" "https://registry.npmjs.org/js-base64/-/js-base64-2.6.4.tgz"
   "version" "2.6.4"
@@ -6895,9 +6904,9 @@
   "version" "2.0.6"
 
 "node-sass@^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0", "node-sass@^7.0.1":
-  "integrity" "sha512-uMy+Xt29NlqKCFdFRZyXKOTqGt+QaKHexv9STj2WeLottnlqZEEWx6Bj0MXNthmFRRdM/YwyNo/8Tr46TOM0jQ=="
-  "resolved" "https://registry.npmjs.org/node-sass/-/node-sass-7.0.1.tgz"
-  "version" "7.0.1"
+  "integrity" "sha512-8MIlsY/4dXUkJDYht9pIWBhMil3uHmE8b/AdJPjmFn1nBx9X9BASzfzmsCy0uCCb8eqI3SYYzVPDswWqSx7gjw=="
+  "resolved" "https://registry.npmjs.org/node-sass/-/node-sass-7.0.3.tgz"
+  "version" "7.0.3"
   dependencies:
     "async-foreach" "^0.1.3"
     "chalk" "^4.1.2"
@@ -6911,7 +6920,7 @@
     "node-gyp" "^8.4.1"
     "npmlog" "^5.0.0"
     "request" "^2.88.0"
-    "sass-graph" "4.0.0"
+    "sass-graph" "^4.0.1"
     "stdout-stream" "^1.4.0"
     "true-case-path" "^1.0.2"
 
@@ -8532,14 +8541,14 @@
   "resolved" "https://registry.npmjs.org/sanitize.css/-/sanitize.css-13.0.0.tgz"
   "version" "13.0.0"
 
-"sass-graph@4.0.0":
-  "integrity" "sha512-WSO/MfXqKH7/TS8RdkCX3lVkPFQzCgbqdGsmSKq6tlPU+GpGEsa/5aW18JqItnqh+lPtcjifqdZ/VmiILkKckQ=="
-  "resolved" "https://registry.npmjs.org/sass-graph/-/sass-graph-4.0.0.tgz"
-  "version" "4.0.0"
+"sass-graph@^4.0.1":
+  "integrity" "sha512-5YCfmGBmxoIRYHnKK2AKzrAkCoQ8ozO+iumT8K4tXJXRVCPf+7s1/9KxTSW3Rbvf+7Y7b4FR3mWyLnQr3PHocA=="
+  "resolved" "https://registry.npmjs.org/sass-graph/-/sass-graph-4.0.1.tgz"
+  "version" "4.0.1"
   dependencies:
     "glob" "^7.0.0"
     "lodash" "^4.17.11"
-    "scss-tokenizer" "^0.3.0"
+    "scss-tokenizer" "^0.4.3"
     "yargs" "^17.2.1"
 
 "sass-loader@^12.3.0":
@@ -8606,13 +8615,13 @@
     "ajv" "^6.12.2"
     "ajv-keywords" "^3.4.1"
 
-"scss-tokenizer@^0.3.0":
-  "integrity" "sha512-14Zl9GcbBvOT9057ZKjpz5yPOyUWG2ojd9D5io28wHRYsOrs7U95Q+KNL87+32p8rc+LvDpbu/i9ZYjM9Q+FsQ=="
-  "resolved" "https://registry.npmjs.org/scss-tokenizer/-/scss-tokenizer-0.3.0.tgz"
-  "version" "0.3.0"
+"scss-tokenizer@^0.4.3":
+  "integrity" "sha512-raKLgf1LI5QMQnG+RxHz6oK0sL3x3I4FN2UDLqgLOGO8hodECNnNh5BXn7fAyBxrA8zVzdQizQ6XjNJQ+uBwMw=="
+  "resolved" "https://registry.npmjs.org/scss-tokenizer/-/scss-tokenizer-0.4.3.tgz"
+  "version" "0.4.3"
   dependencies:
-    "js-base64" "^2.4.3"
-    "source-map" "^0.7.1"
+    "js-base64" "^2.4.9"
+    "source-map" "^0.7.3"
 
 "select-hose@^2.0.0":
   "integrity" "sha512-mEugaLK+YfkijB4fx0e6kImuJdCIt2LxCRcbEYPqRGCs4F2ogyfZU5IAZRdjCP8JPq2AtdNoC/Dux63d9Kiryg=="
@@ -8848,7 +8857,7 @@
   "resolved" "https://registry.npmjs.org/source-map/-/source-map-0.6.1.tgz"
   "version" "0.6.1"
 
-"source-map@^0.7.1", "source-map@^0.7.3":
+"source-map@^0.7.3":
   "integrity" "sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA=="
   "resolved" "https://registry.npmjs.org/source-map/-/source-map-0.7.4.tgz"
   "version" "0.7.4"
@@ -10179,11 +10188,11 @@
     "yargs-parser" "^20.2.2"
 
 "yargs@^17.2.1":
-  "integrity" "sha512-t6YAJcxDkNX7NFYiVtKvWUz8l+PaKTLiL63mJYWR2GnHq2gjEWISzsLp9wg3aY36dY1j+gfIEL3pIF+XlJJfbA=="
-  "resolved" "https://registry.npmjs.org/yargs/-/yargs-17.5.1.tgz"
-  "version" "17.5.1"
+  "integrity" "sha512-8H/wTDqlSwoSnScvV2N/JHfLWOKuh5MVla9hqLjK3nsfyy6Y4kDSYSvkU5YCUEPOSnRXfIyx3Sq+B/IWudTo4g=="
+  "resolved" "https://registry.npmjs.org/yargs/-/yargs-17.6.0.tgz"
+  "version" "17.6.0"
   dependencies:
-    "cliui" "^7.0.2"
+    "cliui" "^8.0.1"
     "escalade" "^3.1.1"
     "get-caller-file" "^2.0.5"
     "require-directory" "^2.1.1"
