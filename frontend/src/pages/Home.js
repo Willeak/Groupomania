@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 //appel du compoenent createpost
 import CreatePost from '../components/CreatePost';
 import ModifyPost from '../components/ModifyPost';

@@ -25,7 +25,6 @@ function App() {
                                     path="/SignUp"
                                     element={<SignUp />}
                               />
-                              <Route path="*" element={<Login />} />
                         </Route>
                         <Route element={<RequireAuth />}>
                               <Route exact path="/" element={<Home />} />

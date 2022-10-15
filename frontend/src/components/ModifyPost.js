@@ -25,9 +25,6 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
       const ipModifyPost = window.location.search.split('?=').join('');
       //   console.log(window.location.search.split('?=').join(''));
 
-      //appel du localstorage
-      const authed = JSON.parse(localStorage.getItem('authed'));
-
       const [post, setPost] = useState('');
       console.log(post);
 
