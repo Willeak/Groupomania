@@ -14,9 +14,10 @@ import imgProfile from './../assets/avatar_neutre.png';
 import Logo1 from './../assets/icon-left-font.png';
 
 const Profile = () => {
-      //recuperation du localstorage
+      // get value du localStorage
       const authed = JSON.parse(localStorage.getItem('authed'));
       const userId = authed.userId;
+      const LocalToken = authed.token;
       //recuperatino de la requete pour les afficher sur l'interface
       const [user, setUser] = useState('');
       const [name, setName] = useState('');
@@ -30,8 +31,7 @@ const Profile = () => {
                   .get(USERget, {
                         headers: {
                               'Content-Type': 'application/json',
-                              Authorization:
-                                    'Bearer ' + sessionStorage.getItem('token'),
+                              Authorization: 'Bearer ' + LocalToken,
                               withCredentials: true,
                         },
                   })
@@ -72,8 +72,7 @@ const Profile = () => {
                   .put(USERputImg, formData, {
                         headers: {
                               'Content-Type': 'singlepart/form-data',
-                              Authorization:
-                                    'Bearer ' + sessionStorage.getItem('token'),
+                              Authorization: 'Bearer ' + LocalToken,
                               withCredentials: true,
                         },
                   })

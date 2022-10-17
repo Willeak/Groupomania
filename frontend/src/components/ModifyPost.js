@@ -21,6 +21,11 @@ const defaultStyle = {
 const regValidPost = /^[A-Za-z-0-9 &_@/;:.,'-éàê^`è&*+()!? \n \r]{10,280}$/;
 
 const CreatePost = ({ style = defaultStyle, ...etc }) => {
+      // get value du localStorage
+      const authed = JSON.parse(localStorage.getItem('authed'));
+      const userId = authed.userId;
+      const LocalToken = authed.token;
+
       // recuperation de l'ip du post pour etre envoyé via le lien vers l'api
       const ipModifyPost = window.location.search.split('?=').join('');
       //   console.log(window.location.search.split('?=').join(''));
@@ -94,9 +99,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                         .put(sendModifyPOST, createdPost, {
                               headers: {
                                     'Content-Type': 'multipart/form-data',
-                                    Authorization:
-                                          'Bearer ' +
-                                          sessionStorage.getItem('token'),
+                                    Authorization: 'Bearer ' + LocalToken,
                               },
 
                               withCredentials: true,
@@ -140,9 +143,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                         .put(sendModifyPOST, createdPost, {
                               headers: {
                                     // 'Content-Type': 'multipart/form-data',
-                                    Authorization:
-                                          'Bearer ' +
-                                          sessionStorage.getItem('token'),
+                                    Authorization: 'Bearer ' + LocalToken,
                               },
 
                               withCredentials: true,
@@ -187,9 +188,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                         .put(sendModifyPOST, createdPost, {
                               headers: {
                                     'Content-Type': 'multipart/form-data',
-                                    Authorization:
-                                          'Bearer ' +
-                                          sessionStorage.getItem('token'),
+                                    Authorization: 'Bearer ' + LocalToken,
                               },
 
                               withCredentials: true,

@@ -20,6 +20,7 @@ const Profile = () => {
       //get value of localstorage
       const authed = JSON.parse(localStorage.getItem('authed'));
       const userId = authed.userId;
+      const LocalToken = authed.token;
       //set value les données sur l'interface utilisateur
       const [name, setName] = useState('');
       const [img, setImg] = useState('');
@@ -32,8 +33,7 @@ const Profile = () => {
                   .get(USER, {
                         headers: {
                               'Content-Type': 'application/json',
-                              Authorization:
-                                    'Bearer ' + sessionStorage.getItem('token'),
+                              Authorization: 'Bearer ' + LocalToken,
                               withCredentials: true,
                         },
                   })

@@ -23,9 +23,10 @@ const defaultStyle = {
 const regValidPost = /^[A-Za-z-0-9 &_@/;:.,'-éàê^`è&*+()!? \n \r]{10,280}$/;
 
 const CreatePost = ({ style = defaultStyle, ...etc }) => {
-      //appel du localstorage
+      // get value du localStorage
       const authed = JSON.parse(localStorage.getItem('authed'));
       const userId = authed.userId;
+      const LocalToken = authed.token;
       const userImg = 'http://localhost:3000' + authed.img;
       const name = authed.user;
 
@@ -104,9 +105,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                         .post(sendPOST, createdPost, {
                               headers: {
                                     // 'Content-Type': 'multipart/form-data',
-                                    Authorization:
-                                          'Bearer ' +
-                                          sessionStorage.getItem('token'),
+                                    Authorization: 'Bearer ' + LocalToken,
                               },
 
                               withCredentials: true,
@@ -146,9 +145,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
                         .post(sendPOST, createdPost, {
                               headers: {
                                     'Content-Type': 'multipart/form-data',
-                                    Authorization:
-                                          'Bearer ' +
-                                          sessionStorage.getItem('token'),
+                                    Authorization: 'Bearer ' + LocalToken,
                               },
 
                               withCredentials: true,
@@ -185,7 +182,7 @@ const CreatePost = ({ style = defaultStyle, ...etc }) => {
             }
             window.setTimeout(masquernotification, 4000);
       };
-      //creatino d'un compteur de caracteres
+      //creation d'un compteur de caracteres
       useEffect(() => {
             var textarea = document.querySelector('#CreatePost');
             // On selectionne l'element textarea et l'élement #counterBlock

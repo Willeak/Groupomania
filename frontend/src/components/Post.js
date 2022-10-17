@@ -10,6 +10,10 @@ import imgProfile from './../assets/avatar_neutre.png';
 import { Link } from 'react-router-dom';
 
 const Post = () => {
+      // get value du localStorage
+      const authed = JSON.parse(localStorage.getItem('authed'));
+      const userId = authed.userId;
+      const LocalToken = authed.token;
       //appel de  l'api des pots pour l'utilisation du .map
       const POSTSList = `/api/posts/`;
       // user list permetant la filtration via la search bar
@@ -25,9 +29,7 @@ const Post = () => {
                         .get(POSTSList, {
                               headers: {
                                     'Content-Type': 'application/json',
-                                    Authorization:
-                                          'Bearer ' +
-                                          sessionStorage.getItem('token'),
+                                    Authorization: 'Bearer ' + LocalToken,
                                     withCredentials: true,
                               },
                         })
@@ -46,9 +48,6 @@ const Post = () => {
             postSubmit();
       }, [reducerValue]); // <--- reducerValue | a ajouter pour refresh auto le component
 
-      // get value du localStorage
-      const authed = JSON.parse(localStorage.getItem('authed'));
-      const userId = authed.userId;
       // fonction au click du bouton Like
       const LikeSubmit = async (e) => {
             //recuperer les valeur dynamique de la .map
@@ -86,8 +85,7 @@ const Post = () => {
                   .post(LikePosts, formLike, {
                         headers: {
                               // 'Content-Type': 'multipart/form-data',
-                              Authorization:
-                                    'Bearer ' + sessionStorage.getItem('token'),
+                              Authorization: 'Bearer ' + LocalToken,
                         },
                   })
                   .then((response) => {
@@ -179,9 +177,7 @@ const Post = () => {
                               .delete(DELETEPost, {
                                     headers: {
                                           'Content-Type': 'application/json',
-                                          Authorization:
-                                                'Bearer ' +
-                                                sessionStorage.getItem('token'),
+                                          Authorization: 'Bearer ' + LocalToken,
                                           withCredentials: true,
                                     },
                               })

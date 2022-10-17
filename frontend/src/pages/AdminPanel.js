@@ -10,6 +10,10 @@ import axios from '../api/axios';
 import imgProfile from './../assets/avatar_neutre.png';
 
 const UserList = () => {
+      // get value du localStorage
+      const authed = JSON.parse(localStorage.getItem('authed'));
+      const userId = authed.userId;
+      const LocalToken = authed.token;
       //appel de l'api
       const USERSList = `/api/register/`;
       // user list permetant la filtration via la search bar
@@ -75,8 +79,7 @@ const UserList = () => {
                   .delete(DELETEUser, {
                         headers: {
                               'Content-Type': 'application/json',
-                              Authorization:
-                                    'Bearer ' + sessionStorage.getItem('token'),
+                              Authorization: 'Bearer ' + LocalToken,
                               withCredentials: true,
                         },
                   })
